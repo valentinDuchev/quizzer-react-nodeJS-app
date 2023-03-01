@@ -92,7 +92,7 @@
     }
 
     .title-profile-data-mobile h3 {
-        color:rgb(75, 74, 74)
+        color: rgb(75, 74, 74)
     }
 
     .title-profile-name-div-mobile {
@@ -101,7 +101,7 @@
 
     .title-profile-name-mobile {
         font-size: 12px;
-        
+
     }
 
     .title-profile-name-data-mobile {
@@ -113,7 +113,7 @@
         height: 100%;
     }
 
-    
+
     .div-title-profile-image-mobile>img {
         width: 100px;
         height: 25%;
@@ -123,6 +123,16 @@
     }
 
     .title-profile-name-data-mobile {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+    }
+
+    .title-profile-name-data-mobile img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
         width: 50%;
     }
 }
@@ -200,6 +210,26 @@
     border-radius: 5%;
 }
 
+@media screen and (min-width: 1080px) {
+    .first-main-profile-mobile {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 1079px) {
+    .first-main-profile {
+        display: none;
+    }
+
+    .first-main-profile-mobile {
+        display: block;
+    }
+}
+
+
+
+
+
 
 /* SECOND MAIN ---------------------------------------------------------------------------------------------------*/
 
@@ -207,6 +237,8 @@
     width: 100%;
     margin-top: 40%;
 }
+
+/* OVERALL MEDIA QUERIES */
 
 @media screen and (max-width: 1080px) {
     .my-profile-section {
