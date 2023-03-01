@@ -1,0 +1,233 @@
+.my-profile-section {
+    width: 100%;
+}
+
+
+/* GRID - OVERALL PAGE --------------------------------------------------------------------------------*/
+
+.first-main-profile {
+    grid-area: first;
+}
+
+.second-main-profile {
+    grid-area: second;
+}
+
+.title-profile {
+    grid-area: title;
+}
+
+.aside-profile {
+    grid-area: aside;
+}
+
+.my-profile-section {
+    display: grid;
+    grid-template-columns: 20% 50% 30%;
+    grid-template-areas:
+        'aside title second'
+        'aside first second';
+
+    gap: 20px;
+    margin-left: 0px;
+}
+
+
+
+/* TITLE ---------------------------------------------------------------------------------------------*/
+
+.title-profile {
+    display: block;
+    text-align: center;
+
+    margin-top: 4%;
+    background-color: rgba(210, 209, 209, 0.379);
+    border-radius: 5%;
+}
+
+.title-profile-name {
+    border-bottom: 1px solid rgb(107, 107, 237);
+    margin-left: 8%;
+    margin-right: 8%;
+}
+
+.title-profile-data {
+    display: grid;
+    grid-template-columns: 31.3% 31.3% 31.3%;
+    gap: 3%;
+
+    /* justify-items: center; */
+    text-align: center;
+
+}
+
+.title-profile-followers {}
+
+.title-profile-followers h2 {
+    text-align: center;
+}
+
+.title-profile-following {}
+
+.title-profile-rating {}
+
+@media screen and (min-width: 1080px) {
+    .title-profile-mobile {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 1079px) {
+
+    .title-profile-mobile {
+        display: block;
+    }
+
+    .title-profile-data-mobile {
+        display: flex;
+        gap: 26px;
+        font-size: 12px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .title-profile-data-mobile h3 {
+        color:rgb(75, 74, 74)
+    }
+
+    .title-profile-name-div-mobile {
+        text-align: center;
+    }
+
+    .title-profile-name-mobile {
+        font-size: 12px;
+        
+    }
+
+    .title-profile-name-data-mobile {
+        display: flex;
+        justify-content: center;
+    }
+
+    .div-title-profile-image-mobile {
+        height: 100%;
+    }
+
+    
+    .div-title-profile-image-mobile>img {
+        width: 100px;
+        height: 25%;
+        margin-right: 50px;
+
+        border-radius: 50%;
+    }
+
+    .title-profile-name-data-mobile {
+        width: 50%;
+    }
+}
+
+
+
+
+/* ASIDE ---------------------------------------------------------------------------------------------*/
+
+.aside-profile {}
+
+.aside-profile-image {
+    width: 65%;
+    margin-top: 10%;
+
+    border-radius: 100%;
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+    margin-bottom: 30px;
+
+    position: sticky;
+    top: 15%;
+}
+
+.aside-quizes-info {
+    margin-top: 10%;
+    height: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(210, 209, 209, 0.379);
+    border-radius: 10%;
+    text-align: center;
+
+    position: sticky;
+    top: 45%;
+
+
+
+}
+
+.aside-quizes-info>.quizes-created {}
+
+.aside-quizes-info-headings {}
+
+
+
+/* MAIN ---------------------------------------------------------------------------------------------------*/
+.first-main-profile {
+    display: grid;
+    justify-content: center;
+    align-self: center;
+    grid-template-columns: 94%;
+    margin-left: 4%;
+    margin-right: 4%;
+}
+
+.courses-container {
+    width: 92%;
+}
+
+.course {
+    width: 100%;
+}
+
+.first-main-profile-card {
+    background: rgb(212, 248, 255);
+    background: linear-gradient(90deg, rgba(212, 248, 255, 1) 31%, rgba(164, 164, 247, 1) 100%, rgba(2, 0, 36, 1) 100%);
+
+
+
+    border-radius: 5%;
+}
+
+
+/* SECOND MAIN ---------------------------------------------------------------------------------------------------*/
+
+.second-main-profile>img {
+    width: 100%;
+    margin-top: 40%;
+}
+
+@media screen and (max-width: 1080px) {
+    .my-profile-section {
+        display: block;
+    }
+
+
+
+    .title-profile-name {
+        display: none;
+    }
+
+    .title-profile-data {
+        display: none;
+    }
+
+    .aside-profile {
+        display: none;
+    }
+
+    .second-main-profile {
+        display: none;
+    }
+}
