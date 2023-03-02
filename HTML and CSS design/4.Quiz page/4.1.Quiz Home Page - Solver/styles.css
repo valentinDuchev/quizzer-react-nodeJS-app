@@ -1,0 +1,15 @@
+.quiz-home-card-solver {
+    background-color: aliceblue;
+    border-radius: 5px;
+    width: 60%;
+
+    min-height: 600px;
+    max-height: 800px;
+    margin-bottom: 20%;
+    margin-left: auto;
+    margin-right: auto ;
+
+     box-shadow: 44px 52px 112px 29px rgba(0,0,0,0.66);
+
+}
+
