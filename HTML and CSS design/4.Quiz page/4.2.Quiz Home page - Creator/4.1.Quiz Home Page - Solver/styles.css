@@ -33,7 +33,7 @@
 }
 
 .quiz-home-card-solver>button {
-    background-color: green;
+    background-color: rgb(1, 59, 71);
     border-radius: 20px;
     color: white;
     width: 50%;
@@ -102,6 +102,8 @@
         font-size: 20px;
     }
 }
+
+
 
 
 

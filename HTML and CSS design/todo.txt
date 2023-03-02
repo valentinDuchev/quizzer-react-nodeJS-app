@@ -1,0 +1,1 @@
+fix the nav bar for less than 360px / 380px
