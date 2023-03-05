@@ -3,34 +3,38 @@
     border-radius: 5px;
     width: 50%;
 
-    min-height: 600px;
-    max-height: 800px;
+    /* min-height: 600px;
+    max-height: 800px; */
     margin-bottom: 20%;
     margin-left: auto;
-    margin-right: auto ;
+    margin-right: auto;
 
-    box-shadow: 44px 52px 112px 29px rgba(0,0,0,0.66);
+    margin-top: 5%;
+
+    box-shadow: 44px 52px 112px 29px rgba(0, 0, 0, 0.66);
 
     text-align: center;
 
 }
 
-/* ALL COMMENTS */
-.quiz-home-card-solver-comments {
+.quiz-home-card-solver {
+    margin-bottom: 10px;
+}
+
+/* .quiz-home-card-solver-comments {
     display: block;
     margin-left: auto;
     margin-right: auto;
     width: 80%;
 }
 
-/* SINGLE COMMENT */
 .quiz-home-card-solver-comment {
     width: 100%;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.5);
     height: 50px;
     text-align: left;
     border-radius: 10px;
-}
+} */
 
 .quiz-home-card-solver>button {
     background-color: green;
@@ -55,7 +59,7 @@
     color: white;
     width: 15%;
     font-weight: bold;
-    
+
 }
 
 .quiz-home-card-solver-dislikes {
@@ -85,7 +89,7 @@
 
 }
 
-@media screen and (max-width: 1080px ) and (min-width: 701px) {
+@media screen and (max-width: 1080px) and (min-width: 701px) {
     .quiz-home-card-solver {
         width: 60%;
     }
@@ -104,4 +108,20 @@
 }
 
 
+/* COMMENT SECTION */
 
+.p-3 {
+    margin-top: 5px;
+}
+
+.bottom-part-quiz-solver {
+    margin-top: 20px;
+}
+
+@media screen and (max-width: 700px) {
+
+    .quiz-home-card-solver>button>h3 {
+        
+        font-size: 16px;
+    }
+}

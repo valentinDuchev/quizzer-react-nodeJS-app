@@ -103,6 +103,14 @@
     }
 }
 
+@media screen and (max-width: 700px) {
+
+    .quiz-home-card-solver>button>h3 {
+        
+        font-size: 16px;
+    }
+}
+
 
 
 

@@ -9,6 +9,12 @@
 
     <link rel="stylesheet" href="./styles.css">
     <link rel="stylesheet" href="/1. Navigation/style.css">
+    <link rel="stylesheet" href="/5. Cards/5.2.Submitted comments/styles.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -55,6 +61,7 @@
 
 
     <div class="quiz-home-card-solver">
+
         <div class="quiz-home-card-solver-info">
             <h1>Welcome to the quiz!</h1>
             <h2>Author: <a href="#">Peter Petrov</a></h2>
@@ -64,18 +71,7 @@
             <h3>Ratin: 8.5/10</h3>
         </div>
 
-        <div class="quiz-home-card-solver-comments">
-            <h2>Comments:</h2>
-            <!-- SINGLE COMMENT-->
-            <div class="quiz-home-card-solver-comment">
-                <h2><a href="#">Peter Petrov </a>: Amazing Quiz </h2>
-            </div>
-
-            <div class="quiz-home-card-solver-comment">
-                <h2><a href="#">Peter Petrov </a>: Amazing Quiz </h2>
-            </div>
-
-        </div>
+        <!-- Likes, Disilikes, Start the quiz button-->
 
         <div class="quiz-home-card-solver-statistics">
 
@@ -89,9 +85,70 @@
 
         </div>
 
-        <button>
-            <h3>START THE QUIZ</h3>
-        </button>
+
+            <button>
+                <h3>START THE QUIZ</h3>
+            </button>
+
+        
+       
+
+        <!-- COMMENTS -->
+
+        <div class="container mt-5 ">
+            <div class="row  d-flex justify-content-center">
+                <div class="col-md-8">
+
+                    <div class="headings d-flex justify-content-between align-items-center mb-3">
+                        <h5>Comments(6)</h5>
+                    </div>
+
+                    <div class="card p-3">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="user d-flex flex-row align-items-center">
+                                <img src="/2. My Profile/Static images/profile-image.jpg" width="30"
+                                    class="user-img rounded-circle mr-2">
+                                <span><small class="font-weight-bold text-primary">james_olesenn</small> <small
+                                        class="font-weight-bold">Hmm, This poster looks cool</small></span>
+                            </div>
+                            <small>2 days ago</small>
+                        </div>
+                    </div>
+
+                    <div class="card p-3">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="user d-flex flex-row align-items-center">
+                                <img src="/2. My Profile/Static images/profile-image.jpg" width="30"
+                                    class="user-img rounded-circle mr-2">
+                                <span><small class="font-weight-bold text-primary">james_olesenn</small> <small
+                                        class="font-weight-bold">Hmm, This poster looks cool</small></span>
+                            </div>
+                            <small>2 days ago</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-part-quiz-solver">
+            End
+        </div>
+
+
+
+        <!-- <div class="quiz-home-card-solver-comments">
+            <h2>Comments:</h2>
+            <div class="quiz-home-card-solver-comment">
+                <h2><a href="#">Peter Petrov </a>: Amazing Quiz </h2>
+            </div>
+
+            <div class="quiz-home-card-solver-comment">
+                <h2><a href="#">Peter Petrov </a>: Amazing Quiz </h2>
+            </div>
+
+        </div> -->
+
+
 
     </div>
 </body>
