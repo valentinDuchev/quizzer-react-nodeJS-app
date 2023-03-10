@@ -1,0 +1,42 @@
+.all-quizes-page {
+    display: grid;
+    grid-template-columns: 25% 75%;
+    gap: 20px;
+
+}
+
+
+.all-quizes-aside-menu {
+
+    border-radius: 10px;
+    background-color: aqua;
+    border-color: black;
+    border: 2px solid black;
+    width: 55%;
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 150px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 200px;
+    position: sticky;
+}
+
+.all-quizes-aside-menu a {
+    font-size: 24px;
+    color: black;
+    font-weight: bold;
+}
+
+.all-quizes-aside-menu ul {
+    list-style-type: none;
+    padding-inline-start: 0px;
+}
+
+.all-quizes-ul {
+    display: grid;
+    text-align: center;
+    width: 100%;
+}
+
+.all-quizes-aside-menu li {}
