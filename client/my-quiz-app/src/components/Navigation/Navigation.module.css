@@ -1,0 +1,10 @@
+.navbar {
+    background-color: rgba(17, 67, 99, 255);
+    width: 100%;
+    margin: 0 0;
+}
+
+.navLink {
+    color: white !important;
+    font-weight: bold !important;
+}

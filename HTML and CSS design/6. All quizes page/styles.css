@@ -40,3 +40,9 @@
 }
 
 .all-quizes-aside-menu li {}
+
+@media screen and (max-width: 1200px) {
+    .container-title-all-quizes {
+        display: none;
+    }
+}
