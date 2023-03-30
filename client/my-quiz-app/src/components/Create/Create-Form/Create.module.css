@@ -30,16 +30,15 @@
 
   .createPage {
     display: grid;
-    grid-template-columns: 47.5% 47.5%;
+    grid-template-columns: 70% 25%;
     gap: 5%
   }
 
   .bg-light .border{
-    display: inline;
-
-
 
   }
+
+  
   
   .form .button,
   .form .message,
