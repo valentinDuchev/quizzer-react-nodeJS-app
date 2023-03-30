@@ -18,30 +18,78 @@ export const Create = () => {
     const [wrongAnswer2, setWrongAnswer2] = useState('')
     const [wrongAnswer3, setWrongAnswer3] = useState('')
 
+    const [errorsQuestion, setErrorsQuestion] = useState('')
+    const [errorsCorrectAnswer, setErrorsCorrectAnswer] = useState('')
+    const [errorsWrongAnswer1, setErrorsWrongAnswer1] = useState('')
+    const [errorsWrongAnswer2, setErrorsWrongAnswer2] = useState('')
+    const [errorsWrongAnswer3, setErrorsWrongAnswer3] = useState('')
+
+
     const [questions, setQuestions] = useState([]);
+
+    const onFormSubmit = (e) => {
+        e.preventDefault()
+
+    }
 
     const handleSave = () => {
 
-        const id = questions.length + 1;
-        console.log(id)
-
-        const newQuestion = {
-            id,
-            question,
-            correctAnswer,
-            wrongAnswer1,
-            wrongAnswer2,
-            wrongAnswer3
+        if (question.length < 2) {
+            setErrorsQuestion('Question is required')
+        } if (correctAnswer.length < 1) {
+            setErrorsCorrectAnswer('Correct answer is required')
+            console.log(errorsCorrectAnswer)
+        } if (wrongAnswer1.length < 1) {
+            setErrorsWrongAnswer1('Wrong answer 1 is required')
+        } if (wrongAnswer2.length < 1) {
+            setErrorsWrongAnswer2('Wrong answer 2 is required')
+        } if (wrongAnswer3.length < 1) {
+            setErrorsWrongAnswer3('Wrong answer 3 is required')
         }
-        setQuestions([...questions, newQuestion]) 
 
-        setQuestion(question, '')
+        else {
 
-        console.log(question)
+            const id = questions.length + 1;
+            console.log(id)
 
+            const newQuestion = {
+                id,
+                question,
+                correctAnswer,
+                wrongAnswer1,
+                wrongAnswer2,
+                wrongAnswer3
+            }
 
-        setShow(false)
+            setQuestions([...questions, newQuestion])
+
+            setQuestion('')
+            setCorrectAnswer('')
+            setWrongAnswer1('')
+            setWrongAnswer2('')
+            setWrongAnswer3('')
+
+            setErrorsQuestion('')
+            setErrorsCorrectAnswer('')
+            setErrorsWrongAnswer1('')
+            setErrorsWrongAnswer2('')
+            setErrorsWrongAnswer3('')
+
+            setShow(false)
+        }
     };
+
+    const onBlurModalFields = (eventTarget) => {
+        console.log(eventTarget);
+
+        if (eventTarget < 1) {
+            setErrorsQuestion('Question is required')
+        } else {
+            setErrorsQuestion('')
+        }
+
+        
+    }
 
     const handleClose = () => {
         setShow(false)
@@ -51,7 +99,6 @@ export const Create = () => {
 
         setShow(true);
 
-        setQuestion(question, '')
 
     }
 
@@ -60,6 +107,10 @@ export const Create = () => {
         setQuestions(questions.filter(question => question.id !== id));
 
     }
+
+
+
+
 
     return (
         <div className={styles.createPage}>
@@ -134,6 +185,11 @@ export const Create = () => {
                         <label className='label' for='about'>About</label>
                         <textarea className='textarea' cols='50' id='about' name='about' rows='4'></textarea>
                     </p>
+
+                    <Button variant="primary" onClick={handleShow}>
+                        Add a question
+                    </Button>
+
                     {/* <p className='field half'>
                     <label className='label' for='select'>Position</label>
                     <select className='select' id='select'>
@@ -144,45 +200,21 @@ export const Create = () => {
                     </select>
                 </p> */}
                     <p className='field half'>
-                        <input className='button' type='submit' value='Send' />
+                        <input className='button' type='submit' value='Create Quiz' />
                     </p>
 
                 </form>
 
-                <button>Add question</button>
 
-                <Button variant="primary" onClick={handleShow}>
-                    Launch demo modal
-                </Button>
+
 
                 <Modal show={show} onHide={handleClose}>
                     <Modal.Header closeButton>
                         <Modal.Title>Modal heading</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        {/* <Form>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                            <Form.Label>Email address</Form.Label>
-                            <Form.Control
-                                type="email"
-                                placeholder="name@example.com"
-                                autoFocus
-                            />
 
-                            <input type='text' name='question'/>
-
-                            
-                        </Form.Group>
-                        <Form.Group
-                            className="mb-3"
-                            controlId="exampleForm.ControlTextarea1"
-                        >
-                            <Form.Label>Example textarea</Form.Label>
-                            <Form.Control as="textarea" rows={3} />
-                        </Form.Group>
-                    </Form> */}
-
-                        <form >
+                        <form id='modalForm' onSubmit={onFormSubmit}>
                             <label htmlFor='question'>
                                 Question
                                 <input
@@ -190,7 +222,9 @@ export const Create = () => {
                                     name='question'
                                     value={question}
                                     onChange={(e) => setQuestion(e.target.value)}
+                                    onBlur={(e) => onBlurModalFields(e.target.value)}
                                 />
+                                {errorsQuestion ? <p>{errorsQuestion}</p> : ''}
                             </label>
 
                             <label htmlFor='answer1' style={{ color: 'green' }}>
@@ -201,6 +235,7 @@ export const Create = () => {
                                     value={correctAnswer}
                                     onChange={(e) => setCorrectAnswer(e.target.value)}
                                 />
+                                {errorsCorrectAnswer ? <p>{errorsCorrectAnswer}</p> : ''}
                             </label>
                             <label htmlFor='answer2' style={{ color: 'red' }}>
                                 Wrong Answer
@@ -209,6 +244,8 @@ export const Create = () => {
                                     value={wrongAnswer1}
                                     onChange={(e) => setWrongAnswer1(e.target.value)}
                                 />
+                                {errorsWrongAnswer1 ? <p>{errorsWrongAnswer1}</p> : ''}
+
                             </label>
                             <label htmlFor='answer3' style={{ color: 'red' }}>
                                 Wrong Answer
@@ -217,13 +254,19 @@ export const Create = () => {
                                     value={wrongAnswer2}
                                     onChange={(e) => setWrongAnswer2(e.target.value)}
                                 />
+                                {errorsWrongAnswer2 ? <p>{errorsWrongAnswer2}</p> : ''}
+
+
                             </label>
                             <label htmlFor='answer4' style={{ color: 'red' }}>
                                 Wrong Answer
                                 <input type='text'
                                     name='wrongAnswer3'
                                     value={wrongAnswer3}
-                                    onChange={(e) => setWrongAnswer3(e.target.value)} />
+                                    onChange={(e) => setWrongAnswer3(e.target.value)}
+                                />
+                                {errorsWrongAnswer3 ? <p>{errorsWrongAnswer3}</p> : ''}
+
                             </label>
 
                         </form>
@@ -232,7 +275,7 @@ export const Create = () => {
                         <Button variant="secondary" onClick={handleClose}>
                             Close
                         </Button>
-                        <Button variant="primary" onClick={handleSave}>
+                        <Button variant="primary" onClick={handleSave} form='modalForm' type='submit'>
                             Save Changes
 
                         </Button>
@@ -246,9 +289,11 @@ export const Create = () => {
 
                 <Stack gap={questions.length}>
 
+                    <h2 style={{ color: 'white' }}>Questions: </h2>
+
                     {questions.map(current =>
                         questions.length > 0 ?
-                            <div className="bg-light border">{current.question}:
+                            <div className="bg-light border" key={current.id}>{current.question}:
                                 <span style={{ color: 'green' }}>
                                     {current.correctAnswer}
                                 </span>
