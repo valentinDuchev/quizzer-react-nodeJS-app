@@ -6,11 +6,12 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Stack from 'react-bootstrap/Stack'
 import Modal from 'react-bootstrap/Modal';
-
-
+import { useNavigate } from "react-router-dom";
 
 
 export const Create = () => {
+
+    const navigate = useNavigate();
 
 
     const [show, setShow] = useState(false);
@@ -36,7 +37,6 @@ export const Create = () => {
     const [topicErrors, setTopicErrors] = useState('')
     const [difficultyErrors, setDifficultyErrors] = useState('')
 
-
     const [questions, setQuestions] = useState([]);
 
     const [moreQuestionsNeeded, setMoreQuestionsNeeded] = useState('')
@@ -59,14 +59,6 @@ export const Create = () => {
         } if (wrongAnswer3.length < 1) {
             setErrorsWrongAnswer3('Wrong answer 3 is required')
         }
-
-        console.log(question)
-        console.log(correctAnswer)
-        console.log(wrongAnswer1)
-        console.log(wrongAnswer2)
-        console.log(wrongAnswer3)
-
-
 
         if (question != '' && correctAnswer != '' && wrongAnswer1 != '' && wrongAnswer2 != '' && wrongAnswer3 != '') {
 
@@ -281,13 +273,42 @@ export const Create = () => {
                 difficulty: difficulty
             }
             console.log(newQuiz)
+            const emptyArr = []
 
-            setQuestions([...questions, ''])
+            setQuestions([...questions, emptyArr])
 
             setTitle('')
             setDescription('')
             setTitle('')
             setDifficulty('')
+
+            try {
+                fetch('http://localhost:3001/api/createQuiz', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        questions: questions,
+                        title: title,
+                        description: description,
+                        topic: topic,
+                        difficulty: difficulty
+                    }),
+                    headers: {
+                        'Content-type': 'application/json; charset=UTF-8',
+                    },
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data);
+                    // Handle data
+                    navigate('/my-profile')
+                })
+                .catch((err) => {
+                    console.log(err.message);
+                });
+            } catch (err) {
+                console.log(err)
+            }
+            
         } else {
             if (title.length < 1) {
                 setTitleErrors('Title is required')
@@ -305,9 +326,9 @@ export const Create = () => {
 
             if (questions.length < 3 && topic !== '' && title !== '' && difficulty !== '') {
                 // setMoreQuestionsNeeded('You need at least 3 questions in order to create quiz')
-                
+
                 alert('You need at least 3 questions in order to create quiz')
-            } else if (questions.length > 5  && topic !== '' && title !== '' && difficulty !== '') {
+            } else if (questions.length > 5 && topic !== '' && title !== '' && difficulty !== '') {
                 alert(`You cannot have more than 15 questions in your quiz. Please delete ${questions.length - 15} of the questions`)
             }
 
@@ -320,15 +341,15 @@ export const Create = () => {
 
     }
 
-    
-   
+
+
 
 
     return (
 
 
         <div className={styles.createPage}>
-                
+
             <div className='createForm'>
 
 

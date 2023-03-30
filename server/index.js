@@ -5,9 +5,8 @@ require('dotenv').config();
 
 const databaseConfig = require('./config/database');
 
-const recipeController = require('./router/recipeRouter');
-const userController = require('./router/userRouter');
-const memberController = require('./router/memberRouter')
+
+const quizesController = require('./router/quizzerRouter')
 const cookieParser = require('cookie-parser');
 
 start();
@@ -38,10 +37,8 @@ async function start() {
 
     app.use(cookieParser());
 
-    // app.use('/api', recipeController);
-    // app.use('/api', userController);  
 
-    app.use('/api', memberController)
+    app.use('/api', quizesController)
 
     app.get('/', (req, res) => {
         res.json({ message: 'It works' })
