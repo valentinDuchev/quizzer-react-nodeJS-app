@@ -80,18 +80,63 @@ export const Create = () => {
     };
 
     const onBlurModalFields = (eventTarget) => {
-        console.log(eventTarget);
+        console.log(eventTarget.name);
+        console.log(eventTarget.value)
 
-        if (eventTarget < 1) {
-            setErrorsQuestion('Question is required')
-        } else {
-            setErrorsQuestion('')
+        if (eventTarget.name == 'question') {
+            if (eventTarget.value < 1) {
+                setErrorsQuestion('Question is required')
+            } else {
+                setErrorsQuestion('')
+            }
         }
 
-        
+        if (eventTarget.name == 'correctAnswer') {
+            if (eventTarget.value < 1) {
+                setErrorsCorrectAnswer('Correct Answer is required')
+            } else {
+                setErrorsCorrectAnswer('')
+            }
+        }
+
+        if (eventTarget.name == 'wrongAnswer1') {
+            if (eventTarget.value < 1) {
+                setErrorsWrongAnswer1('Wrong answer 1 is required')
+            } else {
+                setErrorsWrongAnswer1('')
+            }
+        }
+        if (eventTarget.name == 'wrongAnswer2') {
+            if (eventTarget.value < 1) {
+                setErrorsWrongAnswer2('Wrong answer 2 is required')
+            } else {
+                setErrorsWrongAnswer2('')
+            }
+        }
+
+        if (eventTarget.name == 'wrongAnswer3') {
+            if (eventTarget.value < 1) {
+                setErrorsWrongAnswer3('Wrong answer 3 is required')
+            } else {
+                setErrorsWrongAnswer3('')
+            }
+        }
+
     }
 
     const handleClose = () => {
+        setQuestion('')
+        setCorrectAnswer('')
+        setWrongAnswer1('')
+        setWrongAnswer2('')
+        setWrongAnswer3('')
+
+        setErrorsQuestion('')
+        setErrorsCorrectAnswer('')
+        setErrorsWrongAnswer1('')
+        setErrorsWrongAnswer2('')
+        setErrorsWrongAnswer3('')
+
         setShow(false)
     }
 
@@ -222,7 +267,7 @@ export const Create = () => {
                                     name='question'
                                     value={question}
                                     onChange={(e) => setQuestion(e.target.value)}
-                                    onBlur={(e) => onBlurModalFields(e.target.value)}
+                                    onBlur={(e) => onBlurModalFields(e.target)}
                                 />
                                 {errorsQuestion ? <p>{errorsQuestion}</p> : ''}
                             </label>
@@ -234,15 +279,19 @@ export const Create = () => {
                                     name='correctAnswer'
                                     value={correctAnswer}
                                     onChange={(e) => setCorrectAnswer(e.target.value)}
+                                    onBlur={(e) => onBlurModalFields(e.target)}
                                 />
                                 {errorsCorrectAnswer ? <p>{errorsCorrectAnswer}</p> : ''}
                             </label>
+
+
                             <label htmlFor='answer2' style={{ color: 'red' }}>
                                 Wrong Answer
                                 <input type='text'
                                     name='wrongAnswer1'
                                     value={wrongAnswer1}
                                     onChange={(e) => setWrongAnswer1(e.target.value)}
+                                    onBlur={(e) => onBlurModalFields(e.target)}
                                 />
                                 {errorsWrongAnswer1 ? <p>{errorsWrongAnswer1}</p> : ''}
 
@@ -253,6 +302,7 @@ export const Create = () => {
                                     name='wrongAnswer2'
                                     value={wrongAnswer2}
                                     onChange={(e) => setWrongAnswer2(e.target.value)}
+                                    onBlur={(e) => onBlurModalFields(e.target)}
                                 />
                                 {errorsWrongAnswer2 ? <p>{errorsWrongAnswer2}</p> : ''}
 
@@ -264,6 +314,8 @@ export const Create = () => {
                                     name='wrongAnswer3'
                                     value={wrongAnswer3}
                                     onChange={(e) => setWrongAnswer3(e.target.value)}
+                                    onBlur={(e) => onBlurModalFields(e.target)}
+
                                 />
                                 {errorsWrongAnswer3 ? <p>{errorsWrongAnswer3}</p> : ''}
 
@@ -293,11 +345,32 @@ export const Create = () => {
 
                     {questions.map(current =>
                         questions.length > 0 ?
-                            <div className="bg-light border" key={current.id}>{current.question}:
-                                <span style={{ color: 'green' }}>
-                                    {current.correctAnswer}
+                            <div className="bg-light border" key={current.id} style={{borderRadius: '20px', marginTop: '5px'}}>
+
+                                <span style={{ fontWeight: 'bold' }}>
+                                    {current.question}:
                                 </span>
-                                <button onClick={() => deleteQuestionHandler(current.id)}>delete</button>
+
+                                <span style={{ color: 'green' }}>
+                                    {current.correctAnswer};
+                                </span>
+
+                                <span style={{ color: 'red' }}>
+                                    {current.wrongAnswer1};
+                                </span>
+
+                                <span style={{ color: 'red' }}>
+                                    {current.wrongAnswer2};
+                                </span>
+
+                                <span style={{ color: 'red' }}>
+                                    {current.wrongAnswer3};
+                                </span>
+
+                                <button onClick={() => deleteQuestionHandler(current.id)} style={{backgroundColor: 'red', borderRadius: '30px', fontWeight: 'bold'}}>
+                                    Delete
+                                </button>
+
                             </div>
                             : <p style={{ color: 'white', textAlign: 'center', marginTop: 0, marginBottom: 0 }}>
                                 No Questions added
