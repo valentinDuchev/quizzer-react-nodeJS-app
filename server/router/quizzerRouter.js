@@ -5,7 +5,6 @@ const { getAllQuizes, createQuiz } = require('../controllers/quizesController')
 router.get('/allQuizes', async (req, res) => {
     const result = await getAllQuizes();
 
-    console.log(result)
     res.status(200).json({ result, message: 'success' })
 })
 

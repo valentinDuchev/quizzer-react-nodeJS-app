@@ -10,7 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Create } from './components/Create/Create-Form/Create';
 import { Quizes } from './components/Quizes/Quizes';
 import { Ranking } from './components/Ranking/Ranking';
-import { QuizHome } from './components/Quiz-home/QuizHome';
+import { QuizPage } from './components/Quiz-home/QuizPage';
 import NewModal from './components/Create/Modal/NewModal';
 
 
@@ -30,7 +30,9 @@ function App() {
           <Route path='/quizes/*' element={<Quizes />} />
           <Route path='/ranking' element={<Ranking />} />
 
-          <Route path='/quiz-page/*' element={<QuizHome />} />
+          <Route path='/quiz-page/:quizId/:pageType/:questionNumber?' element={<QuizPage />} /> {/* pageType-Home quiz page/Quiz page/Final page ||||| */}
+
+        
 
 
 
