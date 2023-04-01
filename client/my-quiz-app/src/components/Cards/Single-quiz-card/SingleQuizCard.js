@@ -1,15 +1,24 @@
 import { Img } from "react-image"
 
+import { Link } from "react-router-dom"
+
 import styles from "./SingleQuizCard.module.css"
 
 export const SingleQuizCard = (props) => {
+
+
+    const onDetailsClick = (id) => {
+        console.log(id)
+    }
+
+
     return (
         <div className={styles.cardAllQuizes} >
             <div className={styles.containerCardAllQuizes}>
                 {/* bgWhiteBox */}
 
                 <div className={styles.titleCardAllQuizes}>
-                    <Img src="/Static images/Football-2.png" className={styles.imgIcon}/>
+                    <Img src="/Static images/Football-2.png" className={styles.imgIcon} />
 
                     <p className={styles.cardTitleAllQuizes}>{props.title}</p>
                 </div>
@@ -21,7 +30,9 @@ export const SingleQuizCard = (props) => {
 
                     <h3 className={styles.likesH3}>{props.likes} Likes</h3>
                     <h3 className={styles.dislikesH3}>{props.dislikes} Dislikes</h3>
-                    <button >Details</button>
+                    <Link to={`/quiz-page/${props.id}/firstPage`}>
+                        <button>Details</button>
+                    </Link>
                 </div>
 
                 <p className={styles.cardDescriptionAllQuizesFooter}>12.11.2022 - <a href="#">{props.author}</a></p>

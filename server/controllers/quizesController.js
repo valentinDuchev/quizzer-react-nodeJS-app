@@ -13,9 +13,14 @@ async function createQuiz(data) {
     return result;
 }
 
+async function getOneQuiz (_id) {
+    const result = await Quiz.findOne({_id})
+    return result;
+}
+
 
 module.exports = {
-
     getAllQuizes,
-    createQuiz
+    createQuiz,
+    getOneQuiz
 }
