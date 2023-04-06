@@ -12,6 +12,8 @@ import { Quizes } from './components/Quizes/Quizes';
 import { Ranking } from './components/Ranking/Ranking';
 import { QuizPage } from './components/Quiz-home/QuizPage';
 import NewModal from './components/Create/Modal/NewModal';
+import { Login } from './components/Authentication/Login/Login';
+import { Register } from './components/Authentication/Register/Register';
 
 
 
@@ -29,6 +31,8 @@ function App() {
           <Route path='/create' element={<Create />} />
           <Route path='/quizes/*' element={<Quizes />} />
           <Route path='/ranking' element={<Ranking />} />
+          <Route path='/login' element = {<Login/>}/>
+          <Route path='/register' element={<Register/>} />
 
           <Route path='/quiz-page/:quizId/:pageType/:questionNumber?' element={<QuizPage />} /> {/* pageType-Home quiz page/Quiz page/Final page ||||| */}
 

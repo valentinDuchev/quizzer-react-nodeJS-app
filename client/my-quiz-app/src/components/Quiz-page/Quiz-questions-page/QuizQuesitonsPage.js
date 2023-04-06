@@ -1,19 +1,20 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { Img } from "react-image"
-import { Link, redirect, useParams, useNavigate } from "react-router-dom"
+import { Link, redirect, useParams, useNavigate, useLocation } from "react-router-dom"
 import styles from "./QuizQuestionsPage.module.css"
+
 
 export const QuizQuestionsPage = (props) => {
 
-    const [isHoveredA, setIsHoveredA] = useState(false)
+    const [isHoveredA, setIsHoveredA] = useState(false)  //Setting style to the answers when hovered and still not clicked (answered)
     const [isHoveredB, setIsHoveredB] = useState(false)
     const [isHoveredC, setIsHoveredC] = useState(false)
     const [isHoveredD, setIsHoveredD] = useState(false)
 
-    const [nextUrl, setNextUrl] = useState('')
+    const [nextUrl, setNextUrl] = useState('') //Setting next url for when the user Clicks button Next
 
-    const [isYourAnswerTrue, setIsYourAnswerTrue] = useState(false)
+    const [isYourAnswerTrue, setIsYourAnswerTrue] = useState(false) //Setting the answer of the customer: In case it is true or false
 
     const [isFirstClicked, setIsFirstClicked] = useState(false)
     const [isSecondClicked, setIsSecondClicked] = useState(false)
@@ -27,7 +28,9 @@ export const QuizQuestionsPage = (props) => {
     const [thirdAnswerStyle, setThirdAnswerStyle] = useState('')
     const [fourthAnswerStyle, setFourthAnswerStyle] = useState('')
 
+    const [answeredSpan, setAnsweredSpan] = useState('')
 
+    const [currentResult, setCurrentResult] = useState(0)
 
     const applyStyleOnClick = (e) => {
 
@@ -38,6 +41,7 @@ export const QuizQuestionsPage = (props) => {
         if (correctAnswer) {
             if (yourAnswer === correctAnswer) {
                 setIsYourAnswerTrue(true)
+                setCurrentResult(currentResult + 1);
             } else {
                 setIsYourAnswerTrue(false)
             }
@@ -70,7 +74,8 @@ export const QuizQuestionsPage = (props) => {
         first: '',
         second: '',
         third: '',
-        fourth: ''
+        fourth: '',
+        isAlreadyAnswered: false
     })
 
     const [correctAnswer, setCorrectAnswer] = useState('')
@@ -106,7 +111,6 @@ export const QuizQuestionsPage = (props) => {
     const { quizId } = useParams()
     const { questionNumber } = useParams('questionNumber')
 
-    const currentUrl = window.location.pathname;
 
 
     useEffect(() => { //TODO - if possible, divide that useEffect into 2/3 smaller useEffects
@@ -117,15 +121,15 @@ export const QuizQuestionsPage = (props) => {
                     setQuestionsNumber(res.data.result.questions.length)
                 }
                 if (Number(questionNumber) < Number(questionsNumber)) {
-                    setNextUrl(`/quiz-page/64260bf31aff927732b8fa93/question/${Number(questionNumber) + 1}`)
+                    setNextUrl(`/quiz-page/${quizId}/question/${Number(questionNumber) + 1}`)
 
 
                 } else {
                     setNextUrl(`/quiz-page/${quizId}/finalPage/`)
                 }
 
-                console.log(currentUrl)
-                console.log(nextUrl)
+
+
 
                 setCurrentQuestion({
                     id: props.questions[Number(questionNumber - 1)].id,
@@ -136,6 +140,8 @@ export const QuizQuestionsPage = (props) => {
                     wrongAnswer3: props.questions[Number(questionNumber - 1)].wrongAnswer3,
                 })
 
+
+
                 if (currentQuestion) {
                     setCorrectAnswer(currentQuestion.correctAnswer)
                 }
@@ -143,7 +149,6 @@ export const QuizQuestionsPage = (props) => {
                 {/*  First onclick*/ }
 
                 if (!isFirstClicked && isHoveredA) {
-                    console.log(isHoveredA)
                     setFirstAnswerStyle('linear-gradient(90deg, rgba(68,214,243,1) 0%, rgba(3,63,171,1) 0%, rgba(29,85,212,1) 100%)')
                 }
 
@@ -154,18 +159,19 @@ export const QuizQuestionsPage = (props) => {
                 if (isFirstClicked && isYourAnswerTrue) {
                     setFirstAnswerStyle('green')
                     setIsDivDisabled('none')
+                    localStorage.setItem(currentQuestion.question, true)
                 }
 
                 if (isFirstClicked && !isYourAnswerTrue) {
                     setFirstAnswerStyle('red')
                     setIsDivDisabled('none')
+                    localStorage.setItem(currentQuestion.question, true)
                 }
 
                 {/* Second onclick */ }
 
 
                 if (!isSecondClicked && isHoveredB) {
-                    console.log(isHoveredA)
                     setSecondAnswerStyle('linear-gradient(90deg, rgba(68,214,243,1) 0%, rgba(3,63,171,1) 0%, rgba(29,85,212,1) 100%)')
                 }
 
@@ -176,19 +182,19 @@ export const QuizQuestionsPage = (props) => {
                 if (isSecondClicked && isYourAnswerTrue) {
                     setSecondAnswerStyle('green')
                     setIsDivDisabled('none')
-                    
+                    localStorage.setItem(currentQuestion.question, true)
                 }
 
                 if (isSecondClicked && !isYourAnswerTrue) {
                     setSecondAnswerStyle('red')
                     setIsDivDisabled('none')
+                    localStorage.setItem(currentQuestion.question, true)
                 }
 
                 {/* Third onclick */ }
 
 
                 if (!isThirdClicked && isHoveredC) {
-                    console.log(isHoveredA)
                     setThirdAnswerStyle('linear-gradient(90deg, rgba(68,214,243,1) 0%, rgba(3,63,171,1) 0%, rgba(29,85,212,1) 100%)')
                 }
 
@@ -199,16 +205,17 @@ export const QuizQuestionsPage = (props) => {
                 if (isThirdClicked && isYourAnswerTrue) {
                     setThirdAnswerStyle('green')
                     setIsDivDisabled('none')
+                    localStorage.setItem(currentQuestion.question, true)
                 }
 
                 if (isThirdClicked && !isYourAnswerTrue) {
                     setThirdAnswerStyle('red')
                     setIsDivDisabled('none')
+                    localStorage.setItem(currentQuestion.question, true)
                 }
                 {/* Fourth onclick */ }
 
                 if (!isFourthClicked && isHoveredD) {
-                    console.log(isHoveredA)
                     setFourthAnswerStyle('linear-gradient(90deg, rgba(68,214,243,1) 0%, rgba(3,63,171,1) 0%, rgba(29,85,212,1) 100%)')
                 }
 
@@ -219,12 +226,30 @@ export const QuizQuestionsPage = (props) => {
                 if (isFourthClicked && isYourAnswerTrue) {
                     setFourthAnswerStyle('green')
                     setIsDivDisabled('none')
+                    localStorage.setItem(currentQuestion.question, true)
                 }
 
                 if (isFourthClicked && !isYourAnswerTrue) {
                     setFourthAnswerStyle('red')
                     setIsDivDisabled('none')
+                    localStorage.setItem(currentQuestion.question, true)
                 }
+
+                const questionNow = currentQuestion.question
+
+                const isQuestionAnsweredNow = localStorage.getItem(questionNow)
+                if (isQuestionAnsweredNow) {
+                    setIsDivDisabled('none')
+                    setAnsweredSpan('You have answered to that question. Please go forward')
+                } else {
+                    setAnsweredSpan('')
+                    setIsDivDisabled('')
+                }
+
+                localStorage.setItem('currentResult', currentResult)
+                localStorage.setItem('questionsNumber', props.questions.length)
+
+
 
             })
             .catch((err => {
@@ -251,6 +276,12 @@ export const QuizQuestionsPage = (props) => {
         isHoveredD,
         isDivDisabled
     ])
+
+
+
+
+
+
 
     useEffect(() => {
 
@@ -292,9 +323,9 @@ export const QuizQuestionsPage = (props) => {
             fourth: fourthKey
         })
 
-    }, [currentQuestion.id])
 
-    //TODO!!!!!!!!!! divide into smaller use effects as it re-renders on each action (almost)
+    }, [currentQuestion.id, newCurrentQuestion.first])
+
 
     const onButtonClick = () => {
         setIsFirstClicked(false)
@@ -308,144 +339,150 @@ export const QuizQuestionsPage = (props) => {
 
     return (
         <div className={styles.entireDiv}>
+            <span style={{ backgroundColor: 'red' }}>{answeredSpan}</span>
             <section className={styles.section} id="section-2">
                 <main>
-                    <div className={styles.textContainer}>
-                        <h3>{props.title}</h3>
-                        <p>QUESTION {questionNumber} OF {props.questionsNumber}</p>
-                        <p>{currentQuestion.question}</p>
-                    </div>
-                    <form>
-                        <div className={styles.quizOptions}>
-
-                            <div
-                                onClick={(e) => applyStyleOnClick(e)}
-                                onMouseEnter={(e) => onMouseEnterFunc(e)}
-                                onMouseLeave={(e) => onMouseLeaveFunc(e)}
-                                name={newCurrentQuestion.first}
-                                id='first'
-                                style={{
-                                    pointerEvents: isDivDisabled
-                                }}
-                            >
-                                <input type="radio" id="first" name="first" onClick={(e) => applyStyleOnClick(e)} />
-                                <label
-                                    style={{
-                                        background: firstAnswerStyle,
-                                        marginTop: '-30px',
-                                        color: '#fff',
-                                        pointerEvents: 'none',
-                                    }}
-                                    className={styles.jsjwjdwjdwjdwin}
-                                    htmlFor="first"
-                                    name='labelA'
-                                >
-                                    <span className={styles.alphabet} >A</span> {newCurrentQuestion.first}
-                                </label>
-                            </div>
-
-
+                    <div className={styles.mainDiv}>
+                        <div className={styles.textContainer}>
+                            <h3>{props.title}</h3>
+                            <p>QUESTION {questionNumber} OF {props.questions.length}</p>
+                            <p>{currentQuestion.question}</p>
                         </div>
+                        <form>
+                            <div className={styles.quizOptions}>
 
-                        <div className={styles.quizOptions}>
-
-                            <div
-                                onClick={(e) => applyStyleOnClick(e)}
-                                onMouseEnter={(e) => onMouseEnterFunc(e)}
-                                onMouseLeave={(e) => onMouseLeaveFunc(e)}
-                                name={newCurrentQuestion.second}
-                                id='second'
-                                style={{
-                                    pointerEvents: isDivDisabled
-                                }}
-                            >
-                                <input type="radio" id="first" name="first" onClick={(e) => applyStyleOnClick(e)} />
-                                <label
+                                <div
+                                    onClick={(e) => applyStyleOnClick(e)}
+                                    onMouseEnter={(e) => onMouseEnterFunc(e)}
+                                    onMouseLeave={(e) => onMouseLeaveFunc(e)}
+                                    name={newCurrentQuestion.first}
+                                    id='first'
                                     style={{
-                                        background: secondAnswerStyle,
-                                        marginTop: '-30px',
-                                        color: '#fff',
-                                        pointerEvents: 'none'
+                                        pointerEvents: isDivDisabled
                                     }}
-                                    className={styles.jsjwjdwjdwjdwin}
-                                    htmlFor="first"
-                                    name='labelB'
                                 >
-                                    <span className={styles.alphabet} >B</span> {newCurrentQuestion.second}
-                                </label>
+                                    <input type="radio" id="first" name="first" onClick={(e) => applyStyleOnClick(e)} />
+                                    <label
+                                        style={{
+                                            background: firstAnswerStyle,
+                                            marginTop: '-30px',
+                                            color: '#fff',
+                                            pointerEvents: 'none',
+                                        }}
+                                        className={styles.jsjwjdwjdwjdwin}
+                                        htmlFor="first"
+                                        name='labelA'
+                                    >
+                                        <span className={styles.alphabet} >A</span> {newCurrentQuestion.first}
+                                    </label>
+                                </div>
+
+
                             </div>
 
+                            <div className={styles.quizOptions}>
 
-                        </div>
-
-                        <div className={styles.quizOptions}>
-
-                            <div
-                                onClick={(e) => applyStyleOnClick(e)}
-                                onMouseEnter={(e) => onMouseEnterFunc(e)}
-                                onMouseLeave={(e) => onMouseLeaveFunc(e)}
-                                name={newCurrentQuestion.third}
-                                id='third'
-                                style={{
-                                    pointerEvents: isDivDisabled
-                                }}
-                            >
-                                <input type="radio" id="first" name="first" onClick={(e) => applyStyleOnClick(e)} />
-                                <label
+                                <div
+                                    onClick={(e) => applyStyleOnClick(e)}
+                                    onMouseEnter={(e) => onMouseEnterFunc(e)}
+                                    onMouseLeave={(e) => onMouseLeaveFunc(e)}
+                                    name={newCurrentQuestion.second}
+                                    id='second'
                                     style={{
-                                        background: thirdAnswerStyle,
-                                        marginTop: '-30px',
-                                        color: '#fff',
-                                        pointerEvents: 'none',
+                                        pointerEvents: isDivDisabled
                                     }}
-                                    className={styles.jsjwjdwjdwjdwin}
-                                    htmlFor="first"
-                                    name='labelC'
                                 >
-                                    <span className={styles.alphabet} >C</span> {newCurrentQuestion.third}
-                                </label>
+                                    <input type="radio" id="first" name="first" onClick={(e) => applyStyleOnClick(e)} />
+                                    <label
+                                        style={{
+                                            background: secondAnswerStyle,
+                                            marginTop: '-30px',
+                                            color: '#fff',
+                                            pointerEvents: 'none'
+                                        }}
+                                        className={styles.jsjwjdwjdwjdwin}
+                                        htmlFor="first"
+                                        name='labelB'
+                                    >
+                                        <span className={styles.alphabet} >B</span> {newCurrentQuestion.second}
+                                    </label>
+                                </div>
+
+
                             </div>
 
+                            <div className={styles.quizOptions}>
 
-                        </div>
-
-                        <div className={styles.quizOptions}>
-
-                            <div
-                                onClick={(e) => applyStyleOnClick(e)}
-                                onMouseEnter={(e) => onMouseEnterFunc(e)}
-                                onMouseLeave={(e) => onMouseLeaveFunc(e)}
-                                name={newCurrentQuestion.fourth}
-                                id='fourth'
-                                style={{
-                                    pointerEvents: isDivDisabled
-                                }}
-                            >
-                                <input type="radio" id="first" name="first" onClick={(e) => applyStyleOnClick(e)} />
-                                <label
+                                <div
+                                    onClick={(e) => applyStyleOnClick(e)}
+                                    onMouseEnter={(e) => onMouseEnterFunc(e)}
+                                    onMouseLeave={(e) => onMouseLeaveFunc(e)}
+                                    name={newCurrentQuestion.third}
+                                    id='third'
                                     style={{
-                                        background: fourthAnswerStyle,
-                                        marginTop: '-30px',
-                                        color: '#fff',
-                                        pointerEvents: 'none'
+                                        pointerEvents: isDivDisabled
                                     }}
-                                    className={styles.jsjwjdwjdwjdwin}
-                                    htmlFor="first"
-                                    name='labelD'
                                 >
-                                    <span className={styles.alphabet} >D</span> {newCurrentQuestion.fourth}
-                                </label>
+                                    <input type="radio" id="first" name="first" onClick={(e) => applyStyleOnClick(e)} />
+                                    <label
+                                        style={{
+                                            background: thirdAnswerStyle,
+                                            marginTop: '-30px',
+                                            color: '#fff',
+                                            pointerEvents: 'none',
+                                        }}
+                                        className={styles.jsjwjdwjdwjdwin}
+                                        htmlFor="first"
+                                        name='labelC'
+                                    >
+                                        <span className={styles.alphabet} >C</span> {newCurrentQuestion.third}
+                                    </label>
+                                </div>
+
+
                             </div>
 
+                            <div className={styles.quizOptions}>
+
+                                <div
+                                    onClick={(e) => applyStyleOnClick(e)}
+                                    onMouseEnter={(e) => onMouseEnterFunc(e)}
+                                    onMouseLeave={(e) => onMouseLeaveFunc(e)}
+                                    name={newCurrentQuestion.fourth}
+                                    id='fourth'
+                                    style={{
+                                        pointerEvents: isDivDisabled
+                                    }}
+                                >
+                                    <input type="radio" id="first" name="first" onClick={(e) => applyStyleOnClick(e)} />
+                                    <label
+                                        style={{
+                                            background: fourthAnswerStyle,
+                                            marginTop: '-30px',
+                                            color: '#fff',
+                                            pointerEvents: 'none'
+                                        }}
+                                        className={styles.jsjwjdwjdwjdwin}
+                                        htmlFor="first"
+                                        name='labelD'
+                                    >
+                                        <span className={styles.alphabet} >D</span> {newCurrentQuestion.fourth}
+                                    </label>
+                                </div>
+
+
+
+                            </div>
 
                             <Link to={`${nextUrl}`} >
-                                <button onClick={onButtonClick}>Next</button>
+                                <button onClick={onButtonClick} className={styles.nextBtn}>Next</button>
+                                {/* onClick={onButtonClick} */}
                             </Link>
-                        </div>
 
 
-                        {/* <a id="btn" type="submit" onclick="window.location.href='#section-3'">Next</a> */}
-                    </form>
+                            {/* <a id="btn" type="submit" onclick="window.location.href='#section-3'">Next</a> */}
+                        </form>
+                    </div>
                 </main>
             </section>
         </div >

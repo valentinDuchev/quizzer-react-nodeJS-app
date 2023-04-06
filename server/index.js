@@ -7,6 +7,7 @@ const databaseConfig = require('./config/database');
 
 
 const quizesController = require('./router/quizzerRouter')
+const userController = require('./router/userRouter')
 const cookieParser = require('cookie-parser');
 
 start();
@@ -39,6 +40,7 @@ async function start() {
 
 
     app.use('/api', quizesController)
+    app.use('/api', userController)
 
     app.get('/', (req, res) => {
         res.json({ message: 'It works' })

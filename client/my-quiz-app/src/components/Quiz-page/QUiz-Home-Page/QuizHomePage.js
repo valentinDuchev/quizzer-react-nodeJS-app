@@ -52,6 +52,10 @@ export const QuizHomePage = () => {
 
     }, [currentQuizId, quizData.author])
 
+    const onStartButtonClick = () => {
+        localStorage.clear()
+    }
+
 
 
 
@@ -85,7 +89,7 @@ export const QuizHomePage = () => {
 
             <Link to={`/quiz-page/${quizData._id}/question/1`}>
 
-            <button>
+            <button onClick={onStartButtonClick}>
                 <h3>START THE QUIZ</h3>
             </button>
 

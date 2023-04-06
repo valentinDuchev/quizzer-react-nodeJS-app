@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
+import { QuizFinalPage } from "../Quiz-page/Quiz-Final-Page/QuizFinalPage";
 import { QuizHomePage } from "../Quiz-page/QUiz-Home-Page/QuizHomePage";
 import { QuizQuestionsPage } from "../Quiz-page/Quiz-questions-page/QuizQuesitonsPage";
 import { QuizSolvePage } from "../Quiz-page/QuizSolvePage/QuizSolvePage";
@@ -46,7 +47,7 @@ export const QuizPage = () => {
             
             {isFirstPage && <QuizHomePage/>}
             {isQuestionPage && <QuizSolvePage/>}
-            {isLastPage && <h1 style={{ color: 'white' }}>{pageType}</h1>}
+            {isLastPage && <h1 style={{ color: 'white' }}><QuizFinalPage/></h1>}
             {isUndefinedPage && <h1 style={{ color: 'white' }}>Undefined</h1>}
 
 
