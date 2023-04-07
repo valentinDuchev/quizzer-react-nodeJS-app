@@ -3,15 +3,15 @@ import styles from "./Login.module.css"
 import { useRef, useState, useEffect, useContext } from 'react'
 import AuthContext from "../../../context/AuthProvider";
 import axios from 'axios'
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 
 export const Login = () => {
 
-    const { auth, setAuth } = useContext(AuthContext);
-    const userRef = useRef();
-    const errRef = useRef();
+    const { auth, setAuth } = useContext(AuthContext); 
 
     const navigate = useNavigate()
+    const location = useLocation()
+    const from = location.state?.from?.pathname || "/quizes";
 
     const [user, setUser] = useState('');
     const [password, setPassword] = useState('')
@@ -67,7 +67,8 @@ export const Login = () => {
                         setAuth({
                             email, name, id, accessToken
                         })
-                        navigate('/quizes')
+                        console.log(from)
+                        navigate(from, { replace: true })
                     } else {
                         setErrorMessage(data.message)
                     }
@@ -85,10 +86,6 @@ export const Login = () => {
         setUser('')
         setPassword('')
         setSuccess(true)
-    }
-
-    const logout = () => {
-        setAuth('')
     }
 
     return (

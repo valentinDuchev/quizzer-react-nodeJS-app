@@ -5,23 +5,39 @@ import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from "./Navigation.module.css"
 
 import useAuth from '../../hooks/useAuth';
+import useTheme from '../../hooks/useTheme';
+
 
 function NavScrollExample() {
   const {auth, setAuth} = useAuth();
+  const {dark, setDark} = useTheme()
+
+  const navigate = useNavigate()
   
 
   useEffect(() => {
-    
+    console.log(auth)
   }, [auth])
 
   const logout = (e) => {
     e.preventDefault()
     localStorage.clear()
     setAuth('')
+    navigate("/quizes")
+  }
+
+  const onLightClick = () => {
+    setDark(false)
+    console.log(dark)
+  }
+
+  const onDarkClick = () => {
+    setDark(true)
+    console.log(dark)
   }
 
   return (
@@ -68,6 +84,9 @@ function NavScrollExample() {
 
               : <Nav.Link as={Link} to="/register" className={styles.navLink}>Register</Nav.Link>
             }
+
+            <button onClick={onLightClick}>Dark</button>
+            <button onClick={onDarkClick}>Light</button>
 
           </Nav>
           <Form className="d-flex">

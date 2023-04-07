@@ -2,10 +2,12 @@ import axios from "axios"
 import { createRef, useEffect, useState } from "react"
 import { Img } from "react-image"
 
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import styles from './QuizHomePage.module.css'
 
 export const QuizHomePage = () => {
+
+    const navigate = useNavigate()
 
     const [currentQuizId, setCurrentQuizId] = useState('')
     const [quizData, setQuizData] = useState({
@@ -53,7 +55,14 @@ export const QuizHomePage = () => {
     }, [currentQuizId, quizData.author])
 
     const onStartButtonClick = () => {
-        localStorage.clear()
+        localStorage.removeItem('currentResult')
+        if (localStorage.email) {
+            navigate(`/quiz-page/${quizData._id}/question/1`)
+
+        } else {
+            navigate('/login')
+        }
+
     }
 
 
@@ -87,13 +96,13 @@ export const QuizHomePage = () => {
             </div>
 
 
-            <Link to={`/quiz-page/${quizData._id}/question/1`}>
+            {/* <Link to={`/quiz-page/${quizData._id}/question/1`}> */}
 
             <button onClick={onStartButtonClick}>
                 <h3>START THE QUIZ</h3>
             </button>
 
-            </Link>
+            {/* </Link> */}
 
 
 

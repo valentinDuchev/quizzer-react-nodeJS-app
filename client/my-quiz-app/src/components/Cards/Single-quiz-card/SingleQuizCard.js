@@ -1,14 +1,17 @@
 import { Img } from "react-image"
 
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 import styles from "./SingleQuizCard.module.css"
 
 export const SingleQuizCard = (props) => {
 
+    const navigate = useNavigate()
+
 
     const onDetailsClick = (id) => {
         console.log(id)
+        navigate(`/quiz-page/${props.id}/firstPage`)
     }
 
 
@@ -30,9 +33,7 @@ export const SingleQuizCard = (props) => {
 
                     <h3 className={styles.likesH3}>{props.likes} Likes</h3>
                     <h3 className={styles.dislikesH3}>{props.dislikes} Dislikes</h3>
-                    <Link to={`/quiz-page/${props.id}/firstPage`}>
-                        <button>Details</button>
-                    </Link>
+                        <button onClick={onDetailsClick}>Details</button>
                 </div>
 
                 <p className={styles.cardDescriptionAllQuizesFooter}>12.11.2022 - <a href="#">{props.author}</a></p>
