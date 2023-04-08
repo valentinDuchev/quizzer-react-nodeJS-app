@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
+import useAuth from "../../hooks/useAuth";
+import Protected from "../Authentication/Protected";
 import { QuizFinalPage } from "../Quiz-page/Quiz-Final-Page/QuizFinalPage";
 import { QuizHomePage } from "../Quiz-page/QUiz-Home-Page/QuizHomePage";
 import { QuizQuestionsPage } from "../Quiz-page/Quiz-questions-page/QuizQuesitonsPage";
@@ -15,6 +17,18 @@ export const QuizPage = () => {
     const [isQuestionPage, setIsQuestionPage] = useState(false)
     const [isLastPage, setIsLastPage] = useState(false)
     const [isUndefinedPage, setIsUndefinedPage] = useState('false')
+
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+
+    const { auth, setAuth } = useAuth()
+
+
+    useEffect(() => {
+        if (auth.email) {
+            setIsLoggedIn(true)
+        }
+    })
 
 
     useEffect(() => {
@@ -44,10 +58,13 @@ export const QuizPage = () => {
         <>
 
 
-            
-            {isFirstPage && <QuizHomePage/>}
-            {isQuestionPage && <QuizSolvePage/>}
-            {isLastPage && <h1 style={{ color: 'white' }}><QuizFinalPage/></h1>}
+
+            {isFirstPage && <Protected
+                isLoggedIn={isLoggedIn}>
+                <QuizHomePage />
+            </Protected>}
+            {isQuestionPage && <QuizSolvePage />}
+            {isLastPage && <h1 style={{ color: 'white' }}><QuizFinalPage /></h1>}
             {isUndefinedPage && <h1 style={{ color: 'white' }}>Undefined</h1>}
 
 

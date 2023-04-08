@@ -74,55 +74,57 @@ router.get('/users/logout', (req, res) => { //TODO FIX BACKEND OGOUT
     }
 })
 
-// router.get('/users/myProfile', isUser, async (req, res) => {
-//     try {
-//         const token = req.headers['authorization'];
+router.get('/users/myProfile', async (req, res) => {
 
-//         if (!token) {
-//             throw new Error('There is no auth token in request headers')
-//         }
+    console.log('get')
+    try {
+        const token = req.headers['token'];
+        console.log(token)
 
-//         const tokenData = parseJwt(token);
-//         const user = await getUserByEmail(tokenData.email)
-//         const recipes = await getAllRecipes();
+        if (!token) {
+            throw new Error('There is no auth token in request headers')
+        }
 
-//         const userPosted = [];
-//         const userLiked = [];
+        const tokenData = parseJwt(token);
+        const user = await getUserByEmail(tokenData.email)
+        console.log(user)
 
-//         for (let recipe of recipes) {
-//             if (recipe.author.toString() == user._id.toString()) {
-//                 userPosted.push(recipe);
-//             }
+        // const userPosted = [];
+        // const userLiked = [];
 
-//             for (let liked of recipe.peopleLiked) {
-//                 if (liked.toString() == user._id.toString()) {
-//                     userLiked.push(recipe);
-//                 }
-//             }
-//         }
+        // for (let recipe of recipes) {
+        //     if (recipe.author.toString() == user._id.toString()) {
+        //         userPosted.push(recipe);
+        //     }
 
-//         const userData = {
-//             firstName: user.firstName,
-//             lastName: user.lastName,
-//             gender: user.gender,
-//             email: user.email,
-//             posted: userPosted,
-//             liked: userLiked,
-//             disliked: user.disliked,
-//             totalRecipeLikes: user.totalRecipeLikes,
-//             totalRecipeDislikes: user.totalRecipeDislikes,
-//             level: user.level,
-//             rank: user.rank,
-//             rating: user.rating
-//         }
+        //     for (let liked of recipe.peopleLiked) {
+        //         if (liked.toString() == user._id.toString()) {
+        //             userLiked.push(recipe);
+        //         }
+        //     }
+        // }
 
-//         res.json({ message: "Successfully accessed profile page", userData })
+        const userData = {
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+            liked: user.liked,
+            disliked: user.disliked,
+            rating: user.rating, 
+            quizesLiked: user.quizesLiked, 
+            quizesSolved: user.quizesSolved, 
+            quizesCreated: user.quizesCreated
+            
+        }
+        
+        console.log(userData)
+        res.json({ message: "Successfully accessed profile page", userData })
 
 
-//     } catch (err) {
-//         console.log(err)
-//     }
-// })
+    } catch (err) {
+        console.log(err)
+    }
+})
 
 // router.get('/users/userProfile/:email', async (req, res) => {
 //     try {

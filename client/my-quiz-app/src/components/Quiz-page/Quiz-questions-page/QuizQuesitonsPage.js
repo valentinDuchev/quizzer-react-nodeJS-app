@@ -115,7 +115,11 @@ export const QuizQuestionsPage = (props) => {
 
     useEffect(() => { //TODO - if possible, divide that useEffect into 2/3 smaller useEffects
         axios
-            .get(`http://localhost:3001/api/quiz/${quizId}`)
+            .get(`http://localhost:3001/api/quiz/${quizId}`, {
+                headers: {
+                    'token': localStorage.getItem('accessToken')
+                }
+            })
             .then(res => {
                 if (res.data.result) {
                     setQuestionsNumber(res.data.result.questions.length)

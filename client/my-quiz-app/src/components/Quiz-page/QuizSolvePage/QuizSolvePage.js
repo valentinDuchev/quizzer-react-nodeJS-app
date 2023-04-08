@@ -39,7 +39,11 @@ export const QuizSolvePage = () => {
 
     useEffect(() => {
         axios
-            .get(`http://localhost:3001/api/quiz/${quizId}`)
+            .get(`http://localhost:3001/api/quiz/${quizId}`,{
+                headers: {
+                    'token': localStorage.getItem('accessToken')
+                }
+            })
             .then(res => {
                 if (res.data.result) {
                     setQuizData({

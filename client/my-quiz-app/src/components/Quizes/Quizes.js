@@ -48,6 +48,7 @@ export const Quizes = () => {
                                 raitng={quiz.rating}
                                 solved={quiz.solved}
                                 title={quiz.title}
+                                email={quiz.authorEmail}
                             />) : ''}
                         </div>
                     </div>

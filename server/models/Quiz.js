@@ -1,64 +1,78 @@
 const { Schema, model, Types: { ObjectId } } = require('mongoose');
 
 
-const quizSchema = new Schema ({
+const quizSchema = new Schema({
 
     title: {
-        type: String, 
+        type: String,
         required: [true, "Title is required"]
-    }, 
+    },
     description: {
-        type: String, 
-    }, 
+        type: String,
+    },
     topic: {
         type: String,
         required: [true, 'Topic is required']
-    }, 
+    },
     difficulty: {
-        type: String, 
+        type: String,
         required: [true, 'Difficulty is required']
-    }, 
+    },
     questions: {
         type: [{
             id: Number,
-            question: String, 
-            correctAnswer: String, 
-            wrongAnswer1: String, 
-            wrongAnswer2: String, 
+            question: String,
+            correctAnswer: String,
+            wrongAnswer1: String,
+            wrongAnswer2: String,
             wrongAnswer3: String
         }]
     },
     author: {
-        type: String, //TODO - FIX AUTHOR ONCE AUTH IS DONE
-        required: [true, 'Author is required'], 
-        default: 'pesho'
-    }, 
+        type: ObjectId, 
+        ref: 'User', 
+        required: [true, "Author is required"]
+    },
+    authorEmail: {
+        type: String, 
+        required: [true, 'author email is required']
+    },
     /* dateCreated: {
 
     } */
     likes: {
-        type: Number, 
+        type: Number,
         default: 0
-    }, 
+    },
     dislikes: {
-        type: Number, 
+        type: Number,
         default: 0
-    }, 
+    },
     viewed: {
-        Type: Number, 
+        Type: Number,
         default: 0
-    }, 
+    },
     solved: {
-        type: Number, 
+        type: Number,
         default: 0
-    }, 
-    // comments: {
-        //TODO
-    // }
+    },
     rating: {
-        type: Number, 
+        type: Number,
         default: 0
     }, 
+    peopleLiked: {
+        type: [ObjectId],
+        ref: 'User'
+    } ,
+    peopleDisliked: {
+        type: [ObjectId], 
+        ref: 'User'
+    }, 
+    peopleSolved: {
+        type: [{}], 
+        ref: 'User'
+    }
+
     /* TODO
     peopleLiked, 
     peopleDisliked, 

@@ -115,3 +115,16 @@
 .fullWidth {
     width: 100%;
 }
+
+.quizes {
+    display: grid;
+    grid-template-columns: 31% 31% 31%;
+    gap: 2%;
+    margin-left: 1.5%;
+    margin-right: 1.5%;
+}
+
+.quizCard {
+    background-color: antiquewhite;
+    border-radius: 20px;
+}

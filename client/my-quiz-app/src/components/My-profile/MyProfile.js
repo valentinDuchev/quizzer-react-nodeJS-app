@@ -2,10 +2,48 @@ import { MyQuizCard } from '../Cards/My-quiz-card/MyQuizCard';
 import './MyProfile.module.css'
 import styles from './MyProfile.module.css'; // Import css modules stylesheet as styles
 import { Img } from 'react-image'
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 
 export const MyProfile = () => {
+
+    const [profileData, setProfileData] = useState({})
+
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        try {
+            const token = localStorage.getItem('accessToken')
+            console.log(token)
+            fetch('http://localhost:3001/api/users/myProfile', {
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                    'token': token
+                },
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data);
+                    setProfileData(data.userData)
+                    console.log(profileData)
+                    // Handle data
+                    // navigate('/my-profile')
+                })
+                .catch((err) => {
+                    console.log(err.message);
+                });
+        } catch (err) {
+            console.log(err)
+        }
+    }, [profileData.liked])
+
+    
+    const onDetailsClick = (quizId) => {
+        navigate(`/quiz-page/${quizId}/firstPage`)
+    }
+
     return (
         <div className={styles.profileDiv}>
 
@@ -17,14 +55,14 @@ export const MyProfile = () => {
 
                 <div className={styles.asideDataProfile}>
                     <div className={styles.personal}>
-                        <h3>Quizes Created <span style={{ fontWeight: 'bold' }}>10</span></h3>
-                        <h3>Likes <span style={{ fontWeight: 'bold' }}>10</span></h3>
-                        <h3>Dislikes <span style={{ fontWeight: 'bold' }}>10</span></h3>
+                        <h3>Quizes Created <span style={{ fontWeight: 'bold' }}></span></h3>
+                        <h3>Likes <span style={{ fontWeight: 'bold' }}>TODO</span></h3>
+                        <h3>Dislikes <span style={{ fontWeight: 'bold' }}>TODO</span></h3>
                     </div>
                     <div className={styles.personal2}>
-                        <h3>Quizes Liked <span style={{ fontWeight: 'bold' }}>10</span></h3>
-                        <h3>Quizes Disliked <span style={{ fontWeight: 'bold' }}>10</span></h3>
-                        <h3>Quizes Solved <span style={{ fontWeight: 'bold' }}>10</span></h3>
+                        <h3>Quizes Liked <span style={{ fontWeight: 'bold' }}>{profileData.liked}</span></h3>
+                        <h3>Quizes Disliked <span style={{ fontWeight: 'bold' }}>{profileData.disliked}</span></h3>
+                        <h3>Quizes Solved <span style={{ fontWeight: 'bold' }}>{profileData.solved}</span></h3>
                     </div>
 
                     <div>
@@ -39,14 +77,30 @@ export const MyProfile = () => {
                 <div className={styles.firstRow}>
 
                     <div className={styles.name}>
-                        <h2>Peter Petrov</h2>
+                        <h2>{profileData.firstName}</h2>
                     </div>
 
                     <div className={styles.data}>
-                        <h3> Followers<br /> 64</h3>
-                        <h3> Followers<br /> 64</h3>
-                        <h3> Followers<br /> 64</h3>
+                        <h3> Followers<br /> TODO</h3>
+                        <h3> Following<br /> TODO</h3>
+                        <h3> Quizes Created<br /> </h3>
                     </div>
+
+
+                </div>
+
+                <div className={styles.quizes}>
+
+
+                    {profileData.quizesCreated ? profileData.quizesCreated.map((quiz) =>
+                        <div className={styles.quizCard}>
+                            <h1>{quiz.title}</h1>
+                            <h2>{quiz.topic}</h2>
+                            <button onClick={() => onDetailsClick(quiz._id)}>Details</button>
+                        </div>
+                    ) : ''}
+
+
                 </div>
 
             </div>
@@ -55,257 +109,3 @@ export const MyProfile = () => {
 };
 
 
-{/* <div classNameName={styles.myProfileSection}>
-        <div classNameName={styles.titleProfile}>
-            <div classNameName={styles.titleProfileName}>
-                <h1>Peter Petrov - peter@abv.bg</h1>
-            </div>
-
-            <div classNameName={styles.titleProfileData}>
-                <div classNameName={styles.titleProfileFollowers}>
-                    <h2>Followers </h2>
-                    <h2>26</h2>
-                </div>
-
-                <div classNameName={styles.titleProfileFollowing}>
-                    <h2>Following </h2>
-                    <h2>26</h2>
-                </div>
-
-                <div classNameName={styles.titleProfileRating}>
-                    <h2>Rating </h2>
-                    <h2>22/100</h2>
-                </div>
-            </div>
-        </div>
-
-        <div classNameName={styles.titleProfileMobile}>
-
-
-            <div classNameName={styles.titleProfileNameDivMobile}>
-
-                <div classNameName={styles.titleProfileNameMobile}>
-                    <h1>Peter Petrov - peter@abv.bg</h1>
-                </div>
-
-            </div>
-
-
-            <div classNameName={styles.titleProfileNameDataMobile}>
-
-
-
-                <div classNameName={styles.divTitleProfileImageMobile}>
-                    <Img src="./Static images/profile-image.jpg" classNameName={styles.titleProfileImageMobile}/>
-                </div>
-
-
-                <div classNameName={styles.titleProfileDataMobile}>
-                    <div classNameName={styles.titleProfileFollowersMobile}>
-                        <h2>Followers </h2>
-                        <h3>26</h3>
-                    </div>
-
-                    <div classNameName={styles.titleProfileFollowingMobile}>
-                        <h2>Following </h2>
-                        <h3>26</h3>
-                    </div>
-
-                    <div classNameName={styles.titleProfileRatingMobile}>
-                        <h2>Rating </h2>
-                        <h3>22/100</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div classNameName={styles.asideProfile}>
-
-            <Img src="./Static images/profile-image.jpg" classNameName={styles.asideProfileImage}/>
-
-                <div classNameName={styles.asideQuizesInfo}>
-
-                    <div classNameName={styles.asideQuizesInfoHeadings}>
-                        <h2 classNameName={styles.quizesCreated}>Quizes Created: 10</h2>
-                        <h2>Quizes Created: 10</h2>
-                        <h2>Quizes Created: 10</h2>
-                        <h2>Quizes Created: 10</h2>
-                        <h2>Quizes Created: 10</h2>
-                        <h2>Rating: 22</h2>
-                    </div>
-                </div>
-
-        </div>
-
-        <div classNameName={styles.asideProfileMobile}>
-
-        </div>
-
-
-
-        <div classNameName={styles.firstMainProfile}>
-
-
-            <div classNameName={styles.coursesContainer}>
-                <div classNameName={styles.course}>
-                    <div classNameName={styles.coursePreview}>
-                        <h6>Topic</h6>
-                        <h2>Sports</h2>
-
-                        <h5>Author:</h5>
-                        <a href="#"> pesho_01 <i classNameName="fas fa-chevron-right"></i></a>
-                    </div>
-                    <div classNameName={styles.courseInfo}>
-
-                        <h6>Title</h6>
-                        <h2>Sports quiz to challenge you</h2>
-
-
-                        <h6>FORMAT</h6>
-                        <h3>Who wants to be a millionaire</h3>
-
-                        <h6>Questions number</h6>
-                        <h3>15</h3>
-
-                        <h6>Privacy</h6>
-                        <h3>Public</h3>
-                        <button classNameName={styles.btn}>Details</button>
-                    </div>
-                </div>
-            </div>
-
-            <div classNameName={styles.coursesContainer}>
-                <div classNameName={styles.course}>
-                    <div classNameName={styles.coursePreview}>
-                        <h6>Topic</h6>
-                        <h2>Sports</h2>
-
-                        <h5>Author:</h5>
-                        <a href="#"> pesho_01 <i classNameName="fas fa-chevron-right"></i></a>
-                    </div>
-                    <div classNameName={styles.courseInfo}>
-
-                        <h6>Title</h6>
-                        <h2>Sports quiz to challenge you</h2>
-
-
-                        <h6>FORMAT</h6>
-                        <h3>Who wants to be a millionaire</h3>
-
-                        <h6>Questions number</h6>
-                        <h3>15</h3>
-
-                        <h6>Privacy</h6>
-                        <h3>Public</h3>
-                        <button classNameName={styles.btn}>Details</button>
-                    </div>
-                </div>
-            </div>
-
-            <div classNameName={styles.coursesContainer}>
-                <div classNameName={styles.course}>
-                    <div classNameName={styles.coursePreview}>
-                        <h6>Topic</h6>
-                        <h2>Sports</h2>
-
-                        <h5>Author:</h5>
-                        <a href="#"> pesho_01 <i classNameName="fas fa-chevron-right"></i></a>
-                    </div>
-                    <div classNameName={styles.courseInfo}>
-
-                        <h6>Title</h6>
-                        <h2>Sports quiz to challenge you</h2>
-
-
-                        <h6>FORMAT</h6>
-                        <h3>Who wants to be a millionaire</h3>
-
-                        <h6>Questions number</h6>
-                        <h3>15</h3>
-
-                        <h6>Privacy</h6>
-                        <h3>Public</h3>
-                        <button classNameName={styles.btn}>Details</button>
-                    </div>
-                </div>
-            </div>
-
-            <MyQuizCard/>
-
-            <MyQuizCard/>
-
-
-
-        </div>
-
-        <div classNameName={styles.firstMainProfileMobile}>
-
-
-
-            <button classNameName={styles.openCoursesContainerMobile}>
-                Quizes
-            </button>
-
-
-            <div classNameName={styles.quizCardMobile}>
-                <div classNameName={styles.coursePreviewMobile}>
-
-                    <div classNameName={styles.quizTitleMobile}>
-                        <h1>Sports quiz to challenge you</h1>
-                    </div>
-
-                    <button classNameName={styles.quizDetailsMobile}>
-                        Details
-                    </button>
-
-                </div>
-
-                <div classNameName={styles.coursePreviewMobile}>
-
-                    <div classNameName={styles.quizTitleMobile}>
-                        <h1>Sports quiz to challenge you</h1>
-                    </div>
-
-                    <button classNameName={styles.quizDetailsMobile}>
-                        Details
-                    </button>
-
-                </div>
-            </div>
-
-            <button classNameName={styles.openCoursesContainerMobile}>
-                Statistics
-            </button>
-
-            <div classNameName={styles.quizStatsMobile}>
-                <div classNameName={styles.asideQuizesInfoHeadings}>
-                    <h2 classNameName={styles.quizesCreated}>Quizes Created: 10</h2>
-                    <h2>Quizes Created: 10</h2>
-                    <h2>Quizes Created: 10</h2>
-                    <h2>Quizes Created: 10</h2>
-                    <h2>Quizes Created: 10</h2>
-                    <h2>Rating: 22</h2>
-                </div>
-            </div>
-
-
-            <button classNameName={styles.openCoursesContainerMobile}>
-                Recent quizes charts
-            </button>
-
-            <div classNameName={styles.quizChartMobile}>
-                <Img src="./Static images/how-to-bar-2.jpg" classNameName={styles.chartImageMobile}/>
-            </div>
-
-
-        </div>
-
-
-        <div classNameName={styles.secondMainProfile}>
-
-
-            <Img src="./Static images/how-to-bar-2.jpg"/>
-
-        </div>
-    </div>
-        ; */}

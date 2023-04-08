@@ -282,6 +282,8 @@ export const Create = () => {
             setTitle('')
             setDifficulty('')
 
+            const token = localStorage.getItem('accessToken')
+
             try {
                 fetch('http://localhost:3001/api/createQuiz', {
                     method: 'POST',
@@ -290,10 +292,12 @@ export const Create = () => {
                         title: title,
                         description: description,
                         topic: topic,
-                        difficulty: difficulty
+                        difficulty: difficulty, 
+                        authorId: localStorage.getItem('id')
                     }),
                     headers: {
                         'Content-type': 'application/json; charset=UTF-8',
+                        'token': token
                     },
                 })
                 .then((response) => response.json())

@@ -46,13 +46,13 @@ async function login (email, password) {
     return user;
 }
 
-// async function getUserByEmail (email) {
-//     return await User.findOne({ email })  
-// }
+async function getUserByEmail (email) {
+    return await User.findOne({ email })  
+}
 
-// async function getUserById (id) {
-//     return await User.findById(id);
-// }
+async function getUserById (id) {
+    return await User.findById(id);
+}
 
 // async function getAllUsers () {
 //     return await User.find({});
@@ -61,8 +61,8 @@ async function login (email, password) {
 module.exports = {
     register,
     login, 
-    // getUserByEmail, 
-    // getUserById, 
+    getUserByEmail, 
+    getUserById, 
     // getAllUsers
 
 }

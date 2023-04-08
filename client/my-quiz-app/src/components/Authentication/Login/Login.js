@@ -7,7 +7,7 @@ import { useNavigate, Link, useLocation } from "react-router-dom";
 
 export const Login = () => {
 
-    const { auth, setAuth } = useContext(AuthContext); 
+    const { auth, setAuth } = useContext(AuthContext);
 
     const navigate = useNavigate()
     const location = useLocation()
@@ -53,25 +53,31 @@ export const Login = () => {
 
                     console.log(idData)
 
-                    localStorage.setItem('email', emailData)
-                    localStorage.setItem('name', nameData)
-                    localStorage.setItem('accessToken', accessTokenData)
-                    localStorage.setItem('id', idData)
+                    if (emailData !== undefined && nameData !== undefined && idData !== undefined && accessTokenData !== undefined) {
+                        localStorage.setItem('email', emailData)
+                        localStorage.setItem('name', nameData)
+                        localStorage.setItem('accessToken', accessTokenData)
+                        localStorage.setItem('id', idData)
 
-                    const email = localStorage.getItem('email')
-                    const name = localStorage.getItem('name')
-                    const id = localStorage.getItem('id')
-                    const accessToken = localStorage.getItem('accessToken')
+                        const email = localStorage.getItem('email')
+                        const name = localStorage.getItem('name')
+                        const id = localStorage.getItem('id')
+                        const accessToken = localStorage.getItem('accessToken')
 
-                    if (email && name && id && accessToken) {
-                        setAuth({
-                            email, name, id, accessToken
-                        })
-                        console.log(from)
-                        navigate(from, { replace: true })
+                        if (email !== undefined && name !== undefined && id !== undefined && accessToken !== undefined) {
+                            setAuth({
+                                email, name, id, accessToken
+                            })
+                            console.log(from)
+                            navigate(from, { replace: true })
+                        } else {
+                            setErrorMessage(data.message)
+                        }
                     } else {
                         setErrorMessage(data.message)
                     }
+
+
 
 
                 })
