@@ -3,21 +3,25 @@ import './MyProfile.module.css'
 import styles from './MyProfile.module.css'; // Import css modules stylesheet as styles
 import { Img } from 'react-image'
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 
 
 export const MyProfile = () => {
 
     const [profileData, setProfileData] = useState({})
+    const [isMyOwnProfile, setIsMyOwnProfile] = useState(true)
 
     const navigate = useNavigate()
+
+    const { email } = useParams()
+    console.log(email)
 
     useEffect(() => {
         try {
             const token = localStorage.getItem('accessToken')
             console.log(token)
-            fetch('http://localhost:3001/api/users/myProfile', {
+            fetch(`http://localhost:3001/api/users/profile/${email}`, {
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
                     'token': token
@@ -28,6 +32,7 @@ export const MyProfile = () => {
                     console.log(data);
                     setProfileData(data.userData)
                     console.log(profileData)
+                    setIsMyOwnProfile(data.isMyOwnProfile)
                     // Handle data
                     // navigate('/my-profile')
                 })
@@ -37,11 +42,40 @@ export const MyProfile = () => {
         } catch (err) {
             console.log(err)
         }
-    }, [profileData.liked])
+    }, [])
 
-    
+
     const onDetailsClick = (quizId) => {
         navigate(`/quiz-page/${quizId}/firstPage`)
+    }
+
+    const follow = () => {
+        const token = localStorage.getItem('accessToken')
+        try {
+
+
+            fetch(`http://localhost:3001/api/users/${email}/follow`, {
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                    'token': token
+                },
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data);
+                    if (data.error !== '') {
+                        alert(data.error)
+                    }
+                    
+                    // navigate('/my-profile')
+                })
+                .catch((err) => {
+                    console.log(err.message);
+                    
+                });
+        } catch (err) {
+            console.log(err)
+        }
     }
 
     return (
@@ -60,8 +94,8 @@ export const MyProfile = () => {
                         <h3>Dislikes <span style={{ fontWeight: 'bold' }}>TODO</span></h3>
                     </div>
                     <div className={styles.personal2}>
-                        <h3>Quizes Liked <span style={{ fontWeight: 'bold' }}>{profileData.liked}</span></h3>
-                        <h3>Quizes Disliked <span style={{ fontWeight: 'bold' }}>{profileData.disliked}</span></h3>
+                        <h3>Quizes Liked <span style={{ fontWeight: 'bold' }}></span></h3>
+                        <h3>Quizes Disliked <span style={{ fontWeight: 'bold' }}></span></h3>
                         <h3>Quizes Solved <span style={{ fontWeight: 'bold' }}>{profileData.solved}</span></h3>
                     </div>
 
@@ -81,10 +115,15 @@ export const MyProfile = () => {
                     </div>
 
                     <div className={styles.data}>
-                        <h3> Followers<br /> TODO</h3>
-                        <h3> Following<br /> TODO</h3>
-                        <h3> Quizes Created<br /> </h3>
+                        <h3> Followers<br /> {profileData.followersNumber}</h3>
+                        <h3> Following<br /> {profileData.followingNumber}</h3>
+                        <h3> Quizes <br /> {profileData.quizesNumber} </h3>
                     </div>
+
+                    {!isMyOwnProfile
+                        ? <button onClick={follow}>Follow</button>
+                        : <button>Edit</button>
+                    }
 
 
                 </div>

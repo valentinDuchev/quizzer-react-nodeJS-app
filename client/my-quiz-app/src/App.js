@@ -68,7 +68,7 @@ function App() {
         <Routes>
           <Route path='/home' element={<Home />} />
 
-          <Route path='/my-profile'
+          <Route path='/profile/:email'
             element={<Protected
               isLoggedIn={isLoggedIn}>
               <MyProfile />

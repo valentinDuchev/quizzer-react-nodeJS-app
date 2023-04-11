@@ -74,56 +74,81 @@ router.get('/users/logout', (req, res) => { //TODO FIX BACKEND OGOUT
     }
 })
 
-router.get('/users/myProfile', async (req, res) => {
+router.get('/users/profile/:email', async (req, res) => {
 
     console.log('get')
+
     try {
         const token = req.headers['token'];
         console.log(token)
+        const email = req.params.email;
 
         if (!token) {
             throw new Error('There is no auth token in request headers')
         }
 
         const tokenData = parseJwt(token);
-        const user = await getUserByEmail(tokenData.email)
-        console.log(user)
+        let user;
 
-        // const userPosted = [];
-        // const userLiked = [];
+        let isMyOwnProfile = false
+        // console.log(user)
+        if (JSON.stringify(tokenData.email) === JSON.stringify(email)) {
+            isMyOwnProfile = true;
+            user = await getUserByEmail(tokenData.email)
+        } else {
+            user = await getUserByEmail(email)
+        }
 
-        // for (let recipe of recipes) {
-        //     if (recipe.author.toString() == user._id.toString()) {
-        //         userPosted.push(recipe);
-        //     }
-
-        //     for (let liked of recipe.peopleLiked) {
-        //         if (liked.toString() == user._id.toString()) {
-        //             userLiked.push(recipe);
-        //         }
-        //     }
-        // }
 
         const userData = {
             firstName: user.firstName,
             lastName: user.lastName,
             email: user.email,
-            liked: user.liked,
-            disliked: user.disliked,
-            rating: user.rating, 
-            quizesLiked: user.quizesLiked, 
-            quizesSolved: user.quizesSolved, 
-            quizesCreated: user.quizesCreated
-            
+            rating: user.rating,
+            quizesCreated: user.quizesCreated,
+            quizesNumber: user.quizesCreated.length,
+            dateCreated: user.dateCreated, 
+            followers: user.followers, 
+            following: user.following, 
+            followersNumber: user.followersNumber, 
+            followingNumber: user.followingNumber
+
         }
-        
-        console.log(userData)
-        res.json({ message: "Successfully accessed profile page", userData })
+
+        // console.log(userData)
+        res.json({ message: "Successfully accessed profile page", userData, isMyOwnProfile })
 
 
     } catch (err) {
         console.log(err)
     }
+})
+
+router.get('/users/:email/follow', async (req, res) => {
+    const token = req.headers['token'];
+    const userData = parseJwt(token);
+    const userFollowing = await getUserByEmail(userData.email);
+
+    const userToFollowEmail = req.params.email;
+    const userToFollow = await getUserByEmail(userToFollowEmail)
+
+    let error = '';
+
+    if (!userToFollow.followers.includes(userFollowing._id) && !userFollowing.following.includes(userToFollow._id)) {
+        userToFollow.followersNumber += 1;
+        userFollowing.followingNumber += 1;
+        userToFollow.followers.push(userFollowing)
+        userFollowing.following.push(userToFollow)
+    } else {
+        error = 'You have already followed that user'
+    }
+
+
+    await userToFollow.save()
+    await userFollowing.save()
+
+    res.json({ message: `Successfully followed ${userToFollow}`, error })
+
 })
 
 // router.get('/users/userProfile/:email', async (req, res) => {

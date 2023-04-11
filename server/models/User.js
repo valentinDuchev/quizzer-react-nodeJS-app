@@ -21,12 +21,14 @@ const userSchema = new Schema({
         default: Date.now()
     },
     // posted: { type: [recipeSchema] },
-    liked: { type: Number, default: 0 }, 
-    disliked: { type: Number, default: 0}, 
+    followingNumber: { type: Number, default: 0 }, 
+    followersNumber: { type: Number, default: 0}, 
+    following: {type: [ObjectId], ref: 'User'},
+    followers: { type: [ObjectId], ref: 'User'},
     rating: { type: Number, default: 0 }, 
-    quizesLiked: { type: [quizSchema], default: []}, 
     quizesCreated: { type: [quizSchema], default: []}, 
-    quizesSolved: { type: [quizSchema], default: []}
+    quizesSolved: { type: [quizSchema], default: []}, 
+
 });
 
 userSchema.index({ email: 1 }, {

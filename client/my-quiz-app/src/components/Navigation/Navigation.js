@@ -18,9 +18,11 @@ function NavScrollExample() {
 
   const navigate = useNavigate()
   
+  const email = localStorage.getItem('email')
 
   useEffect(() => {
     console.log(auth)
+    
   }, [auth])
 
   const logout = (e) => {
@@ -62,7 +64,7 @@ function NavScrollExample() {
             }
 
             {localStorage.getItem('email')
-              ? <Nav.Link as={Link} to="/my-profile" className={styles.navLink}>My Profile</Nav.Link>
+              ? <Nav.Link as={Link} to={`/profile/${email}`}className={styles.navLink}>My Profile</Nav.Link>
 
               : ''
             }

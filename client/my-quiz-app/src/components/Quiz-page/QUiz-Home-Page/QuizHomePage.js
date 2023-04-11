@@ -159,6 +159,7 @@ export const QuizHomePage = () => {
                 .then((data) => {
 
                     console.log(data)
+                    navigate("/quizes")
 
                 })
                 .catch((err) => {

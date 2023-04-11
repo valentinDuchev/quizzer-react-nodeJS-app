@@ -36,7 +36,7 @@ export const SingleQuizCard = (props) => {
                         <button onClick={onDetailsClick}>Details</button>
                 </div>
 
-                <p className={styles.cardDescriptionAllQuizesFooter}>12.11.2022 - <a href="#">{props.email}</a></p>
+                <p className={styles.cardDescriptionAllQuizesFooter}>12.11.2022 - <Link to={`/profile/${props.email}`}>{props.email}</Link></p>
 
             </div>
         </div>
