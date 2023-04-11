@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const { getAllQuizes, createQuiz, getOneQuiz } = require('../controllers/quizesController');
+const { getAllQuizes, createQuiz, getOneQuiz, deleteById } = require('../controllers/quizesController');
 const { getUserByEmail, getUserById } = require('../controllers/userController')
 const { parseJwt } = require('../middlewares/auth');
 const User = require('../models/User');
@@ -81,7 +81,7 @@ router.get('/quiz/:id', async (req, res) => {
             solved: data.solved,
             rating: data.rating,
             questions: (data.questions),
-            authorEmail: data.authorEmail, 
+            authorEmail: data.authorEmail,
             peopleSolved: data.peopleSolved
         }
 
@@ -108,10 +108,10 @@ router.get('/quiz/:id', async (req, res) => {
 
 router.get('/quiz/:id/solve', async (req, res) => {
     const id = req.params.id;
+    const result = req.headers.result
 
     const token = req.headers.token;
 
-    const result = req.headers.result
     const userData = parseJwt(token);
     const user = await getUserByEmail(userData.email);
 
@@ -134,6 +134,29 @@ router.get('/quiz/:id/solve', async (req, res) => {
 
 
 
+})
+
+router.delete('/quiz/:id', async (req, res) => {
+    const id = req.params.id;
+    const quiz = await getOneQuiz(id);
+
+    const token = req.headers.token;
+
+    const userData = parseJwt(token);
+    const user = await getUserByEmail(userData.email);
+
+    for (let i = 0; i < user.quizesCreated.length; i++) {
+        if (JSON.stringify(quiz._id) == JSON.stringify(user.quizesCreated[i]._id)) {
+            user.quizesCreated.splice(i, 1)
+        }
+    }
+
+
+
+
+    await deleteById(id)
+    await user.save()
+    res.status(200).json({ message: "Successfully deleted" })
 })
 
 

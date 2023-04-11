@@ -29,17 +29,18 @@ const quizSchema = new Schema({
         }]
     },
     author: {
-        type: ObjectId, 
-        ref: 'User', 
+        type: ObjectId,
+        ref: 'User',
         required: [true, "Author is required"]
     },
     authorEmail: {
-        type: String, 
+        type: String,
         required: [true, 'author email is required']
     },
-    /* dateCreated: {
-
-    } */
+    dateCreated: {
+        type: Date,
+        default: Date.now()
+    },
     likes: {
         type: Number,
         default: 0
@@ -59,17 +60,17 @@ const quizSchema = new Schema({
     rating: {
         type: Number,
         default: 0
-    }, 
+    },
     peopleLiked: {
         type: [ObjectId],
         ref: 'User'
-    } ,
+    },
     peopleDisliked: {
-        type: [ObjectId], 
+        type: [ObjectId],
         ref: 'User'
-    }, 
+    },
     peopleSolved: {
-        type: [{}], 
+        type: [{}],
         ref: 'User'
     }
 

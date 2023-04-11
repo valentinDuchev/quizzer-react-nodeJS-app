@@ -143,6 +143,32 @@ export const QuizHomePage = () => {
         console.log(quizData)
     })
 
+    const onDeleteClick = () => {
+        const token = localStorage.getItem('accessToken')
+
+        try {
+
+            fetch(`http://localhost:3001/api/quiz/${currentQuizId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                    'token': token
+                },
+            })
+                .then((response) => response.json())
+                .then((data) => {
+
+                    console.log(data)
+
+                })
+                .catch((err) => {
+                    console.log(err.message);
+                });
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
 
 
 
@@ -179,6 +205,8 @@ export const QuizHomePage = () => {
             {!isAuthor ? <button onClick={onStartButtonClick}>
                 <h3>START THE QUIZ</h3>
             </button> : ''}
+
+            {isAuthor ? <button onClick={onDeleteClick} style={{ background: 'red' }}>Delete Quiz</button> : ''}
 
 
 

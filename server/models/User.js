@@ -16,7 +16,10 @@ const userSchema = new Schema({
             }, message: "You must enter a valid Email"
         }
     },
-    date: { type: Date, drfault: Date.now() },
+    dateCreated: {
+        type: Date,
+        default: Date.now()
+    },
     // posted: { type: [recipeSchema] },
     liked: { type: Number, default: 0 }, 
     disliked: { type: Number, default: 0}, 

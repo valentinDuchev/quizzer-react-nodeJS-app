@@ -18,9 +18,14 @@ async function getOneQuiz (_id) {
     return result;
 }
 
+async function deleteById(id) {
+    await Quiz.findByIdAndDelete(id);
+}
+
 
 module.exports = {
     getAllQuizes,
     createQuiz,
-    getOneQuiz
+    getOneQuiz,
+    deleteById
 }
