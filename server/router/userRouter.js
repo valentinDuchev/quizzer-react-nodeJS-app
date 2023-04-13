@@ -88,35 +88,70 @@ router.get('/users/profile/:email', async (req, res) => {
         }
 
         const tokenData = parseJwt(token);
-        let user;
 
         let isMyOwnProfile = false
         // console.log(user)
         if (JSON.stringify(tokenData.email) === JSON.stringify(email)) {
             isMyOwnProfile = true;
-            user = await getUserByEmail(tokenData.email)
+            const user = await getUserByEmail(tokenData.email)
+            const userData = {
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email,
+                rating: user.rating,
+                quizesCreated: user.quizesCreated,
+                quizesNumber: user.quizesCreated.length,
+                dateCreated: user.dateCreated,
+                followers: user.followers,
+                following: user.following,
+                followersNumber: user.followersNumber,
+                followingNumber: user.followingNumber,
+                _id: user._id
+            }
+
+            // console.log(userData)
+            res.json({ message: "Successfully accessed MY profile page", userData, isMyOwnProfile })
         } else {
-            user = await getUserByEmail(email)
+            const myUser = await getUserByEmail(tokenData.email)
+            const user = await getUserByEmail(email)
+
+            const userData = {
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email,
+                rating: user.rating,
+                quizesCreated: user.quizesCreated,
+                quizesNumber: user.quizesCreated.length,
+                dateCreated: user.dateCreated,
+                followers: user.followers,
+                following: user.following,
+                followersNumber: user.followersNumber,
+                followingNumber: user.followingNumber,
+                _id: user._id
+
+            }
+
+            const myUserData = {
+                firstName: myUser.firstName,
+                lastName: myUser.lastName,
+                email: myUser.email,
+                rating: myUser.rating,
+                quizesCreated: myUser.quizesCreated,
+                quizesNumber: myUser.quizesCreated.length,
+                dateCreated: myUser.dateCreated,
+                followers: myUser.followers,
+                following: myUser.following,
+                followersNumber: myUser.followersNumber,
+                followingNumber: myUser.followingNumber,
+                _id: myUser._id
+            }
+
+            // console.log(userData)
+            res.json({ message: "Successfully accessed ANOTHER profile page", userData, isMyOwnProfile, myUserData })
         }
 
 
-        const userData = {
-            firstName: user.firstName,
-            lastName: user.lastName,
-            email: user.email,
-            rating: user.rating,
-            quizesCreated: user.quizesCreated,
-            quizesNumber: user.quizesCreated.length,
-            dateCreated: user.dateCreated, 
-            followers: user.followers, 
-            following: user.following, 
-            followersNumber: user.followersNumber, 
-            followingNumber: user.followingNumber
 
-        }
-
-        // console.log(userData)
-        res.json({ message: "Successfully accessed profile page", userData, isMyOwnProfile })
 
 
     } catch (err) {
@@ -147,7 +182,44 @@ router.get('/users/:email/follow', async (req, res) => {
     await userToFollow.save()
     await userFollowing.save()
 
-    res.json({ message: `Successfully followed ${userToFollow}`, error })
+    res.json({ message: `Successfully followed ${userToFollow}`, error, userToFollow, userFollowing })
+
+})
+
+router.get('/users/:email/unfollow', async (req, res) => {
+    const token = req.headers['token'];
+    const userData = parseJwt(token);
+    const userFollowing = await getUserByEmail(userData.email);
+
+    const userToFollowEmail = req.params.email;
+    const userToFollow = await getUserByEmail(userToFollowEmail)
+
+    let error = '';
+
+    if (userToFollow.followers.includes(userFollowing._id) && userFollowing.following.includes(userToFollow._id)) {
+        userToFollow.followersNumber -= 1;
+        userFollowing.followingNumber -= 1;
+
+        for (let i = 0; i < userToFollow.followers.length; i++) {
+            if (JSON.stringify(userToFollow.followers[i]._id) === JSON.stringify(userFollowing._id)) {
+                userToFollow.followers.splice(i, 1);
+            }
+        }
+
+        for (let i = 0; i < userFollowing.following.length; i++) {
+            if (JSON.stringify(userFollowing.following[i]) === JSON.stringify(userToFollow._id)) {
+                userFollowing.following.splice(i, 1);
+            }
+        }
+    } else {
+        error = 'You have already followed that user'
+    }
+
+
+    await userToFollow.save()
+    await userFollowing.save()
+
+    res.json({ message: `Successfully unfollowed ${userToFollow}`, error, userToFollow, userFollowing })
 
 })
 

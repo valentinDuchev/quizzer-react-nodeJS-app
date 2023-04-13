@@ -49,6 +49,9 @@ export const Quizes = () => {
                                 solved={quiz.solved}
                                 title={quiz.title}
                                 email={quiz.authorEmail}
+                                questionsNumber={quiz.questions.length}
+                                rating={quiz.rating}
+                                ratedNumber={quiz.ratedNumber}
                             />) : ''}
                         </div>
                     </div>

@@ -28,6 +28,7 @@ const userSchema = new Schema({
     rating: { type: Number, default: 0 }, 
     quizesCreated: { type: [quizSchema], default: []}, 
     quizesSolved: { type: [quizSchema], default: []}, 
+    quizesRated: { type: [quizSchema]}
 
 });
 

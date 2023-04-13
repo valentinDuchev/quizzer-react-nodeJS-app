@@ -71,35 +71,6 @@ export const QuizHomePage = () => {
             } catch (err) {
                 console.log(err)
             }
-
-
-            // axios
-            //     .get(`http://localhost:3001/api/quiz/${currentQuizId}`)
-            //     // {
-            //     //     headers: {
-            //     //         'token': localStorage.getItem('accessToken')
-            //     //     }
-            //     // })
-            //     .then(res => {
-            //         if (res.data.result) {
-            //             setQuizData({
-            //                 author: res.data.result.authorEmail,
-            //                 _id: res.data.result._id,
-            //                 difficulty: res.data.result.difficulty,
-            //                 dislikes: res.data.result.dislikes,
-            //                 likes: res.data.result.likes,
-            //                 description: res.data.result.description,
-            //                 rating: res.data.result.rating,
-            //                 solved: res.data.result.solved,
-            //                 title: res.data.result.title,
-            //                 topic: res.data.result.topic
-            //             })
-            //         }
-            //         console.log(quizData)
-            //     })
-            //     .catch((err => {
-            //         console.log(err)
-            //     }))
         }
 
     }, [currentQuizId])

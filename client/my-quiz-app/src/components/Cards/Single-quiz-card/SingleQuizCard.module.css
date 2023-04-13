@@ -36,8 +36,9 @@
 
 
 .footerCardAllQuizes {
-    display: grid;
-    grid-template-columns: 33.3% 33.3% 33.3%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .likesH3 {
@@ -54,6 +55,8 @@
     font-size: 20px;
     color: black;
     font-weight: bold;
+    align-items: center;
+    width: 50%;
 }
 
 
@@ -105,7 +108,7 @@
 .containerCardAllQuizes {
     position: relative;
     border: 2px solid transparent;
-    background: linear-gradient(71deg, #080509, #1a171c, #080509);
+    background: -webkit-linear-gradient(#12367d, #620ea1);;
     background-clip: padding-box;
     border-radius: 45px;
     padding: 40px;

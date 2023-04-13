@@ -12,6 +12,14 @@ export const MyProfile = () => {
     const [profileData, setProfileData] = useState({})
     const [isMyOwnProfile, setIsMyOwnProfile] = useState(true)
 
+    const [followers, setFollowers] = useState('')
+
+    const [hasFollowed, setHasFollowed] = useState('')
+
+    const [unfollowButton, setUnfollowButton] = useState(false)
+
+
+
     const navigate = useNavigate()
 
     const { email } = useParams()
@@ -25,7 +33,7 @@ export const MyProfile = () => {
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
                     'token': token
-                },
+                }
             })
                 .then((response) => response.json())
                 .then((data) => {
@@ -33,8 +41,18 @@ export const MyProfile = () => {
                     setProfileData(data.userData)
                     console.log(profileData)
                     setIsMyOwnProfile(data.isMyOwnProfile)
+                    setFollowers(data.userData.followersNumber)
+                    if (!isMyOwnProfile) {
+                        console.log(data.userData.followers.includes(data.myUserData._id))
+                        if (data.userData.followers.includes(data.myUserData._id)) {
+                            setUnfollowButton(true)
+                        }
+
+                    }
+
+                    console.log()
                     // Handle data
-                    // navigate('/my-profile')
+                    // navigate('/my-profile') 
                 })
                 .catch((err) => {
                     console.log(err.message);
@@ -42,7 +60,7 @@ export const MyProfile = () => {
         } catch (err) {
             console.log(err)
         }
-    }, [])
+    }, [profileData.followingNumber, profileData.followersNumber, followers, unfollowButton])
 
 
     const onDetailsClick = (quizId) => {
@@ -66,17 +84,58 @@ export const MyProfile = () => {
                     if (data.error !== '') {
                         alert(data.error)
                     }
-                    
+
+                    setFollowers(data.userToFollow.followersNumber)
+                    setUnfollowButton(true)
+                    console.log(data)
+
                     // navigate('/my-profile')
                 })
                 .catch((err) => {
                     console.log(err.message);
-                    
+
                 });
         } catch (err) {
             console.log(err)
         }
     }
+
+    const unfollow = () => {
+        const token = localStorage.getItem('accessToken')
+        try {
+            fetch(`http://localhost:3001/api/users/${email}/unfollow`, {
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                    'token': token
+                },
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data);
+                    if (data.error !== '') {
+                        alert(data.error)
+                    }
+
+                    setFollowers(data.userToFollow.followersNumber)
+                    setUnfollowButton(false)
+                    console.log(data)
+
+                    // navigate('/my-profile')
+                })
+                .catch((err) => {
+                    console.log(err.message);
+
+                });
+        } catch (err) {
+            console.log(err)
+        }
+
+    }
+
+
+    useEffect(() => {
+        console.log('useef')
+    }, [followers, unfollowButton])
 
     return (
         <div className={styles.profileDiv}>
@@ -88,6 +147,7 @@ export const MyProfile = () => {
                 </div>
 
                 <div className={styles.asideDataProfile}>
+                ☆★
                     <div className={styles.personal}>
                         <h3>Quizes Created <span style={{ fontWeight: 'bold' }}></span></h3>
                         <h3>Likes <span style={{ fontWeight: 'bold' }}>TODO</span></h3>
@@ -121,7 +181,9 @@ export const MyProfile = () => {
                     </div>
 
                     {!isMyOwnProfile
-                        ? <button onClick={follow}>Follow</button>
+                        ? unfollowButton
+                            ? <button onClick={unfollow}>Unfollow</button>
+                            : <button onClick={follow}>Follow</button>
                         : <button>Edit</button>
                     }
 

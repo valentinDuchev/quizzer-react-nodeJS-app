@@ -107,29 +107,59 @@ router.get('/quiz/:id', async (req, res) => {
 })
 
 router.get('/quiz/:id/solve', async (req, res) => {
-    const id = req.params.id;
-    const result = req.headers.result
+    try {
 
-    const token = req.headers.token;
 
-    const userData = parseJwt(token);
-    const user = await getUserByEmail(userData.email);
+        const id = req.params.id;
+        const result = req.headers.result
 
-    const quiz = await getOneQuiz(id);
+        const token = req.headers.token;
+        const rating = req.headers.rating;
 
-    const userId = user.email
+        const userData = parseJwt(token);
+        const user = await getUserByEmail(userData.email);
 
-    const newObj = {
-        userId,
-        result
+        const quiz = await getOneQuiz(id);
+
+        const userId = user.email
+
+        const newObj = {
+            userId,
+            result
+        }
+
+
+        quiz.peopleSolved.push(newObj)
+        const newRating = (Number(quiz.rating) + Number(rating)) / 2;
+
+
+        if (Number(quiz.ratedNumber) > 0) {
+            quiz.rating = newRating;
+            quiz.ratedNumber++;
+        } else {
+            quiz.rating = Number(req.headers.rating)
+            quiz.ratedNumber++;
+        }
+
+
+        if (user.quizesRated) {
+            if (!user.quizesRated.includes(user)) {
+                user.quizesRated.push(quiz)
+            } else {
+                throw new Error('This user has already rated that quiz')
+            }
+        }
+
+        await quiz.save();
+        await user.save();
+
+        console.log(quiz)
+
+        res.status(201).json({ message: 'Quiz finished successfully', quiz, user });
+    } catch (err) {
+        res.json({ message: err.message })
+        console.log(err)
     }
-
-
-    quiz.peopleSolved.push(newObj)
-
-    await quiz.save();
-
-    console.log(quiz)
 
 
 

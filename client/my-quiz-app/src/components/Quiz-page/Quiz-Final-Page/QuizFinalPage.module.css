@@ -1,0 +1,219 @@
+.quizHomeCardSolver {
+    background: -webkit-linear-gradient(#3473f3, #9e41e5);
+    border-radius: 5px;
+    width: 50%;
+
+    /* min-height: 600px;
+    max-height: 800px; */
+    margin-bottom: 20%;
+    margin-left: auto;
+    margin-right: auto;
+
+    margin-top: 5%;
+
+    box-shadow: 44px 52px 112px 29px rgba(0, 0, 0, 0.66);
+
+    text-align: center;
+
+}
+
+.quizHomeCardSolver {
+    margin-bottom: 10px;
+}
+
+/* .quiz-home-card-solver-comments {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+}
+
+.quiz-home-card-solver-comment {
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+    height: 50px;
+    text-align: left;
+    border-radius: 10px;
+} */
+
+.quizHomeCardSolver>button {
+    background-color: green;
+    border-radius: 20px;
+    color: white;
+    width: 50%;
+    margin-top: 20px;
+    height: 50px;
+    font-weight: bold;
+}
+
+.quizHomeCardSolverStatistics {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.quizHomeCardSolverLikes {
+    background-color: blue;
+    border-radius: 15px;
+    color: white;
+    width: 15%;
+    font-weight: bold;
+
+}
+
+.quizHomeCardSolverDislikes {
+    background-color: red;
+    color: white;
+    border-radius: 15px;
+    width: 15%;
+    font-weight: bold;
+}
+
+@media screen and (max-width: 700px) {
+    .quizHomeCardSolver {
+        width: 90%;
+    }
+
+    .quizHomeCardSolverDislikes {
+        width: 25%;
+    }
+
+    .quizHomeCardSolverLikes {
+        width: 25%;
+    }
+
+    .quizHomeCardSolverComment>h2 {
+        font-size: 18px;
+    }
+
+}
+
+@media screen and (max-width: 1080px) and (min-width: 701px) {
+    .quizHomeCardSolver {
+        width: 60%;
+    }
+
+    .quizHomeCardSolverDislikes {
+        width: 20%;
+    }
+
+    .quizHomeCardSolverLikes {
+        width: 20%;
+    }
+
+    .quizHomeCardSolverComment>h2 {
+        font-size: 20px;
+    }
+}
+
+
+/* COMMENT SECTION */
+
+.p-3 {
+    margin-top: 5px;
+}
+
+.bottomPartQuizSolver {
+    margin-top: 20px;
+}
+
+@media screen and (max-width: 700px) {
+
+    .quizHomeCardSolver>button>h3 {
+
+        font-size: 16px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.visuhide {
+    position: absolute !important;
+    overflow: hidden;
+    width: 1px;
+    height: 1px;
+    clip: rect(1px, 1px, 1px, 1px);
+}
+
+.starContainer:hover .starItem,
+.starRadio:checked~.starItem {
+    filter: grayscale(0);
+}
+
+.starItem:hover~.starItem,
+.starItem,
+.starContainer:not(:hover)>.starRadio:nth-of-type(5):checked~.starItem:nth-of-type(5)~.starItem,
+.starContainer:not(:hover)>.starRadio:nth-of-type(4):checked~.starItem:nth-of-type(4)~.starItem,
+.starContainer:not(:hover)>.starRadio:nth-of-type(3):checked~.starItem:nth-of-type(3)~.starItem,
+.starContainer:not(:hover)>.starRadio:nth-of-type(2):checked~.starItem:nth-of-type(2)~.starItem,
+.starContainer:not(:hover)>.starRadio:nth-of-type(1):checked~.starItem:nth-of-type(1)~.starItem {
+    filter: grayscale(1);
+}
+
+.starRadio:nth-of-type(1):checked~.starItem:nth-of-type(1)::before {
+    transform: scale(1.5);
+    transition-timing-function: cubic-bezier(0.5, 1.5, 0.25, 1);
+}
+
+.starRadio:nth-of-type(2):checked~.starItem:nth-of-type(2)::before {
+    transform: scale(1.5);
+    transition-timing-function: cubic-bezier(0.5, 1.5, 0.25, 1);
+}
+
+.starRadio:nth-of-type(3):checked~.starItem:nth-of-type(3)::before {
+    transform: scale(1.5);
+    transition-timing-function: cubic-bezier(0.5, 1.5, 0.25, 1);
+}
+
+.starRadio:nth-of-type(4):checked~.starItem:nth-of-type(4)::before {
+    transform: scale(1.5);
+    transition-timing-function: cubic-bezier(0.5, 1.5, 0.25, 1);
+}
+
+.starRadio:nth-of-type(5):checked~.starItem:nth-of-type(5)::before {
+    transform: scale(1.5);
+    transition-timing-function: cubic-bezier(0.5, 1.5, 0.25, 1);
+}
+
+.starContainer {
+    display: flex;
+    margin: auto;
+    border-radius: 0.25em;
+    background-color: #00a39b;
+    box-shadow: 0 0.25em 1em rgba(0, 0, 0, 0.25);
+    transition: box-shadow 0.3s ease;
+}
+
+.starContainer:focus-within {
+    box-shadow: 0 0.125em 0.5em rgba(0, 0, 0, 0.5);
+}
+
+.starItem {
+    display: inline-flex;
+    width: 1.25em;
+    height: 1.5em;
+}
+
+.starItem::before {
+    content: "⭐️";
+    display: inline-block;
+    margin: auto;
+    font-size: 0.75em;
+    vertical-align: top;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform-origin: 50% 33.3%;
+    transition: transform 0.3s ease-out;
+}

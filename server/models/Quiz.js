@@ -72,7 +72,9 @@ const quizSchema = new Schema({
     peopleSolved: {
         type: [{}],
         ref: 'User'
-    }
+    }, 
+    rating: {type: Number, default: 0}, 
+    ratedNumber: { type: Number, default: 0}
 
     /* TODO
     peopleLiked, 
