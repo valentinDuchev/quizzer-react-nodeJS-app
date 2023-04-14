@@ -1,5 +1,5 @@
 .allQuizesPage {
-    display: grid !important; 
+    display: grid !important;
     grid-template-columns: 15% 35% 35% !important;
     gap: 20px !important;
 
@@ -193,4 +193,23 @@ a.button:active {
     left: 0;
     bottom: 0;
     z-index: 1;
+}
+
+@media screen and (max-width: 1199px) {
+    .dropdown {
+        display: block;
+
+        margin-left: auto;
+        margin-right: auto;
+
+        background-color: aqua;
+
+    }
+
+}
+
+.dropdown {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

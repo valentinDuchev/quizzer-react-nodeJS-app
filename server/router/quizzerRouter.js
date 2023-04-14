@@ -68,30 +68,50 @@ router.get('/quiz/:id', async (req, res) => {
         const id = req.params.id;
         const data = await getOneQuiz(id);
 
-
-        const result = {
-            _id: data._id,
-            title: data.title,
-            description: data.description,
-            topic: data.topic,
-            difficulty: data.difficulty,
-            author: data.author,
-            likes: data.likes,
-            dislikes: data.dislikes,
-            solved: data.solved,
-            rating: data.rating,
-            questions: (data.questions),
-            authorEmail: data.authorEmail,
-            peopleSolved: data.peopleSolved
-        }
-
-        console.log(result)
         console.log(data.questions)
 
         let isAuthor = true;
 
         if (user.email !== data.authorEmail) {
-            isAuthor = false;
+            isAuthor = false;  
+        }
+
+        let result = {};
+
+        if (isAuthor) {
+            console.log(isAuthor)
+             result = {
+                _id: data._id,
+                title: data.title,
+                description: data.description,
+                topic: data.topic,
+                difficulty: data.difficulty,
+                author: data.author,
+                likes: data.likes,
+                dislikes: data.dislikes,
+                solved: data.solved,
+                rating: data.rating,
+                questions: (data.questions),
+                authorEmail: data.authorEmail,
+                peopleSolved: data.peopleSolved, 
+                questions: data.questions
+            }
+        } else {
+             result = {
+                _id: data._id,
+                title: data.title,
+                description: data.description,
+                topic: data.topic,
+                difficulty: data.difficulty,
+                author: data.author,
+                likes: data.likes,
+                dislikes: data.dislikes,
+                solved: data.solved,
+                rating: data.rating,
+                questions: (data.questions),
+                authorEmail: data.authorEmail,
+                peopleSolved: data.peopleSolved
+            }
         }
 
 

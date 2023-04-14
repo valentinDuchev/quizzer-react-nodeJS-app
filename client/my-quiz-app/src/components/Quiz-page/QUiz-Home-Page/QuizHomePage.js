@@ -5,9 +5,15 @@ import { Img } from "react-image"
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import styles from './QuizHomePage.module.css'
 
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
+
 export const QuizHomePage = () => {
 
     const navigate = useNavigate()
+
+    const [show, setShow] = useState(false);
+
 
     const [isAuthor, setIsAuthor] = useState(true)
     const token = localStorage.getItem('accessToken')
@@ -57,7 +63,8 @@ export const QuizHomePage = () => {
                                 solved: data.result.solved,
                                 title: data.result.title,
                                 topic: data.result.topic,
-                                peopleSolved: data.result.peopleSolved
+                                peopleSolved: data.result.peopleSolved,
+                                questions: data.result.questions
                             })
                         }
                         console.log(quizData)
@@ -141,6 +148,15 @@ export const QuizHomePage = () => {
         }
     }
 
+    const handleClose = () => {
+        setShow(false)
+    }
+
+    const handleShow = () => {
+        setShow(true);
+    }
+
+
 
 
 
@@ -151,26 +167,33 @@ export const QuizHomePage = () => {
         <div className={styles.quizHomeCardSolver}>
 
             <div className={styles.quizHomeCardSolverInfo}>
-                <h1>{quizData.title}</h1>
-                <h2>Author: <a href="#">{quizData.author}</a></h2>
-                <h3>Topic: {quizData.topic}</h3>
-                <h3>People Solved: {quizData.solved}</h3>
-                <h3>Ratin: {quizData.rating}/10</h3>
+                <h1> <span style={{ color: 'white' }}>{quizData.title}</span></h1>
+
+                <h2 >
+                    Author:
+                    <Link
+                        to={`http://localhost:3000/profile/${quizData.author}`}
+
+                    > <span style={{ color: 'white' }}>{quizData.author} </span>
+                    </Link>
+                </h2>
+
+                <h3>Topic: <span style={{ color: 'white' }}> {quizData.topic}</span></h3>
+
+                <h3>
+                    People Solved:
+                    {quizData.peopleSolved
+                        ?
+                        <span style={{ color: 'white' }}>
+                            {quizData.peopleSolved.length}
+                        </span>
+                        : ''}
+                </h3>
+
+                <h3>Rating: <span style={{ color: 'white' }}>{quizData.rating}/5</span></h3>
+                <h3>difficulty: <span style={{color: 'white'}}>{quizData.difficulty}</span></h3>
+                {quizData.description !== '' ? <h3 style={{color: 'white'}}>{quizData.description}</h3> : ''}
             </div>
-
-
-            <div className={styles.quizHomeCardSolverStatistics}>
-
-                <div className={styles.quizHomeCardSolverLikes}>
-                    <p>{quizData.likes} Likes</p>
-                </div>
-
-                <div className={styles.quizHomeCardSolverDislikes}>
-                    <p>{quizData.dislikes} Dislikes</p>
-                </div>
-
-            </div>
-
 
             {/* <Link to={`/quiz-page/${quizData._id}/question/1`}> */}
 
@@ -178,71 +201,98 @@ export const QuizHomePage = () => {
                 <h3>START THE QUIZ</h3>
             </button> : ''}
 
-            {isAuthor ? <button onClick={onDeleteClick} style={{ background: 'red' }}>Delete Quiz</button> : ''}
+            {isAuthor
+                ?
+                <button onClick={onDeleteClick} style={{ background: 'red', width: '30%' }}>Delete Quiz</button>
+
+                : ''}
+
+            {isAuthor
+                ?
+                <button onClick={handleShow} style={{ background: 'blue', width: '30%', marginLeft: '20px' }}>Quiz Details</button>
+
+                : ''}
 
 
+            <Modal show={show} onHide={handleClose} size="lg" >
+                <Modal.Header closeButton>
+                    <Modal.Title>Details of {quizData.title}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body style={{ textAlign: 'center', alignItems: 'center' }}>
 
-            {/* </Link> */}
-
-
-
-
-
-            <div className={styles.containerMt}>
-                <div className={styles.rowFlexJustifyContentCenter}>
-                    <div className={styles.colMd}>
-
-                        <div >
-                            <h5>Comments(6)</h5>
-                        </div>
-
-                        <div className={styles.cardP}>
-                            <div>
-                                <div className={styles.userDFlexFlexRowAlignItemsCenter}>
-                                    <Img src="/2. My Profile/Static images/profile-image.jpg" width="30"
-                                        className={styles.userImgRoundedCircleMr} />
-                                    <span><small className={styles.fontWeightBoldTextPrimary}>james_olesenn</small>
-                                        <small className={styles.fontWeightBold}>Hmm, This poster looks cool</small></span>
-                                </div>
-                                <small>2 days ago</small>
-                            </div>
-                        </div>
-
-                        {/* <div className="card p-3">
-                            <div className="d-flex justify-content-between align-items-center">
-                                <div className="user d-flex flex-row align-items-center">
-                                    <Img src="/2. My Profile/Static images/profile-image.jpg" width="30"
-                                        className="user-img rounded-circle mr-2"/>
-                                        <span><small className="font-weight-bold text-primary">james_olesenn</small> <small
-                                            className="font-weight-bold">Hmm, This poster looks cool</small></span>
-                                </div>
-                                <small>2 days ago</small>
-                            </div>
-                        </div> */}
-                    </div>
-                </div>
-            </div>
-
-            <div className={styles.bottomPartQuizSolver}>
-                End
-            </div>
+                    <h2 style={{ marginLeft: 'auto', marginRight: 'auto' }}>People solved: </h2>
 
 
-
-            <div className={styles.quizHomeCardSolverComments}>
-                <h2>Comments:</h2>
-                <div className={styles.quizHomeCardSolverComment}>
-                    <h2><a href="#">Peter Petrov </a>: Amazing Quiz </h2>
-                </div>
-
-                <div className={styles.quizHomeCardSolverComment}>
-                    <h2><a href="#">Peter Petrov </a>: Amazing Quiz </h2>
-                </div>
-
-            </div>
+                    <table style={{ width: '60%', marginLeft: 'auto', marginRight: 'auto' }}>
 
 
+                        <tr>
+                            <th>User</th>
+                            <th>Result</th>
+                        </tr>
 
+                        {quizData.peopleSolved ?
+
+                            quizData.peopleSolved.map((user) =>
+                                <tr>
+                                    <td style={{ textDecoration: 'underline' }}>
+                                        <Link to={`http://localhost:3000/profile/${user.userId}`}>
+                                            {user.userId}
+                                        </Link>
+                                    </td>
+                                    <td>{user.result}/{quizData.questions.length} ({((user.result / quizData.questions.length) * 100).toFixed(2)}%)</td>
+                                </tr>
+                            )
+                            : 'No people have solved that quiz yet.'}
+
+                    </table>
+
+                    <h2 style={{ marginLeft: 'auto', marginRight: 'auto' }}>Questions</h2>
+                    <table style={{ width: '90%', marginLeft: 'auto', marginRight: 'auto' }}>
+
+                        <tr>
+                            <th>Question</th>
+                            <th>Correct Answer</th>
+                            <th>Wrong Answer 1</th>
+                            <th>Wrong Answer 2</th>
+                            <th>Wrong Answer 3</th>
+                        </tr>
+
+                        {quizData.questions ?
+
+                            quizData.questions.map((question) =>
+                                <tr>
+                                    <td style={{ color: 'black' }}>
+                                        {question.question}
+                                    </td>
+
+                                    <td style={{ color: 'green' }}>
+                                        {question.correctAnswer}
+                                    </td>
+
+                                    <td style={{ color: 'red' }}>
+                                        {question.wrongAnswer1}
+                                    </td>
+
+                                    <td style={{ color: 'red' }}>
+                                        {question.wrongAnswer2}
+                                    </td>
+
+                                    <td style={{ color: 'red' }}>
+                                        {question.wrongAnswer3}
+                                    </td>
+                                </tr>
+                            ) : ''}
+
+                    </table>
+
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Close
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     )
 }

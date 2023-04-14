@@ -2,10 +2,11 @@
 import styles from "./Create.module.css";
 
 import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Stack from 'react-bootstrap/Stack'
 import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
+
 import { useNavigate } from "react-router-dom";
 
 
@@ -292,7 +293,7 @@ export const Create = () => {
                         title: title,
                         description: description,
                         topic: topic,
-                        difficulty: difficulty, 
+                        difficulty: difficulty,
                         authorId: localStorage.getItem('id')
                     }),
                     headers: {
@@ -300,19 +301,19 @@ export const Create = () => {
                         'token': token
                     },
                 })
-                .then((response) => response.json())
-                .then((data) => {
-                    console.log(data);
-                    // Handle data
-                    navigate('/my-profile')
-                })
-                .catch((err) => {
-                    console.log(err.message);
-                });
+                    .then((response) => response.json())
+                    .then((data) => {
+                        console.log(data);
+                        // Handle data
+                        navigate('/my-profile')
+                    })
+                    .catch((err) => {
+                        console.log(err.message);
+                    });
             } catch (err) {
                 console.log(err)
             }
-            
+
         } else {
             if (title.length < 1) {
                 setTitleErrors('Title is required')

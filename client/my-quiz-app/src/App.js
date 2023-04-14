@@ -80,7 +80,7 @@ function App() {
               <Create />
             </Protected>} />
 
-          <Route path='/quizes/*' element={<Quizes />} />
+          <Route path='/quizes/:filter1?' element={<Quizes />} />
           <Route path='/ranking' element={<Ranking />} />
 
 

@@ -46,7 +46,7 @@ export const SingleQuizCard = (props) => {
                         {props.rating < 2.5 && props.rating > 1.49 ? <span>⭐⭐★★★</span> : ''}
                         {props.rating < 3.5 && props.rating > 2.49 ? <span>⭐⭐⭐★★</span> : ''}
                         {props.rating < 4.5 && props.rating > 3.49 ? <span>⭐⭐⭐⭐★</span> : ''}
-                        {props.rating < 6 && props.rating > 4.5 ? <span>⭐⭐⭐⭐⭐</span> : ''}
+                        {props.rating < 6 && props.rating >= 4.5 ? <span>⭐⭐⭐⭐⭐</span> : ''}
                         <br />
                         {props.rating}/5
                     </span>
