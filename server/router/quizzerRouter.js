@@ -133,12 +133,15 @@ router.get('/quiz/:id/solve', async (req, res) => {
         const newRating = (Number(quiz.rating) + Number(rating)) / 2;
 
 
-        if (Number(quiz.ratedNumber) > 0) {
-            quiz.rating = newRating;
-            quiz.ratedNumber++;
-        } else {
-            quiz.rating = Number(req.headers.rating)
-            quiz.ratedNumber++;
+
+        if (rating == 1 || rating == 2 || rating == 3 || rating == 4 || rating == 5) {
+            if (Number(quiz.ratedNumber) > 0) {
+                quiz.rating = newRating;
+                quiz.ratedNumber++;
+            } else {
+                quiz.rating = Number(req.headers.rating)
+                quiz.ratedNumber++;
+            }
         }
 
 
@@ -151,9 +154,19 @@ router.get('/quiz/:id/solve', async (req, res) => {
         }
 
         await quiz.save();
+
+
+
+        const quizAdded = quiz;
+        quiz.result = Number(result);
+        user.quizesSolved.push(quiz)
+
+
+
+
+
         await user.save();
 
-        console.log(quiz)
 
         res.status(201).json({ message: 'Quiz finished successfully', quiz, user });
     } catch (err) {

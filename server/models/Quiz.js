@@ -74,7 +74,8 @@ const quizSchema = new Schema({
         ref: 'User'
     }, 
     rating: {type: Number, default: 0}, 
-    ratedNumber: { type: Number, default: 0}
+    ratedNumber: { type: Number, default: 0}, 
+    result: {type: Number, default: 0}
 
     /* TODO
     peopleLiked, 

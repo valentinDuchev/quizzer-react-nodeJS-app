@@ -90,10 +90,29 @@ router.get('/users/profile/:email', async (req, res) => {
         const tokenData = parseJwt(token);
 
         let isMyOwnProfile = false
+
+        let newFollowers = []
+        let newFollowing = []
+
+
         // console.log(user)
         if (JSON.stringify(tokenData.email) === JSON.stringify(email)) {
             isMyOwnProfile = true;
             const user = await getUserByEmail(tokenData.email)
+
+
+
+
+            for (let followerId of user.followers) {
+                const follower = await getUserById(followerId);
+                newFollowers.push(follower)
+            }
+
+            for (let followingId of user.following) {
+                const following = await getUserById(followingId);
+                newFollowing.push(following)
+            }
+
             const userData = {
                 firstName: user.firstName,
                 lastName: user.lastName,
@@ -102,11 +121,15 @@ router.get('/users/profile/:email', async (req, res) => {
                 quizesCreated: user.quizesCreated,
                 quizesNumber: user.quizesCreated.length,
                 dateCreated: user.dateCreated,
-                followers: user.followers,
-                following: user.following,
+                followers: newFollowers,
+                following: newFollowing,
                 followersNumber: user.followersNumber,
                 followingNumber: user.followingNumber,
-                _id: user._id
+                _id: user._id,
+                quizesSolved: user.quizesSolved,
+                followingId: user.following,
+                followersId: user.followers
+
             }
 
             // console.log(userData)
@@ -115,6 +138,16 @@ router.get('/users/profile/:email', async (req, res) => {
             const myUser = await getUserByEmail(tokenData.email)
             const user = await getUserByEmail(email)
 
+            for (let followerId of user.followers) {
+                const follower = await getUserById(followerId);
+                newFollowers.push(follower)
+            }
+
+            for (let followingId of user.following) {
+                const following = await getUserById(followingId);
+                newFollowing.push(following)
+            }
+
             const userData = {
                 firstName: user.firstName,
                 lastName: user.lastName,
@@ -123,11 +156,13 @@ router.get('/users/profile/:email', async (req, res) => {
                 quizesCreated: user.quizesCreated,
                 quizesNumber: user.quizesCreated.length,
                 dateCreated: user.dateCreated,
-                followers: user.followers,
-                following: user.following,
+                followers: newFollowers,
+                following: newFollowing,
                 followersNumber: user.followersNumber,
                 followingNumber: user.followingNumber,
-                _id: user._id
+                _id: user._id,
+                followingId: user.following,
+                followersId: user.followers
 
             }
 

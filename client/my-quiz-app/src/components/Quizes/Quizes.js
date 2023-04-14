@@ -32,31 +32,32 @@ export const Quizes = () => {
             <div className={styles.allQuizesPage}>
                 <SortDropdown className={styles.sortDropdown} />
 
-                <div className={styles.allQuizesMainPage}>
-                    <div className={styles.containerAllQuizCards}>
-                        <div className={styles.gradientCards}>
 
-                            {quizes[0] ? quizes[0].result.map((quiz) => <SingleQuizCard
-                                key={quiz._id}
-                                id={quiz._id}
-                                author={quiz.author}
-                                description={quiz.description}
-                                difficulty={quiz.difficulty}
-                                likes={quiz.likes}
-                                dislikes={quiz.dislikes}
-                                topic={quiz.topic}
-                                raitng={quiz.rating}
-                                solved={quiz.solved}
-                                title={quiz.title}
-                                email={quiz.authorEmail}
-                                questionsNumber={quiz.questions.length}
-                                rating={quiz.rating}
-                                ratedNumber={quiz.ratedNumber}
-                            />) : ''}
-                        </div>
-                    </div>
+                <div className={styles.allQuizesMainPage}>
+
+
+                    {quizes[0] ? quizes[0].result.map((quiz) =>
+                        <SingleQuizCard
+                            key={quiz._id}
+                            id={quiz._id}
+                            author={quiz.author}
+                            description={quiz.description}
+                            difficulty={quiz.difficulty}
+                            likes={quiz.likes}
+                            dislikes={quiz.dislikes}
+                            topic={quiz.topic}
+                            raitng={quiz.rating}
+                            solved={quiz.solved}
+                            title={quiz.title}
+                            email={quiz.authorEmail}
+                            questionsNumber={quiz.questions.length}
+                            rating={quiz.rating.toFixed(2)}
+                            ratedNumber={quiz.ratedNumber}
+                            dateCreated={quiz.dateCreated}
+                        />) : ''}
                 </div>
             </div>
+
         </>
     )
 }

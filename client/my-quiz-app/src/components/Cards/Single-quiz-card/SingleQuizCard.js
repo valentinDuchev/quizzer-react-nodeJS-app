@@ -31,12 +31,12 @@ export const SingleQuizCard = (props) => {
 
 
 
-                <div className={styles.footerCardAllQuizes}>
-                    <button onClick={onDetailsClick}>Details</button>
-                </div>
 
 
-                <p className={styles.cardDescriptionAllQuizesFooter}>12.11.2022 - <Link to={`/profile/${props.email}`}>{props.email}</Link></p>
+
+                <p className={styles.cardDescriptionAllQuizesFooter}>{props.dateCreated.slice(0, 10)} <br />
+                    <Link to={`/profile/${props.email}`} style={{ color: 'grey' }}>  {props.email}</Link>
+                </p>
 
                 <div className={styles.footerCardAllQuizes}>
                     <span style={{ color: 'white' }}>
@@ -51,6 +51,10 @@ export const SingleQuizCard = (props) => {
                         {props.rating}/5
                     </span>
 
+                </div>
+
+                <div className={styles.footerCardAllQuizes}>
+                    <button onClick={onDetailsClick}>Details</button>
                 </div>
 
             </div>

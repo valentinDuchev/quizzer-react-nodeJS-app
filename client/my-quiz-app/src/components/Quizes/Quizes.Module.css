@@ -1,10 +1,24 @@
 .allQuizesPage {
-    display: grid;
-    grid-template-columns: 25% 75%;
-    gap: 20px;
+    display: grid !important; 
+    grid-template-columns: 15% 35% 35% !important;
+    gap: 20px !important;
 
 }
 
+.allQuizesMainPage {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.containerAllQuizCards {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.gradientCards {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
 
 .allQuizesAsideMenu {
 
@@ -180,4 +194,3 @@ a.button:active {
     bottom: 0;
     z-index: 1;
 }
-
