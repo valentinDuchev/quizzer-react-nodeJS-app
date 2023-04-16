@@ -1,0 +1,14 @@
+.tableDiv {
+    width: 80%;
+    opacity: 0.8;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 35px;
+
+    min-height: 620px;
+
+    background: -webkit-linear-gradient(#3473f3, #9e41e5);
+
+
+
+}

@@ -54,15 +54,15 @@ async function getUserById (id) {
     return await User.findById(id);
 }
 
-// async function getAllUsers () {
-//     return await User.find({});
-// }
+async function getAllUsers () {
+    return await User.find({});
+}
 
 module.exports = {
     register,
     login, 
     getUserByEmail, 
     getUserById, 
-    // getAllUsers
+    getAllUsers
 
 }

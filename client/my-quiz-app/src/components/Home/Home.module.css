@@ -1,3 +1,10 @@
-.class-name-class {
-    color: blue
+.homeDiv {
+    width: 100%;
+    opacity: 0.8;
+    margin-left: auto;
+    margin-right: auto;
+
+    min-height: 620px;
+
+    background: -webkit-linear-gradient(#3473f3, #9e41e5);
 }

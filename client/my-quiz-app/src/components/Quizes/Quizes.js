@@ -4,7 +4,7 @@ import { SingleQuizCard } from "../Cards/Single-quiz-card/SingleQuizCard"
 import SortDropdown from "../Dropdowns/SortDropdown/SortDropdown"
 import axios from "axios"
 
-import styles from "./Quizes.Module.css"
+import styles from "./Quizes.module.css"
 import { MyQuizCard } from "../Cards/My-quiz-card/MyQuizCard"
 
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -23,6 +23,8 @@ export const Quizes = () => {
 
     const [filteredByTopicQuizes, setFilteredByTopicQuizes] = useState([])
 
+    const [sortType, setSortType] = useState('')
+
 
     useEffect(() => {
         axios
@@ -36,17 +38,71 @@ export const Quizes = () => {
                 } else {
                     let filteredToPush = []
 
+                    setSortType(filter1)
+
+
+                    console.log(filter1)
                     for (let element of quizes[0].result) {
                         if (element.topic === filter1) {
-                            console.log('same topic')
                             filteredToPush.push(element)
+                        } else if (element.difficulty.toLowerCase() === filter1) {
+                            filteredToPush.push(element)
+
                         }
                     }
+
+                    if (filter1 === 'newest') {
+                        console.log('newest')
+                        filteredToPush = quizes[0].result.sort((a, b) =>
+                            new Date(b.dateCreated) - new Date(a.dateCreated)
+                        )
+
+                        console.log(filteredToPush)
+
+                    } else if (filter1 === 'oldest') {
+                        console.log('oldest')
+                        filteredToPush = quizes[0].result.sort((a, b) =>
+                            new Date(a.dateCreated) - new Date(b.dateCreated)
+                        )
+
+                        console.log(filteredToPush)
+                    }
+
+                    const topicArr = ['sport', 'general', 'books', 'art', 'movies', 'music', 'history', 'geography', 'science', 'politics', 'human', 'medicine', 'animals', 'technology', 'stocks', 'food', 'other']
+                    const difficultyArr = ['easy', 'medium', 'hard']
+
+
+                    if (topicArr.includes(filter1)) {
+                        const word = filter1
+                        const firstLetter = word.charAt(0)
+                        const firstLetterCap = firstLetter.toUpperCase()
+                        const remainingLetters = word.slice(1)
+                        const capitalizedWord = firstLetterCap + remainingLetters
+
+                        setSortType(`Topic - ${capitalizedWord}`)
+                    } else if (difficultyArr.includes(filter1)) {
+                        const word = filter1
+                        const firstLetter = word.charAt(0)
+                        const firstLetterCap = firstLetter.toUpperCase()
+                        const remainingLetters = word.slice(1)
+                        const capitalizedWord = firstLetterCap + remainingLetters
+
+                        setSortType(`Difficulty - ${capitalizedWord}`)
+                    } else if (filter1 === "newest" || filter1 === "oldest") {
+                        const word = filter1
+                        const firstLetter = word.charAt(0)
+                        const firstLetterCap = firstLetter.toUpperCase()
+                        const remainingLetters = word.slice(1)
+                        const capitalizedWord = firstLetterCap + remainingLetters
+
+                        setSortType(`Date Created - ${capitalizedWord}`)
+                    }
+
+                    setFilteredByTopicQuizes(filteredToPush)
                     setFilteredByTopicQuizes(filteredToPush)
 
                 }
 
-                console.log(filter1)
 
 
             })
@@ -61,68 +117,155 @@ export const Quizes = () => {
 
 
     const onDropdownChange = (e) => {
-        console.log(e.target.name)
-
         setFilterTopic(e.target.name)
+
+        console.log(e.target)
+        if (e.target.id === "Topic") {
+            const word = e.target.name
+            const firstLetter = word.charAt(0)
+            const firstLetterCap = firstLetter.toUpperCase()
+            const remainingLetters = word.slice(1)
+            const capitalizedWord = firstLetterCap + remainingLetters
+
+            setSortType(`Topic - ${capitalizedWord}`)
+        } else if (e.target.id === "Difficulty") {
+            const word = e.target.name
+            const firstLetter = word.charAt(0)
+            const firstLetterCap = firstLetter.toUpperCase()
+            const remainingLetters = word.slice(1)
+            const capitalizedWord = firstLetterCap + remainingLetters
+
+            setSortType(`Difficulty - ${capitalizedWord}`)
+        } else if (e.target.id === "date") {
+            const word = e.target.name
+            const firstLetter = word.charAt(0)
+            const firstLetterCap = firstLetter.toUpperCase()
+            const remainingLetters = word.slice(1)
+            const capitalizedWord = firstLetterCap + remainingLetters
+
+            setSortType(`Date Created - ${capitalizedWord}`)
+        }
 
         let filteredToPush = []
 
         for (let element of quizes[0].result) {
             if (element.topic === e.target.name) {
-                console.log('same topic')
+
+                filteredToPush.push(element)
+
+            } else if (element.difficulty.toLowerCase() === e.target.name) {
 
                 filteredToPush.push(element)
             }
         }
 
+        if (e.target.name === 'newest') {
+            console.log('newest')
+            filteredToPush = quizes[0].result.sort((a, b) =>
+                new Date(b.dateCreated) - new Date(a.dateCreated)
+            )
+
+            console.log(filteredToPush)
+
+        } else if (e.target.name === 'oldest') {
+            console.log('oldest')
+            filteredToPush = quizes[0].result.sort((a, b) =>
+                new Date(a.dateCreated) - new Date(b.dateCreated)
+            )
+
+            console.log(filteredToPush)
+        }
+
         setFilteredByTopicQuizes(filteredToPush)
-
-
-        console.log(filteredByTopicQuizes)
-
-
-
     }
 
     const resetButton = () => {
         console.log(quizes[0].result)
         setReset(true)
         setFilteredByTopicQuizes(quizes[0].result)
+        setSortType('')
     }
 
     return (
         <>
 
-            <div className={styles.allQuizesPage}>
-                <Dropdown className={styles.dropdown}>
-                    <Dropdown.Toggle variant="success" id="dropdown-basic">
-                        Filter By Topic
-                    </Dropdown.Toggle>
+            <div className={styles.allQuizesPage} >
 
-                    <Dropdown.Menu>
-                        <Dropdown.Item as={Link} to="http://localhost:3000/quizes/general" name="general" onClick={(e) => (onDropdownChange(e))}>General</Dropdown.Item>
-                        <Dropdown.Item as={Link} to="http://localhost:3000/quizes/sport" name="sport" onClick={(e) => (onDropdownChange(e))}>Sport</Dropdown.Item>
-                        <Dropdown.Item as={Link} to="http://localhost:3000/quizes/books" name="books" onClick={(e) => (onDropdownChange(e))}>Books</Dropdown.Item>
-                        <Dropdown.Item as={Link} to="http://localhost:3000/quizes/art" name="art" onClick={(e) => (onDropdownChange(e))}>Art</Dropdown.Item>
-                        <Dropdown.Item as={Link} to="http://localhost:3000/quizes/movies" name="movies" onClick={(e) => (onDropdownChange(e))}>Movies/TV</Dropdown.Item>
-                        <Dropdown.Item as={Link} to="http://localhost:3000/quizes/music" name="music" onClick={(e) => (onDropdownChange(e))}>Music</Dropdown.Item>
-                        <Dropdown.Item as={Link} to="http://localhost:3000/quizes/history" name="history" onClick={(e) => (onDropdownChange(e))}>History</Dropdown.Item>
-                        <Dropdown.Item as={Link} to="http://localhost:3000/quizes/geography" name="geography" onClick={(e) => (onDropdownChange(e))}>Geography</Dropdown.Item>
-                        <Dropdown.Item as={Link} to="http://localhost:3000/quizes/science" name="science" onClick={(e) => (onDropdownChange(e))}>Science</Dropdown.Item>
-                        <Dropdown.Item as={Link} to="http://localhost:3000/quizes/politics" name="politics" onClick={(e) => (onDropdownChange(e))}>Politics</Dropdown.Item>
-                        <Dropdown.Item as={Link} to="http://localhost:3000/quizes/human" name="human" onClick={(e) => (onDropdownChange(e))}>Human Body</Dropdown.Item>
-                        <Dropdown.Item as={Link} to="http://localhost:3000/quizes/medicine" name="medicine" onClick={(e) => (onDropdownChange(e))}>Medicine</Dropdown.Item>
-                        <Dropdown.Item as={Link} to="http://localhost:3000/quizes/animals" name="animals" onClick={(e) => (onDropdownChange(e))}>Animals/Nature</Dropdown.Item>
-                        <Dropdown.Item as={Link} to="http://localhost:3000/quizes/technology" name="technology" onClick={(e) => (onDropdownChange(e))}>Technology</Dropdown.Item>
-                        <Dropdown.Item as={Link} to="http://localhost:3000/quizes/stocks" name="stocks" onClick={(e) => (onDropdownChange(e))}>Stocks/Crypto</Dropdown.Item>
-                        <Dropdown.Item as={Link} to="http://localhost:3000/quizes/food" name="food" onClick={(e) => (onDropdownChange(e))}>Food/Drink</Dropdown.Item>
-                        <Dropdown.Item as={Link} to="http://localhost:3000/quizes/other" name="other" onClick={(e) => (onDropdownChange(e))}>Other</Dropdown.Item>
-                    </Dropdown.Menu>
-                </Dropdown>
-                <Link to="http://localhost:3000/quizes" onClick={resetButton}>Reset Filters</Link>
+                <div className={styles.dropdowns} >
+
+                    <div>
+                        <Dropdown className={styles.dropdown}>
+                            <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                Filter By Topic
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu>
+                                <Dropdown.Item as={Link} to="http://localhost:3000/quizes/general" id="Topic" name="general" onClick={(e) => (onDropdownChange(e))}>General</Dropdown.Item>
+                                <Dropdown.Item as={Link} to="http://localhost:3000/quizes/sport" id="Topic" name="sport" onClick={(e) => (onDropdownChange(e))}>Sport</Dropdown.Item>
+                                <Dropdown.Item as={Link} to="http://localhost:3000/quizes/books" id="Topic" name="books" onClick={(e) => (onDropdownChange(e))}>Books</Dropdown.Item>
+                                <Dropdown.Item as={Link} to="http://localhost:3000/quizes/art" id="Topic" name="art" onClick={(e) => (onDropdownChange(e))}>Art</Dropdown.Item>
+                                <Dropdown.Item as={Link} to="http://localhost:3000/quizes/movies" id="Topic" name="movies" onClick={(e) => (onDropdownChange(e))}>Movies/TV</Dropdown.Item>
+                                <Dropdown.Item as={Link} to="http://localhost:3000/quizes/music" id="Topic" name="music" onClick={(e) => (onDropdownChange(e))}>Music</Dropdown.Item>
+                                <Dropdown.Item as={Link} to="http://localhost:3000/quizes/history" id="Topic" name="history" onClick={(e) => (onDropdownChange(e))}>History</Dropdown.Item>
+                                <Dropdown.Item as={Link} to="http://localhost:3000/quizes/geography" id="Topic" name="geography" onClick={(e) => (onDropdownChange(e))}>Geography</Dropdown.Item>
+                                <Dropdown.Item as={Link} to="http://localhost:3000/quizes/science" id="Topic" name="science" onClick={(e) => (onDropdownChange(e))}>Science</Dropdown.Item>
+                                <Dropdown.Item as={Link} to="http://localhost:3000/quizes/politics" id="Topic" name="politics" onClick={(e) => (onDropdownChange(e))}>Politics</Dropdown.Item>
+                                <Dropdown.Item as={Link} to="http://localhost:3000/quizes/human" id="Topic" name="human" onClick={(e) => (onDropdownChange(e))}>Human Body</Dropdown.Item>
+                                <Dropdown.Item as={Link} to="http://localhost:3000/quizes/medicine" id="Topic" name="medicine" onClick={(e) => (onDropdownChange(e))}>Medicine</Dropdown.Item>
+                                <Dropdown.Item as={Link} to="http://localhost:3000/quizes/animals" id="Topic" name="animals" onClick={(e) => (onDropdownChange(e))}>Animals/Nature</Dropdown.Item>
+                                <Dropdown.Item as={Link} to="http://localhost:3000/quizes/technology" id="Topic" name="technology" onClick={(e) => (onDropdownChange(e))}>Technology</Dropdown.Item>
+                                <Dropdown.Item as={Link} to="http://localhost:3000/quizes/stocks" id="Topic" name="stocks" onClick={(e) => (onDropdownChange(e))}>Stocks/Crypto</Dropdown.Item>
+                                <Dropdown.Item as={Link} to="http://localhost:3000/quizes/food" id="Topic" name="food" onClick={(e) => (onDropdownChange(e))}>Food/Drink</Dropdown.Item>
+                                <Dropdown.Item as={Link} to="http://localhost:3000/quizes/other" id="Topic" name="other" onClick={(e) => (onDropdownChange(e))}>Other</Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </div>
+
+                    <Dropdown className={styles.dropdown}>
+                        <Dropdown.Toggle variant="success" id="dropdown-basic">
+                            Filter By Difficulty
+                        </Dropdown.Toggle>
+
+                        <Dropdown.Menu>
+                            <Dropdown.Item as={Link} to="http://localhost:3000/quizes/easy" id="Difficulty" name="easy" onClick={(e) => (onDropdownChange(e))}>Easy</Dropdown.Item>
+                            <Dropdown.Item as={Link} to="http://localhost:3000/quizes/medium" id="Difficulty" name="medium" onClick={(e) => (onDropdownChange(e))}>Medium</Dropdown.Item>
+                            <Dropdown.Item as={Link} to="http://localhost:3000/quizes/hard" id="Difficulty" name="hard" onClick={(e) => (onDropdownChange(e))}>Hard</Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
+
+                    <Dropdown className={styles.dropdown}>
+                        <Dropdown.Toggle variant="success" id="dropdown-basic">
+                            Sort By Date
+                        </Dropdown.Toggle>
+
+                        <Dropdown.Menu>
+                            <Dropdown.Item as={Link} to="http://localhost:3000/quizes/newest" id="date" name="newest" onClick={(e) => (onDropdownChange(e))}>Newest to Oldest</Dropdown.Item>
+                            <Dropdown.Item as={Link} to="http://localhost:3000/quizes/oldest" id="date" name="oldest" onClick={(e) => (onDropdownChange(e))}>Oldest to newest</Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
 
 
-                <div className={styles.allQuizesMainPage}>
+
+                </div>
+
+                {sortType ? <span style={{ color: 'white' }}>Sorted by: {sortType}<br /></span> : ''}
+
+
+                <Link to="http://localhost:3000/quizes" onClick={resetButton}><button style={{ marginTop: '20px' }}>Reset Filters</button></Link>
+
+
+
+                <div className={styles.allQuizesMainPage}
+                // style={{
+                //     display: 'grid',
+                //     gridTemplateColumns: ' 45% 45%',
+                //     gap: '2%', marginLeft: '4%',
+                //     marginRight: '4%',
+                //     alignItems: 'center',
+                //     justifyContent: 'center', 
+
+                // }}
+                >
 
 
 

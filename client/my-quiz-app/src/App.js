@@ -81,7 +81,7 @@ function App() {
             </Protected>} />
 
           <Route path='/quizes/:filter1?' element={<Quizes />} />
-          <Route path='/ranking' element={<Ranking />} />
+          <Route path='/ranking/:filterTypeUrl?/:filterUrl?' element={<Ranking />} />
 
 
           <Route path='/login' element={<ProtectedLogin

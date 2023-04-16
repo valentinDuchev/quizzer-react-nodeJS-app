@@ -128,8 +128,8 @@ router.get('/users/profile/:email', async (req, res) => {
                 _id: user._id,
                 quizesSolved: user.quizesSolved,
                 followingId: user.following,
-                followersId: user.followers
-
+                followersId: user.followers, 
+                rating: user.rating
             }
 
             // console.log(userData)
@@ -209,6 +209,7 @@ router.get('/users/:email/follow', async (req, res) => {
         userFollowing.followingNumber += 1;
         userToFollow.followers.push(userFollowing)
         userFollowing.following.push(userToFollow)
+        userToFollow.rating += 1;
     } else {
         error = 'You have already followed that user'
     }
@@ -234,6 +235,7 @@ router.get('/users/:email/unfollow', async (req, res) => {
     if (userToFollow.followers.includes(userFollowing._id) && userFollowing.following.includes(userToFollow._id)) {
         userToFollow.followersNumber -= 1;
         userFollowing.followingNumber -= 1;
+        userToFollow.rating -= 1;
 
         for (let i = 0; i < userToFollow.followers.length; i++) {
             if (JSON.stringify(userToFollow.followers[i]._id) === JSON.stringify(userFollowing._id)) {
@@ -302,27 +304,26 @@ router.get('/users/:email/unfollow', async (req, res) => {
 
 // })
 
-// router.get('/users/getAll', async (req, res) => {
-//     const users = await getAllUsers();
+router.get('/users/getAll', async (req, res) => {
+    const users = await getAllUsers();
 
-//     users.sort((a, b) => {
-//         return b.rating - a.rating;
-//     })
+    const token = req.headers['token'];
+    const userData = parseJwt(token);
+    const myUser = await getUserByEmail(userData.email);
 
-//     for (let user of users) {
-//         user.hashedPassword = '';
-//         user.seqAnswer = '';
-//         user.seqQuestion = '';
-//         user.totalRecipeDislikes = '';
-//         user.totalRecipeLikes = '';
-//         user.liked = [];
-//         user.disliked = '';
-//         user.posted = {};
-//     }
+    
 
+    for (let user of users) {
+        user.hashedPassword = '';
+        user.quizesRated = ''
+        user.quizesSolved = user.quizesSolved.length
+    }
+
+    console.log(users)
 
 
-//     res.json({ mesage: 'Success', users: users })
-// })
+
+    res.json({ mesage: 'Success', users: users, myUser })
+})
 
 module.exports = router;

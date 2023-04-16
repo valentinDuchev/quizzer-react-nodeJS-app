@@ -376,9 +376,12 @@ export const MyProfile = () => {
                     <div className={styles.data}>
                         <h3> Followers<br /> {profileData.followersNumber}</h3>
                         <h3> Following<br /> {profileData.followingNumber}</h3>
-                        <h3> Quizes <br /> {profileData.quizesNumber} </h3>
+                        <h3> Rating <br /> {profileData.rating} </h3>
                     </div>
                 </div>
+
+                <h1>Quizes Created ({profileData.quizesCreated ? profileData.quizesCreated.length : ''})</h1>
+
 
                 <div className={styles.quizes}>
 

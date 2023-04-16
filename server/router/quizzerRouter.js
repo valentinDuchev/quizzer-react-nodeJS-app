@@ -45,6 +45,7 @@ router.post('/createQuiz', async (req, res) => {
 
         const result = await createQuiz(data);
         user.quizesCreated.push(result)
+        user.rating += 1;
         await user.save()
         console.log(result)
 
@@ -132,6 +133,8 @@ router.get('/quiz/:id/solve', async (req, res) => {
 
         const id = req.params.id;
         const result = req.headers.result
+        const quizAuthorEmail = req.headers.quizcreator;
+        const quizAuthor = await getUserByEmail(quizAuthorEmail)
 
         const token = req.headers.token;
         const rating = req.headers.rating;
@@ -140,6 +143,9 @@ router.get('/quiz/:id/solve', async (req, res) => {
         const user = await getUserByEmail(userData.email);
 
         const quiz = await getOneQuiz(id);
+        quizAuthor.rating += 1;
+        console.log(quizAuthor)
+        user.rating += 0.5;
 
         const userId = user.email
 
@@ -149,13 +155,26 @@ router.get('/quiz/:id/solve', async (req, res) => {
         }
 
 
+        console.log(quizAuthor)
+
         quiz.peopleSolved.push(newObj)
         const newRating = (Number(quiz.rating) + Number(rating)) / 2;
 
 
 
         if (rating == 1 || rating == 2 || rating == 3 || rating == 4 || rating == 5) {
-            if (Number(quiz.ratedNumber) > 0) {
+            if (Number(quiz.ratedNumber) > 0 ) {
+                if (Number(quiz.ratedNumber == 1)) {
+                    user.rating -= 0.25;
+                } else if (Number(quiz.ratedNumber == 2)) {
+                    user.rating += 0.25
+                } else if (Number(quiz.ratedNumber == 3)) {
+                    user.rating += 0.5
+                } else if (Number(quiz.ratedNumber == 4)) {
+                    user.rating += 0.75
+                } else if (Number(quiz.ratedNumber == 5)) {
+                    user.rating += 1
+                }
                 quiz.rating = newRating;
                 quiz.ratedNumber++;
             } else {
@@ -173,7 +192,6 @@ router.get('/quiz/:id/solve', async (req, res) => {
             }
         }
 
-        await quiz.save();
 
 
 
@@ -186,6 +204,9 @@ router.get('/quiz/:id/solve', async (req, res) => {
 
 
         await user.save();
+        await quizAuthor.save()
+        await quiz.save();
+
 
 
         res.status(201).json({ message: 'Quiz finished successfully', quiz, user });

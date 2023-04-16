@@ -94,7 +94,8 @@ export const QuizFinalPage = (props) => {
                     'Content-type': 'application/json; charset=UTF-8',
                     'token': token,
                     'result': result, 
-                    'rating': rating
+                    'rating': rating, 
+                    'quizCreator': quizData.author
                 },
             })
                 .then((response) => response.json())
