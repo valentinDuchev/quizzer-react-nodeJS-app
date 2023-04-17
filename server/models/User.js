@@ -28,8 +28,9 @@ const userSchema = new Schema({
     rating: { type: Number, default: 0 }, 
     quizesCreated: { type: [quizSchema], default: []}, 
     quizesSolved: { type: [quizSchema], default: []}, 
-    quizesRated: { type: [quizSchema]}
-
+    quizesRated: { type: [quizSchema]}, 
+    newsFeed: {type: [quizSchema]}, 
+    newsFeedSeen: {type: [quizSchema]}
 });
 
 userSchema.index({ email: 1 }, {

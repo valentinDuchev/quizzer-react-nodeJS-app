@@ -483,20 +483,23 @@ export const MyProfile = () => {
                                     profileData.followers.map((follower) =>
                                         <div>
 
-                                            {profileData.followingId.includes(follower._id)
-                                                //Followers section - giving the user the option to FOLLOW/UNFOLLOW some of his followers
+                                            {follower
                                                 ?
-                                                <div>
-                                                    <span>{follower.email}</span>
-                                                    <span style={{ color: 'violet' }}>*following*</span>
-                                                    <button onClick={(email) => unfollowButtonThird(follower.email)}>Unfollow</button>
-                                                </div>
+                                                profileData.followingId.includes(follower._id)
+                                                    //Followers section - giving the user the option to FOLLOW/UNFOLLOW some of his followers
+                                                    ?
+                                                    <div>
+                                                        <span>{follower.email}</span>
+                                                        <span style={{ color: 'violet' }}>*following*</span>
+                                                        <button onClick={(email) => unfollowButtonThird(follower.email)}>Unfollow</button>
+                                                    </div>
 
-                                                :
-                                                <div>
-                                                    <span>{follower.email}</span>
-                                                    <button onClick={(email) => followButtonThird(follower.email)}>Follow</button>
-                                                </div>
+                                                    :
+                                                    <div>
+                                                        <span>{follower.email}</span>
+                                                        <button onClick={(email) => followButtonThird(follower.email)}>Follow</button>
+                                                    </div>
+                                                : ''
                                             }
                                         </div>
                                     )
@@ -511,16 +514,18 @@ export const MyProfile = () => {
                                 {profileData.followingNumber > 0
                                     ?
                                     profileData.following.map((following) =>
-                                        <div>
-                                            <span>{following.email}</span>
-                                            {
-                                                Number(profileData.followingNumber) > 0
-                                                    ?
-                                                    <button onClick={(email) => unfollowSecond(following.email)}>Unfollow</button>
-                                                    :
-                                                    ''
-                                            }
-                                        </div>
+                                        following ?
+                                            <div>
+                                                <span>{following.email}</span>
+                                                {
+                                                    Number(profileData.followingNumber) > 0
+                                                        ?
+                                                        <button onClick={(email) => unfollowSecond(following.email)}>Unfollow</button>
+                                                        :
+                                                        ''
+                                                }
+                                            </div>
+                                            : ''
                                     )
                                     :
                                     <span>No People Followed</span>

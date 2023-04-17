@@ -264,7 +264,7 @@ export const Create = () => {
 
         e.preventDefault()
 
-        if (title !== '' && difficulty !== '' && topic !== '' && questions.length >= 3 && questions.length < 5) {
+        if (title !== '' && difficulty !== '' && topic !== '' && questions.length >= 3 && questions.length < 15) {
             console.log('were in')
             const newQuiz = {
                 questions: questions,
@@ -333,7 +333,7 @@ export const Create = () => {
                 // setMoreQuestionsNeeded('You need at least 3 questions in order to create quiz')
 
                 alert('You need at least 3 questions in order to create quiz')
-            } else if (questions.length > 5 && topic !== '' && title !== '' && difficulty !== '') {
+            } else if (questions.length > 15 && topic !== '' && title !== '' && difficulty !== '') {
                 alert(`You cannot have more than 15 questions in your quiz. Please delete ${questions.length - 15} of the questions`)
             }
 
@@ -564,15 +564,7 @@ export const Create = () => {
                         Add a question
                     </Button>
 
-                    {/* <p className='field half'>
-                    <label className='label' htmlFor='select'>Position</label>
-                    <select className='select' id='select'>
-                        <option selected value=''></option>
-                        <option value='ceo'>CEO</option>
-                        <option value='front-end'>Front-end developer</option>
-                        <option value='back-end'>Back-end developer</option>
-                    </select>
-                </p> */}
+                    
                     <p className='field half'>
                         <input className='button' type='submit' form='mainForm' value='Create Quiz' />
                     </p>

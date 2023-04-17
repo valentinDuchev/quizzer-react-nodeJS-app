@@ -21,7 +21,6 @@ async function register(reqData) {
         
     });
 
-    console.log(user)
 
     await user.save();
 

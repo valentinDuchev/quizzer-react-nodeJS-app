@@ -29,11 +29,6 @@ export const SingleQuizCard = (props) => {
 
                 <p className={styles.cardDescriptionAllQuizes}>{props.description}</p>
 
-
-
-
-
-
                 <p className={styles.cardDescriptionAllQuizesFooter}>{props.dateCreated.slice(0, 10)} <br />
                     <Link to={`/profile/${props.email}`} style={{ color: 'grey' }}>  {props.email}</Link>
                 </p>

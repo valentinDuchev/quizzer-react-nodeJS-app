@@ -9,6 +9,8 @@ import { MyQuizCard } from "../Cards/My-quiz-card/MyQuizCard"
 
 import Dropdown from 'react-bootstrap/Dropdown';
 
+import {PaginatedItems} from './Pagination'
+
 
 
 export const Quizes = () => {
@@ -37,10 +39,7 @@ export const Quizes = () => {
                     setFilteredByTopicQuizes(quizes[0].result)
                 } else {
                     let filteredToPush = []
-
                     setSortType(filter1)
-
-
                     console.log(filter1)
                     for (let element of quizes[0].result) {
                         if (element.topic === filter1) {
@@ -269,7 +268,7 @@ export const Quizes = () => {
 
 
 
-                    {filteredByTopicQuizes ? filteredByTopicQuizes.map((quiz) =>
+                    {/* {filteredByTopicQuizes ? filteredByTopicQuizes.map((quiz) =>
                         <SingleQuizCard
                             key={quiz._id}
                             id={quiz._id}
@@ -287,7 +286,9 @@ export const Quizes = () => {
                             rating={quiz.rating.toFixed(2)}
                             ratedNumber={quiz.ratedNumber}
                             dateCreated={quiz.dateCreated}
-                        />) : <h1>No quizes with that topic!</h1>}
+                        />) : <h1>No quizes with that topic!</h1>} */}
+
+                        <PaginatedItems data={filteredByTopicQuizes}/>
                 </div>
             </div>
 

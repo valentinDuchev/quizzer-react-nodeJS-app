@@ -7,7 +7,6 @@ async function getAllQuizes() {
 
 async function createQuiz(data) {
     const result = new Quiz(data);
-    console.log(data)
     await result.save();
 
     return result;

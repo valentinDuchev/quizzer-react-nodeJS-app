@@ -113,6 +113,8 @@ router.get('/users/profile/:email', async (req, res) => {
                 newFollowing.push(following)
             }
 
+            
+
             const userData = {
                 firstName: user.firstName,
                 lastName: user.lastName,
@@ -129,7 +131,8 @@ router.get('/users/profile/:email', async (req, res) => {
                 quizesSolved: user.quizesSolved,
                 followingId: user.following,
                 followersId: user.followers, 
-                rating: user.rating
+                rating: user.rating, 
+                newsFeed: user.newsFeed
             }
 
             // console.log(userData)
