@@ -19,6 +19,7 @@ import useTheme from './hooks/useTheme';
 import Protected from './components/Authentication/Protected';
 import ProtectedLogin from './components/Authentication/ProtectedLogin';
 import useAuth from './hooks/useAuth';
+import { StartPage } from './components/Start-Page/StartPage';
 
 
 
@@ -34,7 +35,7 @@ function App() {
 
   useEffect(() => {
     if (auth.email) {
-      setIsLoggedIn(true)
+      setIsLoggedIn(Boolean(auth.email))
     }
 
     const email = localStorage.getItem('email')
@@ -56,7 +57,7 @@ function App() {
     <div className="App"
       style={{
         backgroundImage:
-        dark
+          dark
             ? `url(${require("./cool-background1.png")})`
             : `url(${require("./cool-background.png")})`
       }}>
@@ -66,7 +67,14 @@ function App() {
 
 
         <Routes>
-          <Route path='/home' element={<Home />} />
+
+          {/* <Route path='/home'
+            element={<Protected
+              isLoggedIn={isLoggedIn}>
+              <Home />
+            </Protected>} /> */}
+
+          <Route path='home'element={<Home/>}> </Route>
 
           <Route path='/profile/:email'
             element={<Protected
@@ -80,9 +88,17 @@ function App() {
               <Create />
             </Protected>} />
 
-          <Route path='/quizes/:filter1?' element={<Quizes />} />
-          <Route path='/ranking/:filterTypeUrl?/:filterUrl?' element={<Ranking />} />
+          <Route path='/quizes/:filter1?'
+            element={<Protected
+              isLoggedIn={isLoggedIn}>
+              <Quizes />
+            </Protected>} />
 
+          <Route path='/ranking/:filterTypeUrl?/:filterUrl?'
+            element={<Protected
+              isLoggedIn={isLoggedIn}>
+              <Ranking />
+            </Protected>} />
 
           <Route path='/login' element={<ProtectedLogin
             isLoggedIn={isLoggedIn}>
@@ -92,6 +108,11 @@ function App() {
           <Route path='/register' element={<ProtectedLogin
             isLoggedIn={isLoggedIn}>
             <Register />
+          </ProtectedLogin>} />
+
+          <Route path='/startPage' element={<ProtectedLogin
+            isLoggedIn={isLoggedIn}>
+            <StartPage />
           </ProtectedLogin>} />
 
           <Route path='/quiz-page/:quizId/:pageType/:questionNumber?' element={<Protected

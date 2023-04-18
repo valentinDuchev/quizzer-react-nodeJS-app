@@ -26,6 +26,44 @@ export const PaginatedItems = (props) => {
         setItemOffset(newOffset);
     };
 
+    for (let element of currentItems) {
+        if (element.topic == 'books') {
+            element.topicEmoji = '📚'
+        } else if (element.topic == 'sport') {
+            element.topicEmoji = '⚽'
+        } else if (element.topic == 'general') {
+            element.topicEmoji = '⁉'
+        } else if (element.topic == 'art') {
+            element.topicEmoji = '🎨'
+        } else if (element.topic == 'movies') {
+            element.topicEmoji = '🎥'
+        } else if (element.topic == 'music') {
+            element.topicEmoji = '🎥'
+        } else if (element.topic == 'history') {
+            element.topicEmoji = '⚔️'
+        } else if (element.topic == 'geography') {
+            element.topicEmoji = '🌎'
+        } else if (element.topic == 'science') {
+            element.topicEmoji = '👨‍🔬'
+        } else if (element.topic == 'politics') {
+            element.topicEmoji = '⚖️'
+        } else if (element.topic == 'human') {
+            element.topicEmoji = '👨'
+        } else if (element.topic == 'medicine') {
+            element.topicEmoji = '💊'
+        } else if (element.topic == 'animals') {
+            element.topicEmoji = '🙊'
+        } else if (element.topic == 'technology') {
+            element.topicEmoji = '💻'
+        } else if (element.topic == 'stocks') {
+            element.topicEmoji = '₿'
+        } else if (element.topic == 'food') {
+            element.topicEmoji = '🍔'
+        } else if (element.topic == 'other') {
+            element.topicEmoji = ''
+        }
+    }
+
     return (
         <>
             {currentItems.map((quiz) =>
@@ -46,6 +84,7 @@ export const PaginatedItems = (props) => {
                     rating={quiz.rating.toFixed(2)}
                     ratedNumber={quiz.ratedNumber}
                     dateCreated={quiz.dateCreated}
+                    topicEmoji={quiz.topicEmoji}
                 />)}
 
 

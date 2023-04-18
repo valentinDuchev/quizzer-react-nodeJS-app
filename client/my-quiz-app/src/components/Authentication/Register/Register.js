@@ -34,6 +34,9 @@ export const Register = () => {
         console.log(email, password, firstName, lastName, rePass)
 
         try {
+            if (password === '' || rePass === '' || email === '') {
+                setErrorMessage("All fields are required")
+            }
 
             if (password === rePass) {
                 fetch('http://localhost:3001/api/users/register', {
@@ -162,12 +165,14 @@ export const Register = () => {
 
                         </div>
                         <div className={styles.buttonDiv}><button onClick={handleSubmit} className={`${styles.ghostRound} ${styles.fullWidth}`}>Create Account</button></div>
-                        <div className={styles.subtitle}>Already have an account: Sign in here</div>
+                        <div className={styles.subtitle}>Already have an account:<br />
+                            Sign in <Link style={{ textDecoration: 'underline', color: 'black', fontWeight: 'bold' }} to="http://localhost:3000/login">here</Link>
+                        </div>
 
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
 
 
     )

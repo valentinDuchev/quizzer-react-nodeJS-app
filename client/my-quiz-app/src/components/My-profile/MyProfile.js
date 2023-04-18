@@ -77,7 +77,7 @@ export const MyProfile = () => {
         unfollowButtonSecond,
     profileData.followingNumber,
         zeroFollowing,
-        followers])
+        followers, unfollowButtonSecond])
 
 
     // Redirecting to the quiz page in case of click
@@ -474,6 +474,8 @@ export const MyProfile = () => {
 
                         //Second Modal type - showing the User's Followers/People Followed                           
                         :
+
+
                         <div style={{ display: 'grid', gridTemplateColumns: '50% 50%' }}>
                             {/* FIRST Section of second modal type - FOLLOWERS*/}
                             <div>

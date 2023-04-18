@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const { getAllQuizes, createQuiz, getOneQuiz, deleteById } = require('../controllers/quizesController');
+const { getAllQuizes, createQuiz, getOneQuiz, deleteById, updateById } = require('../controllers/quizesController');
 const { getUserByEmail, getUserById, getAllUsers } = require('../controllers/userController')
 const { parseJwt } = require('../middlewares/auth');
 const User = require('../models/User');
@@ -280,16 +280,16 @@ router.get('/newsFeed', async (req, res) => {
             followingId: user.following,
             followersId: user.followers,
             rating: user.rating,
-            newsFeed: newsFeedArray, 
+            newsFeed: newsFeedArray,
             newsFeedSeen: user.newsFeedSeen
         }
-        
+
         const allUsers = await getAllUsers()
         const topUsers = allUsers.sort((a, b) => b.rating - a.rating).slice(0, 3)
 
         const allQuizes = await getAllQuizes()
         for (let element of allQuizes) {
-            const result = (Number(element.peopleSolved) + 2* Number(element.ratedNumber)) * element.rating;
+            const result = (Number(element.peopleSolved) + 2 * Number(element.ratedNumber)) * element.rating;
             element.result = result;
         }
 
@@ -430,7 +430,7 @@ router.get('/getSeenQuizes', async (req, res) => {
         const userData = parseJwt(token).email;
         const user = await getUserByEmail(userData)
 
-        
+
 
         res.json({ message: "Successfully accessed MY profile page", user })
 
@@ -439,6 +439,18 @@ router.get('/getSeenQuizes', async (req, res) => {
     }
 })
 
+router.put('/updateQuiz/:id', async (req, res) => {
+    const id = req.params.id;
+
+    const data = req.body.data;
+
+
+    const result = await updateById(id, data);
+
+    res.status(201).json({ result, message: 'Successfully edited' });
+
+
+})
 
 
 module.exports = router;

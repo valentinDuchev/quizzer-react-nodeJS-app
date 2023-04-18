@@ -13,23 +13,23 @@ import useTheme from '../../hooks/useTheme';
 
 
 function NavScrollExample() {
-  const {auth, setAuth} = useAuth();
-  const {dark, setDark} = useTheme()
+  const { auth, setAuth } = useAuth();
+  const { dark, setDark } = useTheme()
 
   const navigate = useNavigate()
-  
+
   const email = localStorage.getItem('email')
 
   useEffect(() => {
     console.log(auth)
-    
+
   }, [auth])
 
   const logout = (e) => {
     e.preventDefault()
     localStorage.clear()
     setAuth('')
-    navigate("/quizes")
+    navigate("/login")
   }
 
   const onLightClick = () => {
@@ -43,19 +43,41 @@ function NavScrollExample() {
   }
 
   return (
-    <Navbar expand="lg" className={styles.navbar}>
+    <Navbar  className={styles.navbar}>  {/*  expand="lg" */}
       <Container fluid>
-        <Navbar.Brand as={Link} to="/home" className={styles.navLink}>Quizzer</Navbar.Brand>
+
+        {!localStorage.getItem('email')
+          ? <Navbar.Brand as={Link} to="/home" className={styles.navLink}>Home</Navbar.Brand>
+
+          : ''
+        }
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
-            className="me-auto my-2 my-lg-0"
+            // className="me-auto my-2 my-lg-0"
             style={{ maxHeight: '100px' }}
             navbarScroll
+            className={styles.navbarNav}
           >
-            <Nav.Link as={Link} to="/quizes" className={styles.navLink}>Quizes</Nav.Link>
 
-            <Nav.Link as={Link} to="/ranking" className={styles.navLink}>Ranking</Nav.Link>
+            {localStorage.getItem('email')
+              ? <Nav.Link as={Link} to="/home" className={styles.navLink}>Newsfeed</Nav.Link>
+
+              : ''
+            }
+
+            {localStorage.getItem('email')
+              ? <Nav.Link as={Link} to="/quizes" className={styles.navLink}>Quizes</Nav.Link>
+
+              : ''
+            }
+
+            {localStorage.getItem('email')
+              ? <Nav.Link as={Link} to="/ranking" className={styles.navLink}>Ranking</Nav.Link>
+
+              : ''
+            }
+
 
             {localStorage.getItem('email')
               ? <Nav.Link as={Link} to="/create" className={styles.navLink}>Create</Nav.Link>
@@ -64,13 +86,14 @@ function NavScrollExample() {
             }
 
             {localStorage.getItem('email')
-              ? <Nav.Link as={Link} to={`/profile/${email}`}className={styles.navLink}>My Profile</Nav.Link>
+              ? <Nav.Link as={Link} to={`/profile/${email}`} className={styles.navLink}>My Profile</Nav.Link>
 
               : ''
             }
 
+
             {localStorage.getItem('email')
-              ? <Nav.Link as={Link} onClick={logout}>Logout</Nav.Link>
+              ? <Nav.Link as={Link} onClick={logout} className={styles.navLink}>Logout</Nav.Link>
 
               : ''
             }
@@ -90,8 +113,9 @@ function NavScrollExample() {
             <button onClick={onLightClick}>Dark</button>
             <button onClick={onDarkClick}>Light</button>
 
+
           </Nav>
-          <Form className="d-flex">
+          {/* <Form className="d-flex">
             <Form.Control
               type="search"
               placeholder="Search"
@@ -99,7 +123,9 @@ function NavScrollExample() {
               aria-label="Search"
             />
             <Button variant="outline-success">Search</Button>
-          </Form>
+          </Form> */}
+
+
 
         </Navbar.Collapse>
       </Container>

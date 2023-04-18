@@ -69,7 +69,7 @@ export const Login = () => {
                                 email, name, id, accessToken
                             })
                             console.log(from)
-                            navigate(from, { replace: true })
+                            navigate('/home', { replace: true })
                         } else {
                             setErrorMessage(data.message)
                         }
@@ -132,7 +132,8 @@ export const Login = () => {
                                 ></input>
 
                                 <div><button className={`${styles.ghostRound} ${styles.fullWidth} ${styles.buttonDiv}`}>Log in</button></div>
-                                <div className={styles.subtitle}>Don't have an account yet? Sign up here.</div>
+                                <div className={styles.subtitle}>Don't have an account yet? <br /> Sign up
+                                    <Link style={{ textDecoration: 'underline', color: 'black', fontWeight: 'bold' }} to="http://localhost:3000/register">here</Link></div>
                             </form>
                         </div>
 

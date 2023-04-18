@@ -15,13 +15,16 @@ export const SingleQuizCard = (props) => {
     }
 
 
+
     return (
         <div className={styles.cardAllQuizes} >
             <div className={styles.containerCardAllQuizes}>
                 {/* bgWhiteBox */}
 
                 <div className={styles.titleCardAllQuizes}>
-                    <Img src="/Static images/Football-2.png" className={styles.imgIcon} />
+                    {/* <Img src="/Static images/Football-2.png" className={styles.imgIcon} /> */}
+
+                    <h1>{props.topicEmoji}</h1>
 
                     <p className={styles.cardTitleAllQuizes}>{props.title}</p>
                 </div>

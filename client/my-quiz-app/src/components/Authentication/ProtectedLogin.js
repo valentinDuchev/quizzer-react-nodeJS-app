@@ -3,7 +3,7 @@ const ProtectedLogin = ({ isLoggedIn, children }) => {
 
     const navigate = useNavigate()
     const location = useLocation()
-    const from = location.state?.from?.pathname || "/quizes";
+    const from = location.state?.from?.pathname || "/home";
 
     if (isLoggedIn) {
         console.log(from)

@@ -1,0 +1,14 @@
+.homeDiv {
+    width: 100%;
+    opacity: 0.8;
+
+
+    min-height: 620px;
+
+    background: -webkit-linear-gradient(#3473f3, #9e41e5);
+
+    display: grid;
+    grid-template-columns: 75% 25%;
+
+    gap: 7%
+}

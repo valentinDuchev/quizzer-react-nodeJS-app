@@ -21,10 +21,18 @@ async function deleteById(id) {
     await Quiz.findByIdAndDelete(id);
 }
 
+async function updateById (id, data) {
+    const result = await Quiz.findByIdAndUpdate(id, data);
+    await result.save();
+
+    return result;
+}
+
 
 module.exports = {
     getAllQuizes,
     createQuiz,
     getOneQuiz,
-    deleteById
+    deleteById, 
+    updateById
 }

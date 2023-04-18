@@ -100,58 +100,6 @@ export const Create = () => {
 
     }
 
-    // const handleSave = () => {
-
-    //     if (question.length < 1) {
-    //         setErrorsQuestion('Question is required')
-    //         console.log(errorsQuestion)
-    //     } if (correctAnswer.length < 1) {
-    //         setErrorsCorrectAnswer('Correct answer is required')
-    //         console.log(errorsCorrectAnswer)
-    //     } if (wrongAnswer1.length < 1) {
-    //         setErrorsWrongAnswer1('Wrong answer 1 is required')
-    //     } if (wrongAnswer2.length < 1) {
-    //         setErrorsWrongAnswer2('Wrong answer 2 is required')
-    //     } if (wrongAnswer3.length < 1) {
-    //         setErrorsWrongAnswer3('Wrong answer 3 is required')
-    //     }
-
-    //     if (question.length > 1 && correctAnswer.length > 1 && wrongAnswer1.length > 1 && wrongAnswer2.length > 1 && wrongAnswer3.length > 1) {
-
-    //         const id = questions.length + 1;
-    //         console.log(id)
-
-    //         const newQuestion = {
-    //             id,
-    //             question,
-    //             correctAnswer,
-    //             wrongAnswer1,
-    //             wrongAnswer2,
-    //             wrongAnswer3
-    //         }
-
-    //         console.log(newQuestion)
-
-    //         setQuestions([...questions, newQuestion])
-
-    //         console.log(questions)
-
-    //         setQuestion('')
-    //         setCorrectAnswer('')
-    //         setWrongAnswer1('')
-    //         setWrongAnswer2('')
-    //         setWrongAnswer3('')
-
-    //         setErrorsQuestion('')
-    //         setErrorsCorrectAnswer('')
-    //         setErrorsWrongAnswer1('')
-    //         setErrorsWrongAnswer2('')
-    //         setErrorsWrongAnswer3('')
-
-    //         setShow(false)
-    //     }
-    // };
-
     const onBlurModalFields = (eventTarget) => {
 
 
