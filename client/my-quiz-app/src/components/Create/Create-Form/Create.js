@@ -229,6 +229,7 @@ export const Create = () => {
             setTitle('')
             setDescription('')
             setTitle('')
+
             setDifficulty('')
 
             const token = localStorage.getItem('accessToken')
@@ -253,7 +254,7 @@ export const Create = () => {
                     .then((data) => {
                         console.log(data);
                         // Handle data
-                        navigate('/my-profile')
+                        navigate('/home')
                     })
                     .catch((err) => {
                         console.log(err.message);
@@ -303,13 +304,13 @@ export const Create = () => {
 
         <div className={styles.createPage}>
 
-            <div className='createForm'>
+            <div className=''>
 
 
                 <form action='' className='form' id='mainForm' onSubmit={mainFormSubmit}>
 
 
-                    <p className='field required'>
+                    <p className='field required' style={{marginTop: '1px'}}>
                         <label className='label required' htmlFor='name'>Title</label>
                         <input
                             className='text-input'
@@ -319,6 +320,7 @@ export const Create = () => {
                             onChange={(e) => onMainFormChange(e.target)}
                             onBlur={(e) => onBlurMainForm(e.target)}
                             value={title}
+                            style={{marginTop: '-30px'}}
                         />
 
                         <br />
@@ -328,11 +330,12 @@ export const Create = () => {
                     {titleErrors ? <p style={{ fontWeight: 'bold', color: 'red' }}>{titleErrors}</p> : ''}
 
 
-                    <div className='field'>
+                    <div className='field' style={{marginTop: '-40px', marginLeft: 'auto', marginRight: 'auto', textAlign: 'center', justifyContent: 'center', alignItems: 'center'}}>
                         <label className='label'>Difficulty</label>
-                        <ul className='checkboxes'>
+                        <ul className='checkboxes' style={{marginLeft: 'auto', marginLeft: 'auto', textAlign: 'center', justifyContent: 'center', alignItems: 'center'}}>
                             <li className='checkbox'>
                                 <input className='checkbox-input'
+                                    style={{marginLeft: 'auto', marginRight: 'auto', textAlign: 'center'}}
                                     id='easy' name='difficulty'
                                     type='radio'
                                     value='Easy'
@@ -521,7 +524,7 @@ export const Create = () => {
 
                 <Modal show={show} onHide={handleClose}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Modal heading</Modal.Title>
+                        <Modal.Title>Create question</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
 
@@ -534,6 +537,7 @@ export const Create = () => {
                                     value={question}
                                     onChange={(e) => setQuestion(e.target.value)}
                                     onBlur={(e) => onBlurModalFields(e.target)}
+                                    style={{backgroundColor: 'lightBlue'}}
                                 />
                                 {errorsQuestion ? <p>{errorsQuestion}</p> : ''}
                             </label>
@@ -546,6 +550,7 @@ export const Create = () => {
                                     value={correctAnswer}
                                     onChange={(e) => setCorrectAnswer(e.target.value)}
                                     onBlur={(e) => onBlurModalFields(e.target)}
+                                    style={{backgroundColor: 'lightBlue'}}
                                 />
                                 {errorsCorrectAnswer ? <p>{errorsCorrectAnswer}</p> : ''}
                             </label>
@@ -558,6 +563,7 @@ export const Create = () => {
                                     value={wrongAnswer1}
                                     onChange={(e) => setWrongAnswer1(e.target.value)}
                                     onBlur={(e) => onBlurModalFields(e.target)}
+                                    style={{backgroundColor: 'lightBlue'}}
                                 />
                                 {errorsWrongAnswer1 ? <p>{errorsWrongAnswer1}</p> : ''}
 
@@ -569,6 +575,7 @@ export const Create = () => {
                                     value={wrongAnswer2}
                                     onChange={(e) => setWrongAnswer2(e.target.value)}
                                     onBlur={(e) => onBlurModalFields(e.target)}
+                                    style={{backgroundColor: 'lightBlue'}}
                                 />
                                 {errorsWrongAnswer2 ? <p>{errorsWrongAnswer2}</p> : ''}
 
@@ -581,6 +588,7 @@ export const Create = () => {
                                     value={wrongAnswer3}
                                     onChange={(e) => setWrongAnswer3(e.target.value)}
                                     onBlur={(e) => onBlurModalFields(e.target)}
+                                    style={{backgroundColor: 'lightBlue'}}
 
                                 />
                                 {errorsWrongAnswer3 ? <p>{errorsWrongAnswer3}</p> : ''}

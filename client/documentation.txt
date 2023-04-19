@@ -1,0 +1,131 @@
+Welcome to quizzer - Project of Valentin Duchev for Softuni exam Sprint 2023
+
+How is quizzer built?
+-Quizzer uses React as Front-end technology, nodeJS as back-end server (developed by me as well), and MongoDB for database
+
+What does quizzer? 
+-It's main job is to entertain users while gain knowledge for them
+-All users can create quizes on 20+ different topics with 3 difficulties, adding as much as 15 questions per quiz.
+-Each user can follow another one and so he can see the quizes, created by that user, in their newsfeed
+-By gaining followers, solving quizes, creating quizes, and receiving high rating for created quizes you can gain your rating and go up on the ranking above all other users
+-If you have created a quiz and want to correct some of the questions by some reason, you can totally do that!
+
+Let's make overview of each page and functionality:
+
+1. Login/Register
+-Each person can create an account in quizzer. Without an account, all the user can see is the main home page which does not have anything but links for log in and sign up, and the logo. 
+-All routes are protected, which means even using the URL, the user is not able to access pages which he is not authorized to
+-Login/Register pages are protected as well, so a logged in user cannot open login/register page
+-The navigation is responsive, which means, when the user signs in, the nav buttons change immediately
+-Register and Login forms have front-end, as well as back-end validation(such as all other forms in Quizzer)
+
+What is the logged in user able to do?
+Here comes the fun part
+
+2. All registered users can access all dynamic pages once signed in 
+    2.1.Home page 
+        -The home page is dynamic and shows two different types of page depending on logged in or not logged in user (the same page is used, and with ternary operator we check which content to be shown)
+        -Home page for logged users shows Quizzer's top 3 users and top 3 Quizes in both sides.
+        -At the middle of the page the user sees his newsfeed. In case he has followed some other users, the newsfeed shows a card on each quiz which is created by the users that the current user followers
+        -The user can manually mark the quizes as seen, as well as open them from the newsfeed and solve them
+        -He can access his seen quizes in a modal which opens by pushing a button as well
+
+    2.2.All quizes page
+        -Here the user can see ALL quizes created on the Quizzer app
+        -He can filter them by difficulty, topic and date created
+        -Here is implemented pagination as well
+        -Here the user can access all quizes and depending on that if he is the author or the solver, a differnet type of home page (before beginning the quiz) shows (but for that later)
+        -Here are used quiz cards which are in another component specifically for the card
+        -The card contains date created, author, title, rating and details button
+
+    2.3.Ranking page
+        -Here the user can see the ranking of all users registered on quizzer
+        -He can sort the ranking by rating, followers, Quizes created and solved number
+        -He can also access the profile page of a particular user
+
+    2.4.Create page
+        -In that page we are using a form which the user uses to create quizes
+        -He can enter title, topic, difficulty and description on the main form
+        -By pushing a button to add a question, a modal which contains second form shows up
+        -Everytime the user adds a question, he should enter it on the modal and the question is being added to the side of the page by using state
+        -Both forms have dynamic validation
+
+    2.5. My profile
+        -Here we are using one page for both my profile and another user profile as well and depending on that if the user accesses his own profile or some other user's profile, we are showing different content]
+        -That page contains profile picture, FOllowing, followers and rating stats at main page and all quizes created
+        -It has buttons on the side which open one modal
+        -The modal's content is being showns by ternary operator as well
+        -One of the buttons shows The followers and following users of the current user and allows him to dynamically follow/unfollow them
+        -The other button shows all quizes solved by the current user with the details of the quiz, link to it and the result, as well as the rating left by the current user
+        -If the user opens another user's profile, it has only one button - follo/unfollow button
+        -The follow functionality works the same as in instagram for example
+
+    2.6. Quiz main page
+        -That page is dynamic as well and shows different buttons if the user is the author or the solver of the current quiz
+        -If author, it shows delete and edit button, as well as quiz details
+        -The user can edit and delete his own quiz
+
+        -If the user is not the author, it is being shown the start button only
+        -If the user has already solved the quiz, by clicking "Start QUiz" button he is being alerted that he has already solved that quiz
+        -When pressing the start button, the user starts the quiz
+        -When on quiz questions page, it is being shown the question with 4 possible answers, but only one of them is true
+        -The answers get mixed before opening the relevant page, so the correct answer's place can never be the same 
+        -When clicking on an answer, it colors red if wrong, and green if correct
+        -Once answered, the user cannot go back to a question and answer it again, he can go back to the page only to review the question, his answer is being saved the first time answered
+        -There is noi validation for not answering, the user can click to the next question, without answering the current one
+        -If there are question with exactly the same answers, both answers become true by default (same if 4 same answers)
+        -On the final page, the result of the user is being shown, but not saved before clicking "Finish Quiz" -  if the user leaves the page, it may result in reducing the correct answers to 0!
+        -At the end it shows 5 starts which are radio buttons and with them the user could leave a review of the quiz (1-5 stars, 1 is the lowest, 5 is the highest)
+        -When the user clicks on the (Finish quiz) button, his result of the quiz is being saved in the database
+
+    2.7. Dark-Light mode
+        -Quizzer has been made with an option for the user to change the background to light or dark mode using a button in the navigation
+
+
+HOW DOES EACH PAGE WORK?
+Here is a very important part of the documentation
+
+1. Login/Register
+-Here is being used context and hook as well as storing a JWT token and some user data on the local storage
+-Once logged in, the user data is being stored in the global state and in the local storage
+-Once logged out, all of that is being cleared
+-We have different hook for protected routes which is directly stored in the Auth folder for me to easyer navigate in that folder and those components
+
+2. Create quiz
+-That is one of the two components which became way too big (over 500 lines) and will for sure be reduced further before deploying the app
+-How does it work? - it has simple forms in it, both dinamically validated, the main one opens the secondary one with a button in order to be added a question to the quiz
+-On change of the fields we are setting a state with the values of them, so on submit of the form we are using the data from them in the fetch request to the server
+-While sending a request (almost all of the request) are sending the JWT token in the headers so the server can verify which user sends the request
+-
+
+3.Dropdowns
+-The dropdown menu is in another component in order to be reduced the spaghetti code (Yes, I took the first step of reducing the high volume of code in one component, still a lot of steps to optimize the code before deploy)
+
+4.Home
+-Here is being used conditional rendering - If logged in user, it shows the full content of it, it not - only the logo with log in links
+-For the top users, we are doing sorting on the server side of the 4 top Quizes and authors.
+-For news feed: When creating a quiz, the user that creates it sends the info on the back end. On the back end side, we take all followers of the creator and put the created quiz in an array called Newsfeed of all followers of the creator
+-So, the newsfeed shows all recently created quizes of a person that the current user followes
+-The current user can mark all of them or one by one as seen - when presses the button, the relevant quiz is being relocated from the newsfeed array to the newsfeedseen array on the backend. It returns the data immediately, so the component is being re-rendered
+-He can access all his seen quizes on a modal 
+
+5.My profile
+-Here are used modals as well for followers/following
+-User can follow/unfollow another user and the info goes to the backend and the backend returns info immediately, so the component re-renders the changed parts. That way the user can view the change immediately when he follows/unfollows someone
+-User can also edit his own quizes. The algorithm became a little bit more hard to be done as the quizes are being mapped so the div can be loaded
+-So we cannot know which exact question is being changed that easy, however, I made array of questions and all 4 types of answers push in them all values of the questions and if the relevant input in the form chanmges, I remove the previous value and put new one using the index of the mapping and the index of the array 
+
+6.Quiz page
+-It has 3 different types of pages, however, only the solving one is fun to explain
+-I will explain it without too many details: As you know, I am getting the correctAnswer, wrongAnswer1. wrongAnswer2, wrongAnswer3 in that exact order
+    However, I cannot display them in that order, because that way the first answer in the order will be always correct
+    So I have to iterate and mix the answers in each question using a math random number betweeen 0 and 3, so I can put the questions in new Array and then mix it
+
+7. The quiz page just takes all quizes and use the dropdown menu I explained above for filtering
+    The pagination is being done with a relevant library for it
+
+8. Ranking page - same as quiz page
+
+9. 
+
+

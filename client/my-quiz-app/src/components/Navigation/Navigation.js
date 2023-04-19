@@ -110,8 +110,9 @@ function NavScrollExample() {
               : <Nav.Link as={Link} to="/register" className={styles.navLink}>Register</Nav.Link>
             }
 
-            <button onClick={onLightClick}>Dark</button>
-            <button onClick={onDarkClick}>Light</button>
+            <button className={`${styles.ghostRound}`} onClick={onLightClick} style={{}}>Dark</button>
+            <button className={`${styles.ghostRound} ${styles.fullWidth} `} onClick={onDarkClick}>Light</button>
+            
 
 
           </Nav>

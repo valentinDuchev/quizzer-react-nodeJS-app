@@ -10,6 +10,21 @@
       background-color: #111111;
       font-family: "Titillium Web", sans-serif;
   }
+
+  .createPage {
+    width: 80%;
+    background-color: aliceblue;
+    min-height: 620px;
+    opacity: 0.8;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 35px;
+
+    display: grid;
+    grid-template-columns: 80% 20%;
+    background: -webkit-linear-gradient(#3473f3, #9e41e5);
+
+}
   
   @media screen and (min-width: 40em) {
       body {
@@ -28,11 +43,11 @@
       margin-right: auto;
   }
 
-  .createPage {
+  /* .createPage {
     display: grid;
     grid-template-columns: 70% 25%;
     gap: 5%
-  }
+  } */
 
   .bg-light .border{
 

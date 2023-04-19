@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from './context/AuthProvider';
 import { ThemeProvider } from './context/ThemeProvider';
+import Footer from './components/Footer/Footer';
 
 
 const darkBackground = './cool-background.png'
@@ -16,6 +17,7 @@ root.render(
 
       <AuthProvider>
         <App  />
+        <Footer/>
       </AuthProvider>
 
     </ThemeProvider>

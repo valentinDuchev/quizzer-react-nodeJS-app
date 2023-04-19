@@ -1,0 +1,63 @@
+What has to be done in order to finish the application on 100%
+The main plan is to deploy the application, but before that, there are a bunch of things that have to be done
+
+
+
+
+
+-Fix the CSS and make it responsive in ALL pages (currently some of them are responsive, some are not)
+
+-light dark button - make it radio
+
+- Fix navigation css -> Overall centering and etc
+						->dark/light
+
+- CSS 	-> Profile pages (make it responsive); 
+			-> Create
+			-> All quizes page
+			-> Quiz final and home page
+
+-FIX Modal on followers/following (my profile) CSS
+
+-ChartJS
+
+-Fix background of overall application path
+
+-pagination to everywhere else
+
+-search
+
+-- Fix Navigation and routes and refresh as well
+
+
+- Fix the refresh - has to not forward me to quiz page on each
+
+make better css for navigation
+
+
+-fix paths to static images and folder of it
+
+
+-validation(SHOW ERRORS) on log in and register forms
+
+
+pagination line - css (to not be in the grid)
+
+-fix the spaghetti code in some components - divide them into smaller ones (did not have enough time to do that on time for the exam)
+
+-KEEP LIGHT/DARK mode in localstorace or cookie, so on refresh it keeps being the same
+
+-Pagination to all needed pages
+
+TODO - Epxlained for each page
+	-Home: Make it responsive, get a little bit better css
+	-Quiz Page: Fix pagination at the bottom, make it responsive, load the quizes already sorted at back end by some criteria (not urgent)
+	-Ranking - pagination, responsive, make them load pre sorted as well (not urgent)
+	-Create - fix the CSS a little bit, make it responsive, fix the fields in the modal to look better
+	-Profile - make upload page for my profile page, implement statistics with chart js, fix all quizes cards css, make the page responsive
+	-Quiz start page - fix css, make it responsive and make it load better the data, fix the fonts, if user has solved a quiz, remove the start button and show some other stuff
+	-Quiz solve page - by going back to a certain quest, make it show the marked answer and if correct,  by leaving the page make it save the state in case the user comes back
+	-Quiz final page - fix css as well, make it show some better stuff
+
+	-All quizes page - make it possible to show all solved and all unsolved quizes by filter *and on the solved one - make a sign on the card  !!!!!!!!!!!!!!!!!!!!!! URGENT
+

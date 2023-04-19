@@ -19,6 +19,7 @@ export const Home = () => {
     const [topUsers, setTopUsers] = useState([])
     const [topQuizes, setTopQuizes] = useState([])
     const [hasLoadedUsers, setHasLoadedUsers] = useState(false)
+    const [user, setUser] = useState('')
 
     const [hasSeen, setHasSeen] = useState(false)
 
@@ -47,6 +48,7 @@ export const Home = () => {
                     setTopUsers(data.topUsers)
                     setTopQuizes(data.topQuizes)
                     setHasLoadedUsers(true)
+                    setUser(data.userData.firstName)
 
                     const newDate = Date.now()
 
@@ -66,7 +68,7 @@ export const Home = () => {
         } catch (err) {
             console.log(err)
         }
-    }, [hasSeen, hasLoadedSeen, hasLoadedUsers])
+    }, [hasSeen, hasLoadedSeen, hasLoadedUsers, user])
 
     useEffect(() => {
 
@@ -185,11 +187,14 @@ export const Home = () => {
                         <button onClick={handleShow} className={`${styles.ghostRound} ${styles.fullWidth}`}>Seen quizes</button>
 
 
-                        <div style={{ marginTop: '20px', marginLeft: 'auto', marginRight: 'auto' }}>
-                            <Img className={styles.profileImage} src={Image} style={{ width: '50px', height: '50px', borderRadius: '50%', marginLeft: 'auto', marginRight: '20px' }} />
+                        <Link to="/create" >
+                            <div style={{ marginTop: '20px', marginLeft: 'auto', marginRight: 'auto', background: 'white' }}>
+                                <Img className={styles.profileImage} src={Image} style={{ width: '50px', height: '50px', borderRadius: '50%', marginLeft: 'auto', marginRight: '20px' }} />
 
-                            Create Your own quiz, Peter!
-                        </div>
+                                Create Your own quiz, {user}
+                            </div>
+                        </Link>
+
 
 
                         {newsFeed.length > 0 ? newsFeed.map((item) =>
@@ -302,10 +307,10 @@ export const Home = () => {
                             <p className={styles.pHome}>Create and Solve quizes</p>
                             <p className={styles.pHome}>Earn rating by Solving and Creating as many quizes as possible!</p>
                             <h3 className={styles.h3Home}>
-                                <Link style={{ color: 'black', textDecoration: 'underline'}} to={`http://localhost:3000/login`}>Log in</Link>
+                                <Link style={{ color: 'black', textDecoration: 'underline' }} to={`http://localhost:3000/login`}>Log in</Link>
                             </h3>
                             <h3 className={styles.h3Home}>
-                                <Link style={{ color: 'black', textDecoration: 'underline'}} to={`http://localhost:3000/register`}>Register</Link>
+                                <Link style={{ color: 'black', textDecoration: 'underline' }} to={`http://localhost:3000/register`}>Register</Link>
                             </h3>
                         </div>
 

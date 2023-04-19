@@ -20,6 +20,8 @@ import Protected from './components/Authentication/Protected';
 import ProtectedLogin from './components/Authentication/ProtectedLogin';
 import useAuth from './hooks/useAuth';
 import { StartPage } from './components/Start-Page/StartPage';
+import Footer from './components/Footer/Footer';
+
 
 
 
@@ -123,6 +125,8 @@ function App() {
 
 
         </Routes>
+
+        {/* <Footer /> */}
 
 
       </header>

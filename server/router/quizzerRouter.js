@@ -47,9 +47,15 @@ router.post('/createQuiz', async (req, res) => {
 
 
         for (let followerId of user.followers) {
-            const follower = await getUserById(followerId)
-            follower.newsFeed.push(result)
-            await follower.save()
+            if (followerId) {
+                console.log(followerId)
+                const follower = await getUserById(followerId)
+                console.log(follower)
+                follower.newsFeed.push(result)
+                console.log(follower.newsFeed)
+                await follower.save()
+            }
+
         }
 
         user.quizesCreated.push(result)

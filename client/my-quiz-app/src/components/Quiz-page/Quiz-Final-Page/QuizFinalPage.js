@@ -131,8 +131,8 @@ export const QuizFinalPage = (props) => {
                 <h1 style={{ color: 'black' }}>Your result is:  <span style={{ color: 'white' }}>{result}/{totalQuestionsNumber}</span></h1>
 
                 <div className={styles.quizHomeCardSolverInfo}>
-                    <h3 style={{ color: 'black' }}>People Solved: <span style={{ color: 'white' }}>{quizData.solved}</span></h3>
-                    <h3 style={{ color: 'black' }}>Rating: <span style={{ color: 'white' }}>{quizData.rating}/10</span></h3>
+                    {/* <h3 style={{ color: 'black' }}>People Solved: <span style={{ color: 'white' }}>{quizData.solved}</span></h3> */}
+                    <h3 style={{ color: 'black' }}>Rating: <span style={{ color: 'white' }}>{quizData.rating}/5</span></h3>
                 </div>
 
                 <div>
