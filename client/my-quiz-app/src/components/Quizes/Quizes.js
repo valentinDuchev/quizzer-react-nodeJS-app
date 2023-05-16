@@ -4,7 +4,7 @@ import { SingleQuizCard } from "../Cards/Single-quiz-card/SingleQuizCard"
 import SortDropdown from "../Dropdowns/SortDropdown/SortDropdown"
 import axios from "axios"
 
-import styles from ""
+import styles from "./Quizes.module.css"
 import { MyQuizCard } from "../Cards/My-quiz-card/MyQuizCard"
 
 import Dropdown from 'react-bootstrap/Dropdown';
