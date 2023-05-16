@@ -4,7 +4,7 @@ import { SingleQuizCard } from "../Cards/Single-quiz-card/SingleQuizCard"
 import SortDropdown from "../Dropdowns/SortDropdown/SortDropdown"
 import axios from "axios"
 
-// import styles from ""
+import styles from "./Quizes.module.css"
 import { MyQuizCard } from "../Cards/My-quiz-card/MyQuizCard"
 
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -188,15 +188,12 @@ export const Quizes = () => {
     return (
         <>
 
-            {/* <div className={styles.allQuizesPage} > */}
-            <div>
+            <div className={styles.allQuizesPage} >
 
-                {/* <div className={styles.dropdowns} > */}
-                <div>
+                <div className={styles.dropdowns} >
 
                     <div>
-                        {/* <Dropdown className={styles.dropdown}> */}
-                        <Dropdown>
+                        <Dropdown className={styles.dropdown}>
                             <Dropdown.Toggle variant="success" id="dropdown-basic">
                                 Filter By Topic
                             </Dropdown.Toggle>
@@ -223,8 +220,7 @@ export const Quizes = () => {
                         </Dropdown>
                     </div>
 
-                    {/* <Dropdown className={styles.dropdown}> */}
-                    <Dropdown>
+                    <Dropdown className={styles.dropdown}>
                         <Dropdown.Toggle variant="success" id="dropdown-basic">
                             Filter By Difficulty
                         </Dropdown.Toggle>
@@ -236,8 +232,7 @@ export const Quizes = () => {
                         </Dropdown.Menu>
                     </Dropdown>
 
-                    {/* <Dropdown className={styles.dropdown}> */}
-                    <Dropdown>
+                    <Dropdown className={styles.dropdown}>
                         <Dropdown.Toggle variant="success" id="dropdown-basic">
                             Sort By Date
                         </Dropdown.Toggle>
@@ -259,8 +254,7 @@ export const Quizes = () => {
 
 
 
-                {/* <div className={styles.allQuizesMainPage} */}
-                <div
+                <div className={styles.allQuizesMainPage}
                 // style={{
                 //     display: 'grid',
                 //     gridTemplateColumns: ' 45% 45%',
