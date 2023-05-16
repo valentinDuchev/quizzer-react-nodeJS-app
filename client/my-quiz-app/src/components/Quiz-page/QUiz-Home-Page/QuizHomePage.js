@@ -451,7 +451,7 @@ export const QuizHomePage = () => {
                                 {quizData.peopleSolved ?
 
                                     quizData.peopleSolved.map((user) =>
-                                        <tr>
+                                        <tr key={user._id}>
                                             <td style={{ textDecoration: 'underline' }}>
                                                 <Link to={`http://localhost:3000/profile/${user.userId}`}>
                                                     {user.userId}
@@ -478,7 +478,7 @@ export const QuizHomePage = () => {
                                 {quizData.questions ?
 
                                     quizData.questions.map((question) =>
-                                        <tr>
+                                        <tr key={question._id}>
                                             <td style={{ color: 'black' }}>
                                                 {question.question}
                                             </td>
@@ -508,7 +508,7 @@ export const QuizHomePage = () => {
 
                             {quizData.questions?.map((question, index) =>
 
-                                <form id='modalForm' onSubmit={(e, i) => onFormSubmit(e, index)} style={{ borderBottom: '1px solid black' }} > {/*  */}
+                                <form id='modalForm' onSubmit={(e, i) => onFormSubmit(e, index)} style={{ borderBottom: '1px solid black' }} key={question._id}> {/*  */}
                                     <h1>{index + 1}</h1>
                                     <label htmlFor='question'>
                                         <input

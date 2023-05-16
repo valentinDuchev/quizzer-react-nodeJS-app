@@ -61,3 +61,5 @@ TODO - Epxlained for each page
 
 	-All quizes page - make it possible to show all solved and all unsolved quizes by filter *and on the solved one - make a sign on the card  !!!!!!!!!!!!!!!!!!!!!! URGENT
 
+
+	-fix following followers on my profile

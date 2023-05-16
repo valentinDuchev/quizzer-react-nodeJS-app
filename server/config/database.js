@@ -4,7 +4,10 @@ require('../models/Quiz');
 //TODO - change database name
 const dbName = 'quizzer';
 
-const connectionString = `mongodb://localhost:27017/${dbName}`;
+// const connectionString = `mongodb://localhost:27017/${dbName}`;
+
+ const connectionString = `mongodb+srv://valentinduchev:quizzer-cska1948@quizzer.hval4im.mongodb.net/?retryWrites=true&w=majority`;
+
 
 module.exports = async (app) => {
     try {

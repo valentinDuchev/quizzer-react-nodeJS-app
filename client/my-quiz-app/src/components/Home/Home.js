@@ -158,7 +158,7 @@ export const Home = () => {
 
                         {topUsers.map((item) =>
                             <div >
-                                <Link to={`http://localhost:3000/profile/${item.email}`}>
+                                <Link to={`http://localhost:3000/profile/${item.email}`} key={item._id}>
 
                                     <div className={styles.ourTeam}>
                                         <div className={styles.picture}>
@@ -197,19 +197,21 @@ export const Home = () => {
 
 
 
-                        {newsFeed.length > 0 ? newsFeed.map((item) =>
-                            <div className={styles.quizCard} key={item._id}>
-                                <div className={styles.quizCardBody}>
-                                    <h4 ><Link to={`http://localhost:3000/profile/${item.authorEmail}`} style={{ textDecoration: 'underline', color: 'black' }}>{item.authorEmail}</Link> posted a quiz!</h4>
-                                    <h5>Title: {item.title}</h5>
-                                    <p>Topic: {item.topic}</p>
-                                    <Link to={`http://localhost:3000/quiz-page/${item._id}/firstPage`} className={styles.cardLink}>Check it out!</Link>
-                                    <div style={{ display: 'grid', gridTemplateColumns: '50% 50%' }}>
-                                        <h6>{Date(item.dateCreated.slice(6, 16)).slice(4, 16)}</h6>
-                                        <button style={{ marginBottom: '0px' }} onClick={(id) => markAsSeen(item._id)}>Mark as seen</button>
+                        {newsFeed.length > 0 ? newsFeed.map((item) => {
+                            item &&
+                                <div className={styles.quizCard} key={item._id}>
+                                    <div className={styles.quizCardBody}>
+                                        <h4 ><Link to={`http://localhost:3000/profile/${item.authorEmail}`} style={{ textDecoration: 'underline', color: 'black' }}>{item.authorEmail}</Link> posted a quiz!</h4>
+                                        <h5>Title: {item.title}</h5>
+                                        <p>Topic: {item.topic}</p>
+                                        <Link to={`http://localhost:3000/quiz-page/${item._id}/firstPage`} className={styles.cardLink}>Check it out!</Link>
+                                        <div style={{ display: 'grid', gridTemplateColumns: '50% 50%' }}>
+                                            <h6>{Date(item.dateCreated.slice(6, 16)).slice(4, 16)}</h6>
+                                            <button style={{ marginBottom: '0px' }} onClick={(id) => markAsSeen(item._id)}>Mark as seen</button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                        }
 
                         ) : ''}
 
@@ -231,7 +233,7 @@ export const Home = () => {
 
                         {topQuizes.map((item) =>
                             <div >
-                                <Link to={`http://localhost:3000/quiz-page/${item._id}/firstPage`}>
+                                <Link to={`http://localhost:3000/quiz-page/${item._id}/firstPage`} key={item._id}>
 
                                     <div className={styles.ourTeam}>
                                         <div className={styles.picture}>

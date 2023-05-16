@@ -8,7 +8,7 @@ export const PaginatedItems = (props) => {
 
     const { data } = props;
 
-    const itemsPerPage = 6
+    const itemsPerPage = 3
 
 
     const [itemOffset, setItemOffset] = useState(0);

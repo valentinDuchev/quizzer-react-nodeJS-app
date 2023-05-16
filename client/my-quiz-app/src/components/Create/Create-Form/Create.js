@@ -361,15 +361,11 @@ export const Create = () => {
                                 />
                                 <label className='checkbox-label' htmlFor='hard'>Hard</label>
                             </li>
-
-
                         </ul>
 
                         {difficultyErrors ? <p>{difficultyErrors}</p> : ''}
 
                     </div>
-
-
 
                     <div className='field'>
                         <label className='label'>Topic</label>
@@ -613,6 +609,7 @@ export const Create = () => {
                 <Stack gap={questions.length}>
                     <h2 style={{ color: 'white' }}>Questions: </h2>
                     {questions.map(current =>
+                    
                         questions.length > 0 ?
                             <div className="bg-light border" key={current.id} style={{ borderRadius: '20px', marginTop: '5px' }}>
 

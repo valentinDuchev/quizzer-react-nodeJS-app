@@ -432,7 +432,7 @@ export const MyProfile = () => {
                                     profileData.quizesSolved
                                         ?
                                         profileData.quizesSolved.map((quiz) =>
-                                            <tr>
+                                            <tr key={quiz._id}>
                                                 <td>
                                                     <Link
                                                         to={`http://localhost:3000/quiz-page/${quiz._id}/firstPage`}
@@ -484,7 +484,7 @@ export const MyProfile = () => {
                                     {profileData.followersNumber > 0
                                         ?
                                         profileData.followers.map((follower) =>
-                                            <div>
+                                            <div key={follower._id}>
 
                                                 {follower
                                                     ?
@@ -518,7 +518,7 @@ export const MyProfile = () => {
                                         ?
                                         profileData.following.map((following) =>
                                             following ?
-                                                <div>
+                                                <div key={following._id}>
                                                     <span>{following.email}</span>
                                                     {
                                                         Number(profileData.followingNumber) > 0

@@ -31,7 +31,6 @@ async function start() {
     app.use(cors(corsOptions))
 
     app.use((req, res, next) => {
-
         next()
     })
 
@@ -46,5 +45,7 @@ async function start() {
         res.json({ message: 'It works' })
     })
 
-    app.listen(3001, () => console.log('Server started on port 3001'));
+    const port = process.env.PORT || 5000;
+
+    app.listen(port, () => console.log(`Server started on port ${port}`));
 }
