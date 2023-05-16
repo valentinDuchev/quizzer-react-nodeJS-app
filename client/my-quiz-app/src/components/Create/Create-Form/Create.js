@@ -235,7 +235,7 @@ export const Create = () => {
             const token = localStorage.getItem('accessToken')
 
             try {
-                fetch('http://localhost:3001/api/createQuiz', {
+                fetch('https://quizzer-react-node-js-app.vercel.app/api/createQuiz', {
                     method: 'POST',
                     body: JSON.stringify({
                         questions: questions,

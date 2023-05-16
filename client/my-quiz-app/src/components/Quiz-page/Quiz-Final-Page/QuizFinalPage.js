@@ -43,7 +43,7 @@ export const QuizFinalPage = (props) => {
 
             try {
                 console.log(token)
-                fetch(`http://localhost:3001/api/quiz/${currentQuizId}`, {
+                fetch(`https://quizzer-react-node-js-app.vercel.app/api/quiz/${currentQuizId}`, {
                     headers: {
                         'Content-type': 'application/json; charset=UTF-8',
                         'token': token
@@ -89,7 +89,7 @@ export const QuizFinalPage = (props) => {
 
         try {
             console.log(token)
-            fetch(`http://localhost:3001/api/quiz/${quizId}/solve`, {
+            fetch(`https://quizzer-react-node-js-app.vercel.app/api/quiz/${quizId}/solve`, {
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
                     'token': token,

@@ -115,7 +115,7 @@ export const QuizQuestionsPage = (props) => {
 
     useEffect(() => { //TODO - if possible, divide that useEffect into 2/3 smaller useEffects
         axios
-            .get(`http://localhost:3001/api/quiz/${quizId}`, {
+            .get(`https://quizzer-react-node-js-app.vercel.app/api/quiz/${quizId}`, {
                 headers: {
                     'token': localStorage.getItem('accessToken')
                 }

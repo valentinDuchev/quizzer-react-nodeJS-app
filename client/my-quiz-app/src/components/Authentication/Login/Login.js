@@ -33,7 +33,7 @@ export const Login = () => {
 
         try {
 
-            fetch('http://localhost:3001/api/users/login', {
+            fetch('https://quizzer-react-node-js-app.vercel.app/api/users/login', {
                 method: 'POST',
                 body: JSON.stringify({
                     email: user,

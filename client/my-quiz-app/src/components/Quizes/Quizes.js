@@ -4,7 +4,7 @@ import { SingleQuizCard } from "../Cards/Single-quiz-card/SingleQuizCard"
 import SortDropdown from "../Dropdowns/SortDropdown/SortDropdown"
 import axios from "axios"
 
-import styles from "./Quizes.module.css"
+import styles from ""
 import { MyQuizCard } from "../Cards/My-quiz-card/MyQuizCard"
 
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -30,7 +30,7 @@ export const Quizes = () => {
 
     useEffect(() => {
         axios
-            .get('http://localhost:3001/api/allQuizes')
+            .get('https://quizzer-react-node-js-app.vercel.app/api/allQuizes') //https://quizzer-react-node-js-app.vercel.app/api/allQuizes
             .then(res => {
                 setQuizes([...quizes, res.data])
                 console.log(filteredByTopicQuizes)

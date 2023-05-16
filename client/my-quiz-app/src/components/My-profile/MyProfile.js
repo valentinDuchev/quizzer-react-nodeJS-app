@@ -37,7 +37,7 @@ export const MyProfile = () => {
         try {
             const token = localStorage.getItem('accessToken')
             console.log(token)
-            fetch(`http://localhost:3001/api/users/profile/${email}`, {
+            fetch(`https://quizzer-react-node-js-app.vercel.app/api/users/profile/${email}`, {
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
                     'token': token
@@ -89,7 +89,7 @@ export const MyProfile = () => {
     const follow = () => {
         const token = localStorage.getItem('accessToken')
         try {
-            fetch(`http://localhost:3001/api/users/${email}/follow`, {
+            fetch(`https://quizzer-react-node-js-app.vercel.app/api/users/${email}/follow`, {
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
                     'token': token
@@ -124,7 +124,7 @@ export const MyProfile = () => {
     const unfollow = () => {
         const token = localStorage.getItem('accessToken')
         try {
-            fetch(`http://localhost:3001/api/users/${email}/unfollow`, {
+            fetch(`https://quizzer-react-node-js-app.vercel.app/api/users/${email}/unfollow`, {
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
                     'token': token
@@ -186,7 +186,7 @@ export const MyProfile = () => {
     const unfollowSecond = (email) => {
         const token = localStorage.getItem('accessToken')
         try {
-            fetch(`http://localhost:3001/api/users/${email}/unfollow`, {
+            fetch(`https://quizzer-react-node-js-app.vercel.app/api/users/${email}/unfollow`, {
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
                     'token': token
@@ -229,7 +229,7 @@ export const MyProfile = () => {
 
         const token = localStorage.getItem('accessToken')
         try {
-            fetch(`http://localhost:3001/api/users/${email}/follow`, {
+            fetch(`https://quizzer-react-node-js-app.vercel.app/api/users/${email}/follow`, {
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
                     'token': token
@@ -268,7 +268,7 @@ export const MyProfile = () => {
 
         const token = localStorage.getItem('accessToken')
         try {
-            fetch(`http://localhost:3001/api/users/${email}/unfollow`, {
+            fetch(`https://quizzer-react-node-js-app.vercel.app/api/users/${email}/unfollow`, {
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
                     'token': token

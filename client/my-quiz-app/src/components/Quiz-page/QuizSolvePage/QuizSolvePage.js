@@ -39,7 +39,7 @@ export const QuizSolvePage = () => {
 
     useEffect(() => {
         axios
-            .get(`http://localhost:3001/api/quiz/${quizId}`,{
+            .get(`https://quizzer-react-node-js-app.vercel.app/api/quiz/${quizId}`,{
                 headers: {
                     'token': localStorage.getItem('accessToken')
                 }

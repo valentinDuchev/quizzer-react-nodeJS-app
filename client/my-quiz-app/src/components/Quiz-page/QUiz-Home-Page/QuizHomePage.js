@@ -67,7 +67,7 @@ export const QuizHomePage = () => {
 
             try {
                 console.log(token)
-                fetch(`http://localhost:3001/api/quiz/${currentQuizId}`, {
+                fetch(`https://quizzer-react-node-js-app.vercel.app/api/quiz/${currentQuizId}`, {
                     headers: {
                         'Content-type': 'application/json; charset=UTF-8',
                         'token': token
@@ -195,7 +195,7 @@ export const QuizHomePage = () => {
         console.log(quizData)
 
 
-        fetch(`http://localhost:3001/api/updateQuiz/${quizData._id}`, {
+        fetch(`https://quizzer-react-node-js-app.vercel.app/api/updateQuiz/${quizData._id}`, {
             method: 'PUT',
             body: JSON.stringify({
                 data: quizData,
@@ -270,7 +270,7 @@ export const QuizHomePage = () => {
 
         try {
 
-            fetch(`http://localhost:3001/api/quiz/${currentQuizId}`, {
+            fetch(`https://quizzer-react-node-js-app.vercel.app/api/quiz/${currentQuizId}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',

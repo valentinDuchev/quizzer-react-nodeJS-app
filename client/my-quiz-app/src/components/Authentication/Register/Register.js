@@ -39,7 +39,7 @@ export const Register = () => {
             }
 
             if (password === rePass) {
-                fetch('http://localhost:3001/api/users/register', {
+                fetch('https://quizzer-react-node-js-app.vercel.app/api/users/register', {
                     method: 'POST',
                     body: JSON.stringify({
                         email,
