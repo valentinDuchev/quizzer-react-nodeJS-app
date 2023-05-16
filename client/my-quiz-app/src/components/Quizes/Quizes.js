@@ -30,7 +30,7 @@ export const Quizes = () => {
 
     useEffect(() => {
         axios
-            .get('https://quizzer-react-node-js-app.vercel.app/api/allQuizes') //https://quizzer-react-node-js-app.vercel.app/api/allQuizes
+            .get('https://quizzer-react-node-js-app-dz4a-askhahef5-valentinduchev.vercel.app//api/allQuizes') //https://quizzer-react-node-js-app.vercel.app/api/allQuizes
             .then(res => {
                 setQuizes([...quizes, res.data])
                 console.log(filteredByTopicQuizes)

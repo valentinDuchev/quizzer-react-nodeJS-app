@@ -29,7 +29,7 @@ export const Ranking = () => {
         try {
             const token = localStorage.getItem('accessToken')
             console.log(token)
-            fetch(`https://quizzer-react-node-js-app.vercel.app/api/users/getAll`, { //https://quizzer-react-node-js-app.vercel.app
+            fetch(`https://quizzer-react-node-js-app-dz4a-askhahef5-valentinduchev.vercel.app//api/users/getAll`, { //https://quizzer-react-node-js-app.vercel.app
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
                     'token': token
@@ -98,7 +98,7 @@ export const Ranking = () => {
 
         const token = localStorage.getItem('accessToken')
         try {
-            fetch(`https://quizzer-react-node-js-app.vercel.app/api/users/${email}/follow`, {
+            fetch(`https://quizzer-react-node-js-app-dz4a-askhahef5-valentinduchev.vercel.app//api/users/${email}/follow`, {
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
                     'token': token
@@ -136,7 +136,7 @@ export const Ranking = () => {
         const token = localStorage.getItem('accessToken')
         try {
             console.log(email)
-            fetch(`https://quizzer-react-node-js-app.vercel.app/api/users/${email}/unfollow`, {
+            fetch(`https://quizzer-react-node-js-app-dz4a-askhahef5-valentinduchev.vercel.app//api/users/${email}/unfollow`, {
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
                     'token': token

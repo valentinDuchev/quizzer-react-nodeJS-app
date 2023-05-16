@@ -34,7 +34,7 @@ export const Home = () => {
         try {
             const token = localStorage.getItem('accessToken')
             console.log(token)
-            fetch(`https://quizzer-react-node-js-app.vercel.app/api/newsFeed`, {
+            fetch(`https://quizzer-react-node-js-app-dz4a-askhahef5-valentinduchev.vercel.app//api/newsFeed`, {
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
                     'token': token
@@ -84,7 +84,7 @@ export const Home = () => {
         setHasSeen(true)
 
 
-        fetch(`https://quizzer-react-node-js-app.vercel.app/api/newsFeedRemove`, {
+        fetch(`https://quizzer-react-node-js-app-dz4a-askhahef5-valentinduchev.vercel.app//api/newsFeedRemove`, {
             headers: {
                 'Content-type': 'application/json; charset=UTF-8',
                 'token': token,
@@ -100,7 +100,7 @@ export const Home = () => {
     const markAsSeen = (id) => {
         const token = localStorage.getItem('accessToken')
 
-        fetch(`https://quizzer-react-node-js-app.vercel.app/api/markAsSeen/${id}`, {
+        fetch(`https://quizzer-react-node-js-app-dz4a-askhahef5-valentinduchev.vercel.app//api/markAsSeen/${id}`, {
             headers: {
                 'Content-type': 'application/json; charset=UTF-8',
                 'token': token,
@@ -118,7 +118,7 @@ export const Home = () => {
     const quizesAlreadySeen = () => {
         const token = localStorage.getItem('accessToken')
 
-        fetch(`https://quizzer-react-node-js-app.vercel.app/api/getSeenQuizes`, {
+        fetch(`https://quizzer-react-node-js-app-dz4a-askhahef5-valentinduchev.vercel.app//api/getSeenQuizes`, {
             headers: {
                 'Content-type': 'application/json; charset=UTF-8',
                 'token': token,
