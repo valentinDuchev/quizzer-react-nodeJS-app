@@ -43,7 +43,7 @@ function NavScrollExample() {
   }
 
   return (
-    <Navbar  className={styles.navbar}>  {/*  expand="lg" */}
+    <Navbar className={styles.navbar}>  {/*  expand="lg" */}
       <Container fluid>
 
         {!localStorage.getItem('email')
@@ -110,9 +110,12 @@ function NavScrollExample() {
               : <Nav.Link as={Link} to="/register" className={styles.navLink}>Register</Nav.Link>
             }
 
+            <Nav.Link as={Link} to="/about" className={styles.navLink}>About</Nav.Link>
+
+
             <button className={`${styles.ghostRound}`} onClick={onLightClick} style={{}}>Dark</button>
             <button className={`${styles.ghostRound} ${styles.fullWidth} `} onClick={onDarkClick}>Light</button>
-            
+
 
 
           </Nav>
