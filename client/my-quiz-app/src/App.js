@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import './App.css';
 
 import { Home } from './components/Home/Home';
+import { About } from './components/About/About'
 import { MyProfile } from './components/My-profile/MyProfile';
 import Navigation from './components/Navigation/Navigation';
 
@@ -77,6 +78,9 @@ function App() {
             </Protected>} /> */}
 
           <Route path='home'element={<Home/>}> </Route>
+
+          <Route path='about'element={<About/>}> </Route>
+
 
           <Route path='/profile/:email'
             element={<Protected

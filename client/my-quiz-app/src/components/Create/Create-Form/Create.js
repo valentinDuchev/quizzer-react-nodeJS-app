@@ -304,7 +304,7 @@ export const Create = () => {
 
         <div className={styles.createPage}>
 
-            <div className=''>
+            <div className={styles.createForm}>
 
 
                 <form action='' className='form' id='mainForm' onSubmit={mainFormSubmit}>
@@ -605,7 +605,7 @@ export const Create = () => {
                 </Modal>
             </div>
 
-            <div>
+            <div className={styles.questionsArea}>
                 <Stack gap={questions.length}>
                     <h2 style={{ color: 'white' }}>Questions: </h2>
                     {questions.map(current =>

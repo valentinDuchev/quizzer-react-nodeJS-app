@@ -265,6 +265,7 @@ button:focus {
     .window {
         width: 55%;
         height: 100%;
+        display: none;
     }
 
     .inputFields {
